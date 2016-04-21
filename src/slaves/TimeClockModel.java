@@ -27,25 +27,34 @@ public class TimeClockModel {
 	}
 	
 	private static void waitForClient() {
-		try {
-			if(srvSocket == null)
-				srvSocket = new ServerSocket(1337, 1);
+		if(srvSocket == null) {
+			try {
+				srvSocket = new ServerSocket(1337, 1);}
+			catch (IOException e) {
+				System.err.println("The port 1337 is already used by another "
+						+ "application. Exiting...");
+				System.exit(1);
+			}
+		}
+	
+		if(outStream == null)
+			waitClient = true;
 		
-			if(outStream == null)
-				waitClient = true;
+		if(waitClient) {
+			System.out.println("Waiting for a client");
 			
-			if(waitClient) {
-				System.out.println("Waiting for a client");
+			try {
 				//Block until a connection
 				Socket socket = srvSocket.accept();
 				outStream = socket.getOutputStream();
-				waitClient = false;
-				System.out.println("Client here");
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 
-		} catch (IOException e) {
-			e.printStackTrace();
+			waitClient = false;
+			System.out.println("Client here");
 		}
+
 	}
 	
 	public static void sendAll() {

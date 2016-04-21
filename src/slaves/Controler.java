@@ -16,7 +16,7 @@ public class Controler {
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-			
+
 			TimeClockModel.sendAll();
 		}
 	}

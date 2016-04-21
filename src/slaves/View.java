@@ -46,6 +46,9 @@ public class View extends JFrame {
 				break;
 			}
 		}*/
+		
+		//Ensure to exit the program and not only the window
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
 		//TODO: Use the view as the main layout
 		dateTimeInfo = new JLabel();
