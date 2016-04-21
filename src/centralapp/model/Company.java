@@ -29,8 +29,9 @@ public class Company {
 	public void add(Employee empParam) {
 		if (!employeeList.contains(empParam))
 			employeeList.add(empParam);
-		/*if (!(empParam.getCompany() == this))
-			empParam.assign(this);*/
+		/*
+		 * if (!(empParam.getCompany() == this)) empParam.assign(this);
+		 */
 	}
 
 	public void add(Department dptParam) {
@@ -70,7 +71,7 @@ public class Company {
 	}
 
 	public void removeDepartment(Department dptParam) {
-		if(dptList.contains(dptParam))
+		if (dptList.contains(dptParam))
 			dptList.remove(dptParam);
 		dptParam.removeDpt();
 	}
@@ -82,15 +83,17 @@ public class Company {
 	public boolean containsDpt(Department department) {
 		return dptList.contains(department);
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		String res;
-		res = "Entreprise : " + name + System.lineSeparator() + System.lineSeparator();
-		
-		res += boss.toString() + System.lineSeparator() + System.lineSeparator();
-		
-		res+=managementDpt.toString() + System.lineSeparator();
-		
+		res = "Entreprise : " + name + System.lineSeparator()
+				+ System.lineSeparator();
+
+		res += boss.toString() + System.lineSeparator()
+				+ System.lineSeparator();
+
+		res += managementDpt.toString() + System.lineSeparator();
+
 		res = res + System.lineSeparator();
 		Iterator<Department> j = dptList.iterator();
 		Department temp2;
@@ -98,18 +101,27 @@ public class Company {
 			temp2 = j.next();
 			res = res + temp2.toString() + System.lineSeparator();
 		}
-		
-		res = res + System.lineSeparator()+ "Unassigned Employee :" + System.lineSeparator();
+
+		res = res + System.lineSeparator() + "Unassigned Employee :"
+				+ System.lineSeparator();
 		Iterator<Employee> i = employeeList.iterator();
 		Employee temp;
 		while (i.hasNext()) {
 			temp = i.next();
-			if(temp.getDpt() == null && temp.getClass() != Manager.class)
+			if (temp.getDpt() == null && temp.getClass() != Manager.class)
 				res = res + temp.toString() + System.lineSeparator();
 		}
-		
-		//TODO Ajouter unassigned Manager
-		
+
+		res = res + System.lineSeparator() + "Unassigned Manager :"
+				+ System.lineSeparator();
+		Iterator<Employee> k = employeeList.iterator();
+		Employee temp3;
+		while (k.hasNext()) {
+			temp3 = k.next();
+			if (temp3.getDpt() == null && temp3.getClass() == Manager.class)
+				res = res + temp3.toString() + System.lineSeparator();
+		}
+
 		return res;
 	}
 }

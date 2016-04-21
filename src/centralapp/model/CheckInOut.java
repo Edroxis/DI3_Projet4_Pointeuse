@@ -3,16 +3,15 @@ package centralapp.model;
 import java.time.ZonedDateTime;
 
 public class CheckInOut {
-	//Attribut
+	// Attribut
 	private ZonedDateTime date;
-	
-	//Constructeur
-	CheckInOut(ZonedDateTime dateParam)
-	{
+
+	// Constructeur
+	CheckInOut(ZonedDateTime dateParam) {
 		date = dateParam;
 	}
 
-	//Methode
+	// Methode
 	public ZonedDateTime getDate() {
 		return date;
 	}

@@ -39,7 +39,7 @@ public class Employee extends AbstractPerson {
 	}
 
 	public void assign(Department dptParam) {
-		if(dpt != null)
+		if (dpt != null)
 			dpt.removeEmployee(this);
 		dpt = dptParam;
 		if (dptParam != null && !dptParam.contains(this))
@@ -56,6 +56,18 @@ public class Employee extends AbstractPerson {
 
 	public void addCheckInOut(CheckInOut param) {
 		checkInOut.add(param);
+	}
+
+	public void modifyCheckInOut(CheckInOut oldCIO, CheckInOut newCIO) {
+		int index = checkInOut.indexOf(oldCIO);
+		if (index != -1)
+			checkInOut.set(index, newCIO);
+	}
+
+	public void deleteCheckInOut(CheckInOut toDelete) {
+		int index = checkInOut.indexOf(toDelete);
+		if (index != -1)
+			checkInOut.remove(index);
 	}
 
 	public void removeEmployee() {

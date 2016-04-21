@@ -29,11 +29,10 @@ public class Department extends AbstractDpt {
 	}
 
 	public void assign(Employee eParam) {
-		if(eParam.getDpt() != this)
+		if (eParam.getDpt() != this)
 			eParam.assign(this);
-		
-		if (!employeeMap.containsKey(eParam.getId()))
-		{
+
+		if (!employeeMap.containsKey(eParam.getId())) {
 			employeeMap.put(eParam.getId(), eParam);
 			nbEmployee++;
 		}
@@ -44,9 +43,8 @@ public class Department extends AbstractDpt {
 	}
 
 	public void setManager(Manager manParam) {
-		manager = manParam;
-		if (manParam.getDpt() != this)
-			manParam.setDpt(this);
+		// manager.setDpt(null);
+		// TODO !!!!!!!!
 	}
 
 	public Company getCompany() {
@@ -59,30 +57,31 @@ public class Department extends AbstractDpt {
 	}
 
 	public void removeEmployee(Employee empParam) {
-		if(employeeMap.containsValue(empParam))
-		{
+		if (employeeMap.containsValue(empParam)) {
 			employeeMap.remove(empParam.getId());
 			nbEmployee--;
 		}
 	}
-	
-	public void removeDpt()
-	{
+
+	public void removeDpt() {
 		Department nullDpt = null;
-		if(!employeeMap.isEmpty())
-			employeeMap.forEach((k,v) -> {if(v.getDpt() == this) v.assign(nullDpt);});
+		if (!employeeMap.isEmpty())
+			employeeMap.forEach((k, v) -> {
+				if (v.getDpt() == this)
+					v.assign(nullDpt);
+			});
 		employeeMap.clear();
-		if(company.containsDpt(this))
+		if (company.containsDpt(this))
 			company.removeDepartment(this);
-		if(manager.getDpt() == this)
+		if (manager.getDpt() == this)
 			manager.setDpt(nullDpt);
 	}
 
 	public String toString() {
-		String res =  "Department : " + getName() + System.lineSeparator();
+		String res = "Department : " + getName() + System.lineSeparator();
 		res = res + "\t" + manager.toString() + System.lineSeparator();
-		for(Employee e : employeeMap.values())
-			res+= "\t" + e.toString() + System.lineSeparator();
+		for (Employee e : employeeMap.values())
+			res += "\t" + e.toString() + System.lineSeparator();
 		return res;
 	}
 }
