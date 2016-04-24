@@ -30,22 +30,20 @@ public class Manager extends Employee {
 	}
 
 	public void setDpt(Department dptParam) {
-		if (super.dpt != null && dptParam != null) // Retirer instance actuelle
-													// de l'ancien dpt
+		if (super.dpt != null && super.dpt != dptParam) // Retirer instance actuelle de l'ancien dpt
 			if (super.dpt.getManager() != null)
 				super.dpt.setManager(null);
 
-		dpt = dptParam;
+		if(super.dpt != dptParam)
+			super.dpt = dptParam;
 
-		if (dptParam.getManager() != null && dptParam != null) // retirer dpt de
-																// son ancien
-																// manager
-			dptParam.getManager().setDpt(null);
+		if (dptParam != null)// retirer dpt de son ancien manager
+			if (dptParam.getManager() != null && dptParam.getManager() != this)
+				dptParam.getManager().setDpt(null);
 
-		if (dptParam.getManager() != this && dptParam != null) // Changer
-																// manager dans
-																// nouveau dpt
-			dptParam.setManager(this);
+		if (dptParam != null)// Changer manager dans nouveau dpt
+			if (dptParam.getManager() != this)
+				dptParam.setManager(this);
 	}
 
 	public String toString() {

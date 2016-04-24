@@ -43,8 +43,19 @@ public class Department extends AbstractDpt {
 	}
 
 	public void setManager(Manager manParam) {
-		// manager.setDpt(null);
-		// TODO !!!!!!!!
+		if (manager != null && manager != manParam)
+			manager.setDpt(null);
+
+		if (manParam != null)
+			if (manParam.getDpt() != null && manParam.getDpt() != this)
+				manParam.getDpt().setManager(null);
+
+		if (manager != manParam)
+			manager = manParam;
+
+		if (manParam != null)
+			if (manParam.getDpt() != this)
+				manParam.setDpt(this);
 	}
 
 	public Company getCompany() {
@@ -79,7 +90,10 @@ public class Department extends AbstractDpt {
 
 	public String toString() {
 		String res = "Department : " + getName() + System.lineSeparator();
-		res = res + "\t" + manager.toString() + System.lineSeparator();
+		if(manager != null)
+			res = res + "\t" + manager.toString() + System.lineSeparator();
+		else
+			res = res + "\t" + "Manager : " + System.lineSeparator();
 		for (Employee e : employeeMap.values())
 			res += "\t" + e.toString() + System.lineSeparator();
 		return res;

@@ -86,14 +86,16 @@ public class Company {
 
 	public String toString() {
 		String res;
-		res = "Entreprise : " + name + System.lineSeparator()
-				+ System.lineSeparator();
+		//Afficher nom entrprise
+		res = "Entreprise : " + name + System.lineSeparator() + System.lineSeparator();
+		
+		//Afficher boss
+		res += boss.toString() + System.lineSeparator() + System.lineSeparator();
 
-		res += boss.toString() + System.lineSeparator()
-				+ System.lineSeparator();
-
+		//Afficher ManagementDpt et son contenu
 		res += managementDpt.toString() + System.lineSeparator();
 
+		//Afficher les départements et leurs contenus
 		res = res + System.lineSeparator();
 		Iterator<Department> j = dptList.iterator();
 		Department temp2;
@@ -102,8 +104,8 @@ public class Company {
 			res = res + temp2.toString() + System.lineSeparator();
 		}
 
-		res = res + System.lineSeparator() + "Unassigned Employee :"
-				+ System.lineSeparator();
+		//Afficher employés non assignés
+		res = res + System.lineSeparator() + "Unassigned Employee :" + System.lineSeparator();
 		Iterator<Employee> i = employeeList.iterator();
 		Employee temp;
 		while (i.hasNext()) {
@@ -112,8 +114,8 @@ public class Company {
 				res = res + temp.toString() + System.lineSeparator();
 		}
 
-		res = res + System.lineSeparator() + "Unassigned Manager :"
-				+ System.lineSeparator();
+		//Afficher manager non assignés
+		res = res + System.lineSeparator() + "Unassigned Manager :" + System.lineSeparator();
 		Iterator<Employee> k = employeeList.iterator();
 		Employee temp3;
 		while (k.hasNext()) {
