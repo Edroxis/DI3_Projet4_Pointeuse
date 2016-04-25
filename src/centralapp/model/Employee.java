@@ -73,8 +73,10 @@ public class Employee extends AbstractPerson {
 	public void removeEmployee() {
 		if (company.contains(this))
 			company.removeEmployee(this);
-		if (dpt.contains(this))
-			dpt.removeEmployee(this);
+		
+		if(dpt != null)
+			if (dpt.contains(this))
+				dpt.removeEmployee(this);
 	}
 
 	public String toString() {

@@ -73,19 +73,30 @@ public class Department extends AbstractDpt {
 			nbEmployee--;
 		}
 	}
+	
+	public void removeManager() {
+		manager.removeManager();
+		setManager(null);
+	}
 
 	public void removeDpt() {
-		Department nullDpt = null;
-		if (!employeeMap.isEmpty())
-			employeeMap.forEach((k, v) -> {
-				if (v.getDpt() == this)
-					v.assign(nullDpt);
-			});
+		for (Employee e : employeeMap.values())
+			e.assign(null);// TODO Gestion multi-thread
+		
+		/*Iterator i = employeeMap.values().iterator();
+		Employee temp;
+		while(i.hasNext())
+		{
+			i.next();
+		}*/
+		
 		employeeMap.clear();
+		
 		if (company.containsDpt(this))
 			company.removeDepartment(this);
+		
 		if (manager.getDpt() == this)
-			manager.setDpt(nullDpt);
+			manager.setDpt(null);
 	}
 
 	public String toString() {

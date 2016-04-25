@@ -19,7 +19,8 @@ public class ManagementDpt extends AbstractDpt {
 
 	// Methode
 	public void addManager(Manager manParam) {
-		managerList.add(manParam);
+		if(!contains(manParam))
+			managerList.add(manParam);
 	}
 	
 	public String toString(){
@@ -31,11 +32,18 @@ public class ManagementDpt extends AbstractDpt {
 		Manager temp;
 		while (i.hasNext()) {
 			temp = i.next();
-			if(temp.getDpt() == null)
-				res = res + "\t" + temp.toString() + System.lineSeparator();
+			res = res + "\t" + temp.toString() + System.lineSeparator();
 		}
 		return res;
 	}
+
+	public boolean contains(Manager manager) {
+		return managerList.contains(manager);
+	}
 	
-	//public void removeManager TODO
+	public void removeManager(Manager manager) {
+		if(contains(manager))
+			managerList.remove(manager);
+		manager.removeManager();
+	}
 }

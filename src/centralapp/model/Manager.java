@@ -30,7 +30,7 @@ public class Manager extends Employee {
 	}
 
 	public void setDpt(Department dptParam) {
-		if (super.dpt != null && super.dpt != dptParam) // Retirer instance actuelle de l'ancien dpt
+		if (super.dpt != null && super.getDpt() != dptParam && dptParam != null) // Retirer instance actuelle de l'ancien dpt
 			if (super.dpt.getManager() != null)
 				super.dpt.setManager(null);
 
@@ -44,6 +44,15 @@ public class Manager extends Employee {
 		if (dptParam != null)// Changer manager dans nouveau dpt
 			if (dptParam.getManager() != this)
 				dptParam.setManager(this);
+	}
+	
+	public void removeManager() {
+		if(managementDpt.contains(this))
+			managementDpt.removeManager(this);
+		
+		super.dpt = null;
+		
+		super.removeEmployee();
 	}
 
 	public String toString() {

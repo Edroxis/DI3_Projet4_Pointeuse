@@ -4,12 +4,6 @@ import java.time.ZonedDateTime;
 
 public class Test {
 
-	/**
-	 * @param args
-	 */
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		Boss flamby = new Boss("Hollande", "Francois");
 		Company france = new Company("République Française", flamby);
@@ -30,8 +24,8 @@ public class Test {
 		interieur.setManager(man2);
 		travail.setManager(man3);
 		defense.setManager(man1);
-		
-		//defense.setManager(man2); //->bug
+
+		// defense.removeManager();
 
 		Employee emp1 = new Employee("CRS1", "Jack", france);
 		Employee emp2 = new Employee("CRS2", "Alfred", france);
@@ -51,11 +45,13 @@ public class Test {
 		emp6.assign(travail);
 		emp7.assign(defense);
 		emp8.assign(defense);
-		emp9.assign(defense);
+		// emp9.assign(defense);
 
 		emp1.removeEmployee();
-		
+
 		emp2.assign(travail);
+
+		// travail.removeDpt(); //bug s'il reste des employés
 
 		System.out.println(france.toString());
 
