@@ -2,9 +2,11 @@ package slaves;
 
 public class Controler {
 	private View view;
+	private int port;
 	
-	public Controler() {		
+	public Controler(int port) {		
 		view = new View();
+		this.port = port;
 	}
 	
 	public void run() {
@@ -17,12 +19,21 @@ public class Controler {
 			    Thread.currentThread().interrupt();
 			}
 
-			TimeClockModel.sendAll();
+			TimeClockModel.sendAll(port);
 		}
 	}
 	
 	public static void main(String[] args) {
-		Controler controler = new Controler();
+		int port = 1337;
+		
+		if(args.length == 1)
+			port = Integer.parseInt(args[0]);
+		else if(args.length >= 2) { //Et si parseInt fail : TODO
+			System.err.println("Invalid arguments. Please, put the port number or nothing. Exiting...");
+			System.exit(0);
+		}
+		
+		Controler controler = new Controler(port);
 		System.out.println("Launching...");
 		controler.run();
 	}

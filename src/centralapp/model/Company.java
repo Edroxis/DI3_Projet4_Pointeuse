@@ -3,6 +3,7 @@ package centralapp.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+//TODO: Transformer en Singleton
 public class Company {
 
 	// Attribut

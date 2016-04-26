@@ -18,7 +18,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.Timer;
 
-@SuppressWarnings("serial")
 public class View extends JFrame {
 	private JLabel dateTimeInfo;
 	private JButton checkButton;
@@ -99,7 +98,7 @@ public class View extends JFrame {
 	    	DateTimeFormatter date = DateTimeFormatter.ofPattern("EEEE, dd MMMM YYYY");
 	    	DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm");
 	    	
-	    	String text = "<html>" + dateTime.format(date) + "<br>" +
+	    	String text = "<html>Welcome<br><br>" + dateTime.format(date) + "<br>" +
 	    	dateTime.format(time) + " (" + roundedDateTime.format(time) +
 	    	")" + "</html>";
 
