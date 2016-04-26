@@ -19,15 +19,15 @@ public class ManagementDpt extends AbstractDpt {
 
 	// Methode
 	public void addManager(Manager manParam) {
-		if(!contains(manParam))
+		if (!contains(manParam))
 			managerList.add(manParam);
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		String res = "Management Department : " + System.lineSeparator();
-		
+
 		res += "\t" + boss.toString() + System.lineSeparator();
-		
+
 		Iterator<Manager> i = managerList.iterator();
 		Manager temp;
 		while (i.hasNext()) {
@@ -40,9 +40,9 @@ public class ManagementDpt extends AbstractDpt {
 	public boolean contains(Manager manager) {
 		return managerList.contains(manager);
 	}
-	
+
 	public void removeManager(Manager manager) {
-		if(contains(manager))
+		if (contains(manager))
 			managerList.remove(manager);
 		manager.removeManager();
 	}

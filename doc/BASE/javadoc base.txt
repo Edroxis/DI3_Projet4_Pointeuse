@@ -1,0 +1,39 @@
+/**
+ * <b>Test : Test class of model</b>
+ * <p>
+ * Attributes:
+ * <ul>
+ * <li>Att1</li>
+ * <li>Att2: could be this or that</li>
+ * <li>Att3</li>
+ * </ul>
+ * </p>
+ * <p>
+ * Details about Test
+ * </p>
+ * 
+ * @see otherClass
+ * 
+ * @author Julien
+ */
+public class Test {}
+
+
+/**
+* I can do this
+* 
+* @param arg1 I'm useful for this
+* 
+* @return I return that
+*
+* @throws MyException When this or that happens
+* 
+* @see otherClass
+*/
+public static void main(String[] args)
+
+
+/**
+* Le nom du "level"
+*/
+private String nom;

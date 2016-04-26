@@ -2,8 +2,19 @@ package centralapp.model;
 
 import java.time.ZonedDateTime;
 
+/**
+ * <b>Test : Test class of model</b>
+ * @see Company
+ * 
+ * @author Julien
+ */
 public class Test {
 
+	 /**
+     * Test Function
+     * @param args arguments of the test, useless
+     * @see Company
+     */
 	public static void main(String[] args) {
 		Boss flamby = new Boss("Hollande", "Francois");
 		Company france = new Company("République Française", flamby);
