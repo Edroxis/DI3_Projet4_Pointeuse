@@ -6,6 +6,10 @@ import java.net.Socket;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import centralapp.model.Boss;
+import centralapp.model.CheckInOut;
+import centralapp.model.Company;
+
 //One instance per client
 public class CheckInOutControler implements Runnable {
 	final private int COUNT_OF_MAX_RETRIES = 3;
@@ -18,8 +22,10 @@ public class CheckInOutControler implements Runnable {
 	private InputStream inStream;
 	private String buffer;
 	private int remainingRetries;
+	private Company company;
 	
-	public CheckInOutControler(String ip, int port) throws IOException {
+	public CheckInOutControler(Company company, String ip, int port) throws IOException {
+		this.company = company;
 		this.remainingRetries = COUNT_OF_MAX_RETRIES;
 		this.ip = ip;
 		this.port = port;
@@ -95,15 +101,18 @@ public class CheckInOutControler implements Runnable {
 			int id = Integer.parseInt(idDateHourAndEverythingElse[0]);
 			ZonedDateTime dateTime = ZonedDateTime.parse(idDateHourAndEverythingElse[1]);
 			
-			//TODO: Fill with Company singleton (Check thread-safety)
 			System.out.println(id + " has check in/out at " + dateTime);
+			company.findEmployee(id).addCheckInOut(new CheckInOut(dateTime));
 		}
 	}
 	
 	public static void main(String[] args) {			
-		try {			
+		try {
+			Boss boss = new Boss("Hollande", "François");
+			Company france = new Company("France", boss);
+			
 			CheckInOutControler instance;
-			instance = new CheckInOutControler("127.0.0.1", 1337);
+			instance = new CheckInOutControler(france, "127.0.0.1", 1337);
 			instance.run();
 			
 		} catch (IOException e) {

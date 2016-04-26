@@ -7,7 +7,7 @@ public class CheckInOut {
 	private ZonedDateTime date;
 
 	// Constructeur
-	CheckInOut(ZonedDateTime dateParam) {
+	public CheckInOut(ZonedDateTime dateParam) {
 		date = dateParam;
 	}
 

@@ -3,7 +3,6 @@ package centralapp.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-//TODO: Transformer en Singleton
 public class Company {
 
 	// Attribut
@@ -14,7 +13,7 @@ public class Company {
 	private Boss boss;
 
 	// Constructeur
-	Company(String nameParam, Boss bossParam) {
+	public Company(String nameParam, Boss bossParam) {
 		managementDpt = new ManagementDpt(bossParam);
 		boss = bossParam;
 		employeeList = new ArrayList<Employee>(0);
@@ -97,7 +96,7 @@ public class Company {
 		//Afficher ManagementDpt et son contenu
 		res += managementDpt.toString() + System.lineSeparator();
 
-		//Afficher les départements et leurs contenus
+		//Afficher les dï¿½partements et leurs contenus
 		res = res + System.lineSeparator();
 		Iterator<Department> j = dptList.iterator();
 		Department temp2;
@@ -106,7 +105,7 @@ public class Company {
 			res = res + temp2.toString() + System.lineSeparator();
 		}
 
-		//Afficher employés non assignés
+		//Afficher employï¿½s non assignï¿½s
 		res = res + System.lineSeparator() + "Unassigned Employee :" + System.lineSeparator();
 		Iterator<Employee> i = employeeList.iterator();
 		Employee temp;
@@ -116,7 +115,7 @@ public class Company {
 				res = res + temp.toString() + System.lineSeparator();
 		}
 
-		//Afficher manager non assignés
+		//Afficher manager non assignï¿½s
 		res = res + System.lineSeparator() + "Unassigned Manager :" + System.lineSeparator();
 		Iterator<Employee> k = employeeList.iterator();
 		Employee temp3;
