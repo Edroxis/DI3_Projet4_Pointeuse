@@ -49,7 +49,9 @@ public class Manager extends Employee {
 	public void removeManager() {
 		if(managementDpt.contains(this))
 			managementDpt.removeManager(this);
-		
+		if(dpt != null)
+			if(dpt.getManager() == this)
+				dpt.setManager(null);
 		super.dpt = null;
 		
 		super.removeEmployee();

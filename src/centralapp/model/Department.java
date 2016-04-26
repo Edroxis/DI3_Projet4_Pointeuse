@@ -2,21 +2,30 @@ package centralapp.model;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Department extends AbstractDpt {
 
 	// Attribut
 	private Company company;
-	private HashMap<Integer, Employee> employeeMap;
+	private ConcurrentHashMap<Integer, Employee> employeeMap;
 	private int nbEmployee;
 	private Manager manager;
 
 	// Constructeur
 	public Department(String nameParam) {
 		super(nameParam);
-		employeeMap = new HashMap<Integer, Employee>(0);
+		employeeMap = new ConcurrentHashMap<Integer, Employee>(0);
 		manager = null;
 		nbEmployee = 0;
+	}
+
+	public Department(String nameParam, Company company) {
+		super(nameParam);
+		employeeMap = new ConcurrentHashMap<Integer, Employee>(0);
+		manager = null;
+		nbEmployee = 0;
+		assign(company);
 	}
 
 	// Methode
@@ -65,6 +74,8 @@ public class Department extends AbstractDpt {
 	public void assign(Company companyParam) {
 		company = companyParam;
 		companyParam.add(this);
+		for (Employee e : employeeMap.values())
+			e.assign(companyParam);
 	}
 
 	public void removeEmployee(Employee empParam) {
@@ -75,20 +86,14 @@ public class Department extends AbstractDpt {
 	}
 	
 	public void removeManager() {
-		manager.removeManager();
-		setManager(null);
+		if(manager != null)
+			manager.removeManager();
 	}
 
 	public void removeDpt() {
+		Department nullDpt = null;
 		for (Employee e : employeeMap.values())
-			e.assign(null);// TODO Gestion multi-thread
-		
-		/*Iterator i = employeeMap.values().iterator();
-		Employee temp;
-		while(i.hasNext())
-		{
-			i.next();
-		}*/
+			e.assign(nullDpt);
 		
 		employeeMap.clear();
 		

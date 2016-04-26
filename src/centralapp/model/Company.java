@@ -29,9 +29,10 @@ public class Company {
 	public void add(Employee empParam) {
 		if (!employeeList.contains(empParam))
 			employeeList.add(empParam);
-		/*
-		 * if (!(empParam.getCompany() == this)) empParam.assign(this);
-		 */
+
+		if (!(empParam.getCompany() == this)) 
+			empParam.assign(this);
+
 	}
 
 	public void add(Department dptParam) {
