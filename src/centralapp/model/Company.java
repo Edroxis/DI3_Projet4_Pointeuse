@@ -54,6 +54,7 @@ public class Company {
 	* Reference to the boss
 	*/
 	private Boss boss;
+	private Employee mrX;
 
 	// Constructeur
 	/**
@@ -70,6 +71,9 @@ public class Company {
 		employeeList = new ArrayList<Employee>(0);
 		dptList = new ArrayList<Department>(0);
 		name = nameParam;
+		
+		//The goal is to handle unknown employee's id
+		mrX = new Employee("X", "Mr");
 	}
 
 	// Methode
@@ -82,6 +86,10 @@ public class Company {
 	*/
 	public Boss getBoss() {
 		return boss;
+	}
+	
+	public Employee getMrX() {
+		return mrX;
 	}
 
 	/**

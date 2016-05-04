@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import centralapp.model.Boss;
 import centralapp.model.CheckInOut;
 import centralapp.model.Company;
+import centralapp.model.Employee;
 
 //One instance per client
 public class CheckInOutControler implements Runnable {
@@ -102,7 +103,12 @@ public class CheckInOutControler implements Runnable {
 			ZonedDateTime dateTime = ZonedDateTime.parse(idDateHourAndEverythingElse[1]);
 			
 			System.out.println(id + " has check in/out at " + dateTime);
-			company.findEmployee(id).addCheckInOut(new CheckInOut(dateTime));
+			
+			Employee employee = company.findEmployee(id);
+			if(employee == null)
+				employee = company.getMrX();
+				
+			employee.addCheckInOut(new CheckInOut(dateTime));
 		}
 	}
 	
@@ -115,10 +121,7 @@ public class CheckInOutControler implements Runnable {
 			instance = new CheckInOutControler(france, "127.0.0.1", 1337);
 			instance.run();
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (IOException e) {}
 	}
 
 }

@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 
 public class View extends JFrame {
 	private JLabel dateTimeInfo;
@@ -24,27 +25,10 @@ public class View extends JFrame {
 	private JFormattedTextField numberField;
 	
 	public View() {
-		//GTK theme
-		/*for(javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-			if("com.sun.java.swing.plaf.gtk.GTKLookAndFeel".equals(info.getClassName())) {   
-				try {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-			}
-		}*/
+		//GTK theme 
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+		} catch (Exception e) {	}
 		
 		//Ensure to exit the program and not only the window
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
