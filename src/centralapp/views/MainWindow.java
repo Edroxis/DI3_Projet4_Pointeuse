@@ -6,10 +6,10 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
+/*import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.FormSpecs;*/
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 

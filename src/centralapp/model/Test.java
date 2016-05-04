@@ -4,17 +4,20 @@ import java.time.ZonedDateTime;
 
 /**
  * <b>Test : Test class of model</b>
+ * 
  * @see Company
  * 
  * @author Julien
  */
 public class Test {
 
-	 /**
-     * Test Function
-     * @param args arguments of the test, useless
-     * @see Company
-     */
+	/**
+	 * Test Function
+	 * 
+	 * @param args
+	 *            arguments of the test, useless
+	 * @see Company
+	 */
 	public static void main(String[] args) {
 		Boss flamby = new Boss("Hollande", "Francois");
 		Company france = new Company("République Française", flamby);
@@ -23,7 +26,8 @@ public class Test {
 		Manager man2 = new Manager("Valls", "Manuel", france);
 		Manager man3 = new Manager("El Komhri", "Myriam", france);
 
-		Department interieur = new Department("Ministère de l'Intérieur", france);
+		Department interieur = new Department("Ministère de l'Intérieur",
+				france);
 
 		Department travail = new Department("Ministère du Travail");
 		travail.assign(france);
@@ -47,11 +51,11 @@ public class Test {
 		Employee emp8 = new Employee("Capitaine", "Martin", defense);
 		Employee emp9 = new Employee("Général", "Paul");
 
-		//emp1.removeEmployee();
+		// emp1.removeEmployee();
 
-		//emp2.assign(travail);
+		// emp2.assign(travail);
 
-		//travail.removeDpt();
+		// travail.removeDpt();
 
 		System.out.println(france);
 

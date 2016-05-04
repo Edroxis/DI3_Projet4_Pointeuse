@@ -29,79 +29,114 @@ import java.util.Iterator;
  */
 public class Company {
 
-	// Attribut
+	// Attribute
 	/**
-	* Name of the Company
-	*/
+	 * Name of the Company
+	 */
 	private String name;
-	
+
 	/**
-	* List of employees
-	*/
+	 * List of employees
+	 */
 	private ArrayList<Employee> employeeList;
-	
+
 	/**
-	* List of departments
-	*/
+	 * List of departments
+	 */
 	private ArrayList<Department> dptList;
-	
+
 	/**
-	* Reference to management department
-	*/
+	 * Reference to management department
+	 */
 	private ManagementDpt managementDpt;
-	
+
 	/**
-	* Reference to the boss
-	*/
+	 * Reference to the boss
+	 */
 	private Boss boss;
+
+	/**
+	 * Entity which gets all checkInOut referring to unknown employee
+	 */
 	private Employee mrX;
 
-	// Constructeur
+	// Constructor
 	/**
-	* Constructor of a company
-	* 
-	* @param nameParam Name of the Company
-	* @param bossParam Reference to the boss of the Company
-	* 
-	* @see ManagementDpt
-	*/
+	 * Constructor of a company
+	 * 
+	 * @param nameParam
+	 *            Name of the Company
+	 * @param bossParam
+	 *            Reference to the boss of the Company
+	 * 
+	 * @see ManagementDpt
+	 */
 	public Company(String nameParam, Boss bossParam) {
 		managementDpt = new ManagementDpt(bossParam);
 		boss = bossParam;
 		employeeList = new ArrayList<Employee>(0);
 		dptList = new ArrayList<Department>(0);
 		name = nameParam;
-		
-		//The goal is to handle unknown employee's id
+
+		// The goal is to handle unknown employee's id
 		mrX = new Employee("X", "Mr");
 	}
 
-	// Methode
+	// Method
 	/**
-	* Get the reference to the boss of the company
-	* 
-	* @return Reference to the boss of the Company
-	* 
-	* @see Boss
-	*/
+	 * Get the reference to the boss of the company
+	 * 
+	 * @return Reference to the boss of the Company
+	 */
 	public Boss getBoss() {
 		return boss;
 	}
-	
+
+	/**
+	 * Get the reference to MrX
+	 * 
+	 * @return Reference to MrX
+	 */
 	public Employee getMrX() {
 		return mrX;
 	}
 
 	/**
-	* Constructor of a company
-	* 
-	* @param empParam Employee you want to add to the Company
-	* 
-	* @see ArrayList#add(Object)
-	* @see ArrayList#contains(Object)
-	* @see Employee#getCompany()
-	* @see Employee#assign(Company)
-	*/
+	 * Get the name of the Company
+	 * 
+	 * @return name of the company
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Set the name of the Company
+	 * 
+	 * @param name
+	 *            new name of the company
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Get the reference of the ManagementDpt
+	 * 
+	 * @return managementDpt
+	 */
+	public ManagementDpt getManagementDpt() {
+		return managementDpt;
+	}
+
+	/**
+	 * Add an Employee to the company, won't be assigned to any Department
+	 * 
+	 * @param empParam
+	 *            Employee you want to add to the Company
+	 * 
+	 * @see Employee#assign(Company)
+	 */
 	public void add(Employee empParam) {
 		if (!employeeList.contains(empParam))
 			employeeList.add(empParam);
@@ -111,6 +146,14 @@ public class Company {
 
 	}
 
+	/**
+	 * Add a Department to the Company
+	 * 
+	 * @param dptParam
+	 *            Department you want to add to the Company
+	 * 
+	 * @see Department#assign(Company)
+	 */
 	public void add(Department dptParam) {
 		if (!dptList.contains(dptParam))
 			dptList.add(dptParam);
@@ -118,18 +161,15 @@ public class Company {
 			dptParam.assign(this);
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public ManagementDpt getManagementDpt() {
-		return managementDpt;
-	}
-
+	/**
+	 * Get the reference to an Employee from his id
+	 * 
+	 * @param id
+	 *            the id of the Employee you are looking for
+	 * 
+	 * @return reference to the employee with the id in parameter, null if not
+	 *         found
+	 */
 	public Employee findEmployee(int id) {
 		Iterator<Employee> i = employeeList.iterator();
 		Employee temp;
@@ -141,40 +181,77 @@ public class Company {
 		return null;
 	}
 
+	/**
+	 * Remove an Employee from the company and the Department he's in
+	 * 
+	 * @param empParma
+	 *            reference to the Employee you want to delete
+	 * 
+	 * @see Employee#removeEmployee()
+	 */
 	public void removeEmployee(Employee empParam) {
 		if (employeeList.contains(empParam))
 			employeeList.remove(empParam);
 		empParam.removeEmployee();
 	}
 
+	/**
+	 * Remove a Department from the Company and all its employees
+	 * 
+	 * @param dptParam
+	 *            reference to the Department you want to delete
+	 * @see Department#removeDpt()
+	 */
 	public void removeDepartment(Department dptParam) {
 		if (dptList.contains(dptParam))
 			dptList.remove(dptParam);
 		dptParam.removeDpt();
 	}
 
+	/**
+	 * Test the presence of an Employee
+	 * 
+	 * @param employee
+	 *            reference to the employee you're looking for
+	 * 
+	 * @return true if contained, false otherwise
+	 */
 	public boolean contains(Employee employee) {
 		return employeeList.contains(employee);
 	}
 
+	/**
+	 * Test the presence of a Department
+	 * 
+	 * @param department
+	 *            reference to the department you're looking for
+	 * 
+	 * @return true if contained, false otherwise
+	 */
 	public boolean containsDpt(Department department) {
 		return dptList.contains(department);
 	}
 
+	/**
+	 * Print name, boss, departments, unassigned employees and unassigned
+	 * managers
+	 * 
+	 * @return String giving details about company
+	 */
 	public String toString() {
 		String res;
-		// Afficher nom entrprise
+		// Add Company name to result String
 		res = "Entreprise : " + name + System.lineSeparator()
 				+ System.lineSeparator();
 
-		// Afficher boss
+		// Add boss to result String
 		res += boss.toString() + System.lineSeparator()
 				+ System.lineSeparator();
 
-		// Afficher ManagementDpt et son contenu
+		// Add managementDpt to result String
 		res += managementDpt.toString() + System.lineSeparator();
 
-		// Afficher les d�partements et leurs contenus
+		// Add Departments to result String
 		res = res + System.lineSeparator();
 		Iterator<Department> j = dptList.iterator();
 		Department temp2;
@@ -183,7 +260,7 @@ public class Company {
 			res = res + temp2.toString() + System.lineSeparator();
 		}
 
-		// Afficher employ�s non assign�s
+		// Add List of unassigned Employees to result String
 		res = res + System.lineSeparator() + "Unassigned Employee :"
 				+ System.lineSeparator();
 		Iterator<Employee> i = employeeList.iterator();
@@ -194,7 +271,7 @@ public class Company {
 				res = res + temp.toString() + System.lineSeparator();
 		}
 
-		// Afficher manager non assign�s
+		// Add List of unassigned managers to result String
 		res = res + System.lineSeparator() + "Unassigned Manager :"
 				+ System.lineSeparator();
 		Iterator<Employee> k = employeeList.iterator();

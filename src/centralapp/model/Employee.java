@@ -20,18 +20,18 @@ public class Employee extends AbstractPerson {
 		company = companyParam;
 		companyParam.add(this);
 	}
-	
+
 	public Employee(String lnParam, String fnParam, Department dptParam) {
 		super(lnParam, fnParam);
 		id = nbEmployee;
 		nbEmployee++;
 		checkInOut = new ArrayList<CheckInOut>(0);
 		company = dptParam.getCompany();
-		if(dptParam.getCompany() != null)
+		if (dptParam.getCompany() != null)
 			dptParam.getCompany().add(this);
 		assign(dptParam);
 	}
-	
+
 	public Employee(String lnParam, String fnParam) {
 		super(lnParam, fnParam);
 		id = nbEmployee;
@@ -64,9 +64,8 @@ public class Employee extends AbstractPerson {
 		dpt = dptParam;
 		if (dptParam != null && !dptParam.contains(this))
 			dptParam.assign(this);
-		if(company != dpt.getCompany())
-		{
-			if(company != null)
+		if (company != dpt.getCompany()) {
+			if (company != null)
 				company.removeEmployee(this);
 			company = dpt.getCompany();
 			dpt.getCompany().add(this);
@@ -100,8 +99,8 @@ public class Employee extends AbstractPerson {
 	public void removeEmployee() {
 		if (company.contains(this))
 			company.removeEmployee(this);
-		
-		if(dpt != null)
+
+		if (dpt != null)
 			if (dpt.contains(this))
 				dpt.removeEmployee(this);
 	}
