@@ -5,6 +5,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import centralapp.model.Boss;
 import centralapp.model.Company;
 import centralapp.views.CompanyView;
 
@@ -26,13 +27,18 @@ public class CompanyControler {
 	}
 	
 	public String getBossName() {
-		return company.getBoss().toString();
+		Boss boss = company.getBoss();
+		return boss.getfName() + " " + boss.getlName();
 	}
 
 	public class ChangeNameEvent extends FocusAdapter {
 		@Override
 		public void focusLost(FocusEvent arg0) {
-			System.err.println("Change company name");
+			String newName = view.getName();
+			if(company.getName() != newName) {
+				//There is a modif, so update
+				company.setName(newName);
+			}
 		}
 	}
 	

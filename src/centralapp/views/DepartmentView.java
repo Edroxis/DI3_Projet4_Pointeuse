@@ -57,8 +57,9 @@ public class DepartmentView extends JPanel {
 		JLabel departmentManagerLabel = new JLabel("Manager");
 		departmentFormPanel.add(departmentManagerLabel, "2, 4");
 		
-		JButton departmentManagerButton = new JButton("Click to choose the manager");
-		departmentFormPanel.add(departmentManagerButton, "4, 4");
+		//TODO: Fill the combobox
+		JComboBox<String> departmentManagerComboBox = new JComboBox<String>();
+		departmentFormPanel.add(departmentManagerComboBox, "4, 4");
 		
 		JPanel departmentButtonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		departmentFormPanel.add(departmentButtonsPanel, "4, 6, fill, fill");

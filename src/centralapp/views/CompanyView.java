@@ -1,6 +1,6 @@
 package centralapp.views;
 
-import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -11,8 +11,6 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import centralapp.controlers.CompanyControler;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class CompanyView extends JPanel {
@@ -49,8 +47,13 @@ public class CompanyView extends JPanel {
 		JLabel companyBossLabel = new JLabel("Boss");
 		add(companyBossLabel, "2, 4");
 		
-		JButton companyBossButton = new JButton(controler.getBossName());
-		companyBossButton.addMouseListener(controler.new ChangeBossEvent());
-		add(companyBossButton, "4, 4");
+		//TODO: Fill the combobox
+		JComboBox<String> companyBossComboBox = new JComboBox<String>();
+		companyBossComboBox.addMouseListener(controler.new ChangeBossEvent());
+		add(companyBossComboBox, "4, 4");
+	}
+	
+	public String getName() {
+		return companyNameField.getText();
 	}
 }

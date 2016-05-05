@@ -11,8 +11,8 @@ public class CentralApp {
 	Company company;
 	
 	public CentralApp() {
-		Boss boss = new Boss("First name", "Last name");
-		company = new Company("Company name", boss);
+		Boss boss = new Boss("Page", "Jimmy");
+		company = new Company("LedZep", boss);
 		
 		CompanyControler companyControler = new CompanyControler(company);
 		DepartmentControler departmentControler = new DepartmentControler(company);

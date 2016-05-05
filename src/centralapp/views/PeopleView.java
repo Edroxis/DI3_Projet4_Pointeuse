@@ -4,10 +4,10 @@ import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.JTree;
 
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -73,17 +73,12 @@ public class PeopleView extends JPanel {
 		JLabel personDepartmentLabel = new JLabel("Department");
 		personFormPanel.add(personDepartmentLabel, "2, 6");
 		
-		JButton personDepartmentButton = new JButton("Click to choose the department");
-		personFormPanel.add(personDepartmentButton, "4, 6");
-		
-		JLabel personIsManagerLabel = new JLabel("Is a manager?");
-		personFormPanel.add(personIsManagerLabel, "2, 8");
-		
-		JToggleButton personIsManagerButton = new JToggleButton("Press to promote as manager");
-		personFormPanel.add(personIsManagerButton, "4, 8");
+		//TODO: Fill the combobox, disable the management dpt, add MrX and the boss
+		JComboBox<String> personDepartmentComboBox = new JComboBox<String>();
+		personFormPanel.add(personDepartmentComboBox, "4, 6");
 		
 		JPanel personButtonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		personFormPanel.add(personButtonsPanel, "4, 10, fill, fill");
+		personFormPanel.add(personButtonsPanel, "4, 8, fill, fill");
 	
 		JButton personAddButton = new JButton("Add");
 		personButtonsPanel.add(personAddButton);
