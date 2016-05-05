@@ -2,6 +2,8 @@ package centralapp.controlers;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -31,7 +33,7 @@ public class CompanyControler {
 		return boss.getfName() + " " + boss.getlName();
 	}
 
-	public class ChangeNameEvent extends FocusAdapter {
+	public class NameEvent extends FocusAdapter {
 		@Override
 		public void focusLost(FocusEvent arg0) {
 			String newName = view.getName();
@@ -42,10 +44,12 @@ public class CompanyControler {
 		}
 	}
 	
-	public class ChangeBossEvent extends MouseAdapter {
+	public class BossEvent implements ItemListener {
 		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			System.err.println("Change company boss");
+		public void itemStateChanged(ItemEvent event) {
+			if(event.getStateChange() == ItemEvent.SELECTED) {
+				System.err.println("[Company] Select event");
+			}
 		}
 	}
 }

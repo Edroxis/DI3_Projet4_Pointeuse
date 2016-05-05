@@ -16,6 +16,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import centralapp.controlers.PeopleControler;
+import centralapp.controlers.DepartmentControler.AddEvent;
 
 @SuppressWarnings("serial")
 public class PeopleView extends JPanel {
@@ -33,6 +34,7 @@ public class PeopleView extends JPanel {
 		
 		JTree peopleTree = new JTree();
 		peopleTree.setRootVisible(false);
+		peopleTree.addMouseListener(controler.new SelectEvent());
 		add(peopleTree);
 		
 		//Create the form: firstname, lastname, 
@@ -75,18 +77,22 @@ public class PeopleView extends JPanel {
 		
 		//TODO: Fill the combobox, disable the management dpt, add MrX and the boss
 		JComboBox<String> personDepartmentComboBox = new JComboBox<String>();
+		personDepartmentComboBox.addItemListener(controler.new SelectDepartmentEvent());
 		personFormPanel.add(personDepartmentComboBox, "4, 6");
 		
 		JPanel personButtonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		personFormPanel.add(personButtonsPanel, "4, 8, fill, fill");
 	
 		JButton personAddButton = new JButton("Add");
+		personAddButton.addMouseListener(controler.new AddEvent());
 		personButtonsPanel.add(personAddButton);
 		
 		JButton personApplyButton = new JButton("Apply");
+		personApplyButton.addMouseListener(controler.new ApplyEvent());
 		personButtonsPanel.add(personApplyButton);
 		
 		JButton personRemoveButton = new JButton("Remove");
+		personRemoveButton.addMouseListener(controler.new RemoveEvent());
 		personButtonsPanel.add(personRemoveButton);
 	}
 }

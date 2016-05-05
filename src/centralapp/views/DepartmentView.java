@@ -15,6 +15,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import centralapp.controlers.DepartmentControler;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class DepartmentView extends JPanel {
@@ -27,6 +29,7 @@ public class DepartmentView extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JComboBox<String> departmentsComboBox = new JComboBox<String>();
+		departmentsComboBox.addItemListener(controler.new SelectEvent());
 		add(departmentsComboBox);
 		
 		//Create the form: name, button choose manager, button add, apply, button remove
@@ -59,18 +62,22 @@ public class DepartmentView extends JPanel {
 		
 		//TODO: Fill the combobox
 		JComboBox<String> departmentManagerComboBox = new JComboBox<String>();
+		departmentManagerComboBox.addItemListener(controler.new SelectManagerEvent());
 		departmentFormPanel.add(departmentManagerComboBox, "4, 4");
 		
 		JPanel departmentButtonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		departmentFormPanel.add(departmentButtonsPanel, "4, 6, fill, fill");
 		
 		JButton departmentAddButton = new JButton("Add");
+		departmentAddButton.addMouseListener(controler.new AddEvent());
 		departmentButtonsPanel.add(departmentAddButton);
 		
 		JButton departmentApplyButton = new JButton("Apply");
+		departmentApplyButton.addMouseListener(controler.new ApplyEvent());
 		departmentButtonsPanel.add(departmentApplyButton);
 		
 		JButton departmentRemoveButton = new JButton("Remove");
+		departmentRemoveButton.addMouseListener(controler.new RemoveEvent());
 		departmentButtonsPanel.add(departmentRemoveButton);
 	}
 }

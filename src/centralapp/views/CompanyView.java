@@ -40,7 +40,7 @@ public class CompanyView extends JPanel {
 		add(companyNameLabel, "2, 2, right, default");
 		
 		companyNameField = new JTextField(controler.getCompanyName());
-		companyNameField.addFocusListener(controler.new ChangeNameEvent());
+		companyNameField.addFocusListener(controler.new NameEvent());
 		add(companyNameField, "4, 2, fill, default");
 		companyNameField.setColumns(10);
 		
@@ -49,7 +49,7 @@ public class CompanyView extends JPanel {
 		
 		//TODO: Fill the combobox
 		JComboBox<String> companyBossComboBox = new JComboBox<String>();
-		companyBossComboBox.addMouseListener(controler.new ChangeBossEvent());
+		companyBossComboBox.addItemListener(controler.new BossEvent());
 		add(companyBossComboBox, "4, 4");
 	}
 	
