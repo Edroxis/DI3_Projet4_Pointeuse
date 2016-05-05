@@ -30,6 +30,8 @@ public class View extends JFrame {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 		} catch (Exception e) {	}
 		
+		setSize(900, 600);
+		
 		//Ensure to exit the program and not only the window
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	

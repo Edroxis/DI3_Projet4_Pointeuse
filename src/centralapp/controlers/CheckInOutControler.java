@@ -109,17 +109,4 @@ public class CheckInOutControler implements Runnable {
 			employee.addCheckInOut(new CheckInOut(dateTime));
 		}
 	}
-	
-	public static void main(String[] args) {			
-		try {
-			Boss boss = new Boss("Hollande", "François");
-			Company france = new Company("France", boss);
-			
-			CheckInOutControler instance;
-			instance = new CheckInOutControler(france, "127.0.0.1", 1337);
-			instance.run();
-			
-		} catch (IOException e) {}
-	}
-
 }

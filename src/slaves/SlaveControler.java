@@ -1,10 +1,10 @@
 package slaves;
 
-public class Controler {
+public class SlaveControler {
 	private View view;
 	private int port;
 	
-	public Controler(int port) {		
+	public SlaveControler(int port) {		
 		view = new View();
 		this.port = port;
 	}
@@ -33,7 +33,7 @@ public class Controler {
 			System.exit(0);
 		}
 		
-		Controler controler = new Controler(port);
+		SlaveControler controler = new SlaveControler(port);
 		System.out.println("Launching...");
 		controler.run();
 	}
