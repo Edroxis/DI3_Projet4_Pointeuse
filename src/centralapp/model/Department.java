@@ -1,7 +1,5 @@
 package centralapp.model;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Department extends AbstractDpt {

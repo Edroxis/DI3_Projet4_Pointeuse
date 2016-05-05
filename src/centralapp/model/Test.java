@@ -1,7 +1,5 @@
 package centralapp.model;
 
-import java.time.ZonedDateTime;
-
 /**
  * <b>Test : Test class of model</b>
  * 
@@ -20,19 +18,19 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 		Boss flamby = new Boss("Hollande", "Francois");
-		Company france = new Company("République Française", flamby);
+		Company france = new Company("Rï¿½publique Franï¿½aise", flamby);
 
 		Manager man1 = new Manager("Cazeneuve", "Bernard", france);
 		Manager man2 = new Manager("Valls", "Manuel", france);
 		Manager man3 = new Manager("El Komhri", "Myriam", france);
 
-		Department interieur = new Department("Ministère de l'Intérieur",
+		Department interieur = new Department("Ministï¿½re de l'Intï¿½rieur",
 				france);
 
-		Department travail = new Department("Ministère du Travail");
+		Department travail = new Department("Ministï¿½re du Travail");
 		travail.assign(france);
 
-		Department defense = new Department("Ministère de la Défense");
+		Department defense = new Department("Ministï¿½re de la Dï¿½fense");
 		defense.assign(france);
 
 		interieur.setManager(man2);
@@ -47,9 +45,9 @@ public class Test {
 		Employee emp4 = new Employee("Inspecteur1", "Marc", travail);
 		Employee emp5 = new Employee("Inspecteur2", "Joe", travail);
 		Employee emp6 = new Employee("Inspecteur3", "Luc", france);
-		Employee emp7 = new Employee("Sergeant", "Rémi", defense);
+		Employee emp7 = new Employee("Sergeant", "Rï¿½mi", defense);
 		Employee emp8 = new Employee("Capitaine", "Martin", defense);
-		Employee emp9 = new Employee("Général", "Paul");
+		Employee emp9 = new Employee("Gï¿½nï¿½ral", "Paul");
 
 		// emp1.removeEmployee();
 
@@ -60,7 +58,7 @@ public class Test {
 		System.out.println(france);
 
 		/*
-		 * ZonedDateTime date1 = null, date2 = null; //TEST pointages employés
+		 * ZonedDateTime date1 = null, date2 = null; //TEST pointages employï¿½s
 		 * date1 =
 		 * ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]"); date2
 		 * = ZonedDateTime.parse("2016-12-03T10:15:30+01:00[Europe/Paris]");

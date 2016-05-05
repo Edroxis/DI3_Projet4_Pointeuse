@@ -15,10 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public class View extends JFrame {
 	private JLabel dateTimeInfo;
 	private JButton checkButton;
