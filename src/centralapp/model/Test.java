@@ -55,7 +55,7 @@ public class Test {
 
 		// travail.removeDpt();
 
-		System.out.println(france);
+		System.out.println(france.print());
 
 		/*
 		 * ZonedDateTime date1 = null, date2 = null; //TEST pointages employ�s

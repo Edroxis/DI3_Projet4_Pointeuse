@@ -105,7 +105,7 @@ public class Employee extends AbstractPerson {
 				dpt.removeEmployee(this);
 	}
 
-	public String toString() {
+	public String getPrinting() {
 		return "Employee : " + getfName() + " " + getlName();// + " " + id;
 	}
 

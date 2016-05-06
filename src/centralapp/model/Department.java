@@ -19,18 +19,11 @@ public class Department extends AbstractDpt {
 	}
 
 	public Department(String nameParam, Company company) {
-		super(nameParam);
-		employeeMap = new ConcurrentHashMap<Integer, Employee>(0);
-		manager = null;
-		nbEmployee = 0;
+		this(nameParam);
 		assign(company);
 	}
 
 	// Methode
-	public String getName() {
-		return super.getName();
-	}
-
 	public boolean contains(Employee empParam) {
 		return employeeMap.containsValue(empParam);
 	}
@@ -102,8 +95,8 @@ public class Department extends AbstractDpt {
 			manager.setDpt(null);
 	}
 
-	public String toString() {
-		String res = "Department : " + getName() + System.lineSeparator();
+	public String getPrinting() {
+		String res = "Department : " + toString() + System.lineSeparator();
 		if(manager != null)
 			res = res + "\t" + manager.toString() + System.lineSeparator();
 		else

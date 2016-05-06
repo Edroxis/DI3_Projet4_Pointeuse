@@ -38,7 +38,7 @@ public abstract class AbstractDpt {
 	 * 
 	 * @return name of the Department
 	 */
-	public String getName() {
+	public String toString() {
 		return name;
 	}
 }

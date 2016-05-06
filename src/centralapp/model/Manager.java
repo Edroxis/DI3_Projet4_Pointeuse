@@ -57,7 +57,7 @@ public class Manager extends Employee {
 		super.removeEmployee();
 	}
 
-	public String toString() {
+	public String getPrinting() {
 		return "Manager : " + getfName() + " " + getlName();
 	}
 }

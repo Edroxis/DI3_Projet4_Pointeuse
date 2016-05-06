@@ -56,4 +56,13 @@ public abstract class AbstractPerson {
 	public String getfName() {
 		return fName;
 	}
+
+	/**
+	 * Get the name of a Person
+	 * 
+	 * @return Name of a Person
+	 */
+	public String toString() {
+		return fName + " " + lName;
+	}
 }

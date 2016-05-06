@@ -12,32 +12,25 @@ import centralapp.model.Company;
 import centralapp.views.CompanyView;
 
 public class CompanyControler {
-	private Company company;
+	private CentralApp mainControler;
 	private CompanyView view;
 	
-	public CompanyControler(Company companyModel) {
-		company = companyModel;
-		view = new CompanyView(this);
+	public CompanyControler(CentralApp mainControler) {
+		this.mainControler = mainControler;
+		view = new CompanyView(mainControler, this);
 	}
 	
 	public CompanyView getView() {
 		return view;
-	}
-	
-	public String getCompanyName() {
-		return company.getName();
-	}
-	
-	public String getBossName() {
-		Boss boss = company.getBoss();
-		return boss.getfName() + " " + boss.getlName();
 	}
 
 	public class NameEvent extends FocusAdapter {
 		@Override
 		public void focusLost(FocusEvent arg0) {
 			String newName = view.getName();
-			if(company.getName() != newName) {
+			Company company = mainControler.getCompany();
+			
+			if(company.toString() != newName) {
 				//There is a modif, so update
 				company.setName(newName);
 			}

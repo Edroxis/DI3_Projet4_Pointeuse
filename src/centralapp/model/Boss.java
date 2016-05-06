@@ -40,7 +40,7 @@ public class Boss extends AbstractPerson {
 	 * 
 	 * @return String of first name + last name
 	 */
-	public String toString() {
+	public String getPrinting() {
 		return "PDG : " + getfName() + " " + getlName();
 	}
 

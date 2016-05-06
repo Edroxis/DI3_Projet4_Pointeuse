@@ -1,6 +1,7 @@
 package centralapp.views;
 
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,22 +15,30 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import centralapp.controlers.CentralApp;
 import centralapp.controlers.DepartmentControler;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import centralapp.model.AbstractDpt;
+import centralapp.model.AbstractPerson;
+import centralapp.model.Department;
+import centralapp.model.Employee;
+import centralapp.model.Manager;
 
 @SuppressWarnings("serial")
 public class DepartmentView extends JPanel {
+	private CentralApp mainControler;
 	private DepartmentControler controler;
-	private JTextField departmentNameField;
 	
-	public DepartmentView(DepartmentControler dptControler) {
+	private JComboBox<AbstractDpt> departmentsComboBox;
+	private JTextField departmentNameField;
+	private JComboBox<AbstractPerson> departmentManagerComboBox;
+	
+	public DepartmentView(CentralApp mainControler, DepartmentControler dptControler) {
+		this.mainControler = mainControler;
 		controler = dptControler;
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JComboBox<String> departmentsComboBox = new JComboBox<String>();
-		departmentsComboBox.addItemListener(controler.new SelectEvent());
+		departmentsComboBox = new JComboBox<AbstractDpt>();
 		add(departmentsComboBox);
 		
 		//Create the form: name, button choose manager, button add, apply, button remove
@@ -60,8 +69,7 @@ public class DepartmentView extends JPanel {
 		JLabel departmentManagerLabel = new JLabel("Manager");
 		departmentFormPanel.add(departmentManagerLabel, "2, 4");
 		
-		//TODO: Fill the combobox
-		JComboBox<String> departmentManagerComboBox = new JComboBox<String>();
+		departmentManagerComboBox = new JComboBox<AbstractPerson>();
 		departmentManagerComboBox.addItemListener(controler.new SelectManagerEvent());
 		departmentFormPanel.add(departmentManagerComboBox, "4, 4");
 		
@@ -69,15 +77,57 @@ public class DepartmentView extends JPanel {
 		departmentFormPanel.add(departmentButtonsPanel, "4, 6, fill, fill");
 		
 		JButton departmentAddButton = new JButton("Add");
-		departmentAddButton.addMouseListener(controler.new AddEvent());
 		departmentButtonsPanel.add(departmentAddButton);
 		
 		JButton departmentApplyButton = new JButton("Apply");
-		departmentApplyButton.addMouseListener(controler.new ApplyEvent());
 		departmentButtonsPanel.add(departmentApplyButton);
 		
 		JButton departmentRemoveButton = new JButton("Remove");
-		departmentRemoveButton.addMouseListener(controler.new RemoveEvent());
 		departmentButtonsPanel.add(departmentRemoveButton);
+		
+		//Update infos
+		updateDepartmentsList(mainControler.getCompany().getDepartments());
+		
+		//Set up events
+		departmentsComboBox.addItemListener(controler.new SelectEvent());
+		departmentAddButton.addMouseListener(controler.new AddEvent());
+		departmentApplyButton.addMouseListener(controler.new ApplyEvent());
+		departmentRemoveButton.addMouseListener(controler.new RemoveEvent());
+	}
+	
+	public String getName() {
+		return departmentNameField.getText();
+	}
+	
+	public void setName(String name) {
+		departmentNameField.setText(name);
+	}
+	
+	public Manager getManager() {
+		return (Manager)departmentManagerComboBox.getSelectedItem();
+	}
+	
+	public void setManager(AbstractPerson manager) {
+		departmentManagerComboBox.setSelectedItem(manager);
+	}
+	
+	public void updateDepartmentsList(ArrayList<Department> dptsList) {
+		departmentsComboBox.removeAll();
+		
+		departmentsComboBox.addItem(mainControler.getCompany().getManagementDpt());
+		for(Department dpt : dptsList) {
+			departmentsComboBox.addItem(dpt);
+		}
+		
+		departmentsComboBox.setSelectedIndex(-1);
+	}
+	
+	public void updatePeopleList(ArrayList<Employee> employeesList) {
+		departmentManagerComboBox.removeAll();
+		
+		departmentManagerComboBox.addItem(mainControler.getCompany().getBoss());
+		for(Employee employee : employeesList) {
+			departmentManagerComboBox.addItem(employee);
+		}
 	}
 }

@@ -106,7 +106,7 @@ public class Company {
 	 * 
 	 * @return name of the company
 	 */
-	public String getName() {
+	public String toString() {
 		return name;
 	}
 
@@ -127,6 +127,15 @@ public class Company {
 	 */
 	public ManagementDpt getManagementDpt() {
 		return managementDpt;
+	}
+
+	/**
+	 * Get a list of all the departments
+	 * 
+	 * @return dptList
+	 */
+	public ArrayList<Department> getDepartments() {
+		return dptList;
 	}
 
 	/**
@@ -159,6 +168,15 @@ public class Company {
 			dptList.add(dptParam);
 		if (!(dptParam.getCompany() == this))
 			dptParam.assign(this);
+	}
+
+	/**
+	 * Get all the employees (managers included, boss excluded)
+	 * 
+	 * @return reference an ArrayList to all the employees
+	 */
+	public ArrayList<Employee> getEmployees() {
+		return employeeList;
 	}
 
 	/**
@@ -238,18 +256,18 @@ public class Company {
 	 * 
 	 * @return String giving details about company
 	 */
-	public String toString() {
+	public String print() {
 		String res;
 		// Add Company name to result String
 		res = "Entreprise : " + name + System.lineSeparator()
 				+ System.lineSeparator();
 
 		// Add boss to result String
-		res += boss.toString() + System.lineSeparator()
+		res += boss.getPrinting() + System.lineSeparator()
 				+ System.lineSeparator();
 
 		// Add managementDpt to result String
-		res += managementDpt.toString() + System.lineSeparator();
+		res += managementDpt.getPrinting() + System.lineSeparator();
 
 		// Add Departments to result String
 		res = res + System.lineSeparator();
@@ -257,7 +275,7 @@ public class Company {
 		Department temp2;
 		while (j.hasNext()) {
 			temp2 = j.next();
-			res = res + temp2.toString() + System.lineSeparator();
+			res = res + temp2.getPrinting() + System.lineSeparator();
 		}
 
 		// Add List of unassigned Employees to result String
@@ -268,7 +286,7 @@ public class Company {
 		while (i.hasNext()) {
 			temp = i.next();
 			if (temp.getDpt() == null && temp.getClass() != Manager.class)
-				res = res + temp.toString() + System.lineSeparator();
+				res = res + temp.getPrinting() + System.lineSeparator();
 		}
 
 		// Add List of unassigned managers to result String
@@ -279,7 +297,7 @@ public class Company {
 		while (k.hasNext()) {
 			temp3 = k.next();
 			if (temp3.getDpt() == null && temp3.getClass() == Manager.class)
-				res = res + temp3.toString() + System.lineSeparator();
+				res = res + temp3.getPrinting() + System.lineSeparator();
 		}
 
 		return res;

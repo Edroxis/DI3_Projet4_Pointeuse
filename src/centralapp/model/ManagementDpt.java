@@ -22,7 +22,7 @@ public class ManagementDpt extends AbstractDpt {
 			managerList.add(manParam);
 	}
 
-	public String toString() {
+	public String getPrinting() {
 		String res = "Management Department : " + System.lineSeparator();
 
 		res += "\t" + boss.toString() + System.lineSeparator();

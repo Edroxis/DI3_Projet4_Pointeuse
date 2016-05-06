@@ -1,6 +1,7 @@
 package centralapp.views;
 
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,16 +16,24 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import centralapp.controlers.CentralApp;
 import centralapp.controlers.PeopleControler;
-import centralapp.controlers.DepartmentControler.AddEvent;
+import centralapp.model.AbstractPerson;
+import centralapp.model.Department;
+import centralapp.model.Employee;
 
 @SuppressWarnings("serial")
 public class PeopleView extends JPanel {
+	private CentralApp mainControler;
 	private PeopleControler controler;
+	
 	private JTextField personFirstNameField;
 	private JTextField personLastNameField;
+	private JComboBox<Department> personDepartmentComboBox;
+	private Department unassignedDpt;
 	
-	public PeopleView(PeopleControler peopleControler) {
+	public PeopleView(CentralApp mainControler, PeopleControler peopleControler) {
+		this.mainControler = mainControler;
 		controler = peopleControler;
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -75,24 +84,59 @@ public class PeopleView extends JPanel {
 		JLabel personDepartmentLabel = new JLabel("Department");
 		personFormPanel.add(personDepartmentLabel, "2, 6");
 		
-		//TODO: Fill the combobox, disable the management dpt, add MrX and the boss
-		JComboBox<String> personDepartmentComboBox = new JComboBox<String>();
-		personDepartmentComboBox.addItemListener(controler.new SelectDepartmentEvent());
+		unassignedDpt = new Department("unassigned");
+		personDepartmentComboBox = new JComboBox<Department>();
 		personFormPanel.add(personDepartmentComboBox, "4, 6");
 		
 		JPanel personButtonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		personFormPanel.add(personButtonsPanel, "4, 8, fill, fill");
 	
 		JButton personAddButton = new JButton("Add");
-		personAddButton.addMouseListener(controler.new AddEvent());
 		personButtonsPanel.add(personAddButton);
 		
 		JButton personApplyButton = new JButton("Apply");
-		personApplyButton.addMouseListener(controler.new ApplyEvent());
 		personButtonsPanel.add(personApplyButton);
 		
 		JButton personRemoveButton = new JButton("Remove");
-		personRemoveButton.addMouseListener(controler.new RemoveEvent());
 		personButtonsPanel.add(personRemoveButton);
+
+		//TODO: Update infos: Fill the combobox, disable the management dpt, add MrX and the boss
+		updateDepartmentsList(mainControler.getCompany().getDepartments());
+		updatePeopleList(mainControler.getCompany().getEmployees());
+		
+		//Set up events
+		personDepartmentComboBox.addItemListener(controler.new SelectDepartmentEvent());
+		personAddButton.addMouseListener(controler.new AddEvent());
+		personApplyButton.addMouseListener(controler.new ApplyEvent());
+		personRemoveButton.addMouseListener(controler.new RemoveEvent());
+	}
+	
+	public String getFirstName() {
+		return personFirstNameField.getText();
+	}
+	
+	public String getLastName() {
+		return personLastNameField.getText();
+	}
+	
+	public Department getDepartment() {
+		Department returnedDpt = (Department)personDepartmentComboBox.getSelectedItem();
+		
+		if(returnedDpt == unassignedDpt)
+			returnedDpt = null;
+			
+		return returnedDpt;
+	}
+	
+	public void updateDepartmentsList(ArrayList<Department> dptsList) {
+		personDepartmentComboBox.removeAll();
+		for(Department dpt : dptsList) {
+			personDepartmentComboBox.addItem(dpt);
+		}
+		personDepartmentComboBox.addItem(unassignedDpt);
+	}
+	
+	public void updatePeopleList(ArrayList<Employee> peopleList) {
+		System.err.println("[PeopleView] updatePeopleList() not implemented yet");
 	}
 }
