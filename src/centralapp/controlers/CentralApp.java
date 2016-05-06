@@ -2,6 +2,7 @@ package centralapp.controlers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import centralapp.model.AbstractDpt;
 import centralapp.model.Boss;
@@ -11,19 +12,20 @@ import centralapp.model.Employee;
 import centralapp.views.MainView;
 
 public class CentralApp {
-	CompanyControler companyControler;
-	DepartmentControler departmentControler;
-	PeopleControler peopleControler;
-	MainView mainWindow;
-	Company company;
+	private CompanyControler companyControler;
+	private DepartmentControler departmentControler;
+	private PeopleControler peopleControler;
+	private MainView mainWindow;
+	private Boss boss;
+	private Company company;
 	
 	public CentralApp() {
-		Boss boss = new Boss("Page", "Jimmy");
+		boss = new Boss("Page", "Jimmy");
 		company = new Company("LedZep", boss);
 		
-		CompanyControler companyControler = new CompanyControler(this);
-		DepartmentControler departmentControler = new DepartmentControler(this);
-		PeopleControler peopleControler = new PeopleControler(this);
+		companyControler = new CompanyControler(this);
+		departmentControler = new DepartmentControler(this);
+		peopleControler = new PeopleControler(this);
 		mainWindow = new MainView(
 				companyControler.getView(),
 				departmentControler.getView(),
@@ -33,12 +35,17 @@ public class CentralApp {
 	public void run() {
 		mainWindow.setVisible(true);
 
-		//Run the client socket to get data
-		try {
-			CheckInOutControler instance = new CheckInOutControler(company, "127.0.0.1", 1337);
-			instance.run();
-		} catch (IOException e) {
-			System.err.println("The client listening the TimeClocking has not been launched");
+		/*  This loop allows to retry the socket client connection if it fails
+		 */
+		while(true) {
+			try {
+				CheckInOutControler instance = new CheckInOutControler(company, "127.0.0.1", 1337);
+				instance.run();
+			} catch (IOException e) {}
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {}
 		}
 	}
 	
@@ -53,10 +60,9 @@ public class CentralApp {
 		peopleControler.updateDepartmentsList(list);
 	}
 	
-	public void notifyPeopleListModification() {		
+	public void notifyPeopleListModification() {
 		ArrayList<Employee> list = company.getEmployees();
 		
-		//TODO: BIG ISSUE HOW CAN DEPARTMENTCONTROLLER BE NULL????
 		departmentControler.updatePeopleList(list);
 		peopleControler.updatePeopleList(list);
 	}
