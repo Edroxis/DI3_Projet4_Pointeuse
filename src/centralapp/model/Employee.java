@@ -2,16 +2,69 @@ package centralapp.model;
 
 import java.util.ArrayList;
 
+/**
+ * <b>Employee : Manage Employee Objects</b>
+ * <p>
+ * Attributes:
+ * <ul>
+ * <li>Company : Reference to the Company</li>
+ * <li>id : Unique id of the employee</li>
+ * <li>nbEmployee : Contains all the departments</li>
+ * <li>dpt : Reference to the Management Departments</li>
+ * <li>checkInOut : ArrayList of all checks</li>
+ * </ul>
+ * 
+ * <p>
+ * Get, add, modify Department, get, add, modify, delete CheckInOut, add and get
+ * Company, delete Employee
+ * </p>
+ * 
+ * @see Department
+ * @see Company
+ * @see CheckInOut
+ * @see AbstractPerson
+ * 
+ * @author Julien
+ */
 public class Employee extends AbstractPerson {
 
-	// Attribut
+	// Attribute
+	/**
+	 * Reference to the Company
+	 */
 	private Company company;
+
+	/**
+	 * Unique id of current Employee
+	 */
 	private int id;
+
+	/**
+	 * Total number of created Employees
+	 */
 	static private int nbEmployee = 0;
+
+	/**
+	 * Reference to the Department
+	 */
 	protected Department dpt;
+
+	/**
+	 * List of all CheckInOut
+	 */
 	private ArrayList<CheckInOut> checkInOut;
 
-	// Constructeur
+	// Constructor
+	/**
+	 * Constructor of Employee
+	 * 
+	 * @param lnParam
+	 *            Last name of Employee
+	 * @param fnParam
+	 *            First name of Employee
+	 * @param companyParam
+	 *            Reference to the Company Employee will be assigned in
+	 */
 	public Employee(String lnParam, String fnParam, Company companyParam) {
 		super(lnParam, fnParam);
 		id = nbEmployee;
@@ -21,6 +74,16 @@ public class Employee extends AbstractPerson {
 		companyParam.add(this);
 	}
 
+	/**
+	 * Constructor of Employee
+	 * 
+	 * @param lnParam
+	 *            Last name of Employee
+	 * @param fnParam
+	 *            First name of Employee
+	 * @param dptParam
+	 *            Department where Employee will be assigned
+	 */
 	public Employee(String lnParam, String fnParam, Department dptParam) {
 		super(lnParam, fnParam);
 		id = nbEmployee;
@@ -32,6 +95,14 @@ public class Employee extends AbstractPerson {
 		assign(dptParam);
 	}
 
+	/**
+	 * Constructor of Employee
+	 * 
+	 * @param lnParam
+	 *            Last name of Employee
+	 * @param fnParam
+	 *            First name of Employee
+	 */
 	public Employee(String lnParam, String fnParam) {
 		super(lnParam, fnParam);
 		id = nbEmployee;
@@ -41,7 +112,7 @@ public class Employee extends AbstractPerson {
 		dpt = null;
 	}
 
-	// Methode
+	// Method
 	public String getlName() {
 		return super.getlName();
 	}
@@ -50,14 +121,33 @@ public class Employee extends AbstractPerson {
 		return super.getfName();
 	}
 
+	/**
+	 * Get id of the current Employee
+	 * 
+	 * @return id of the Employee
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Get the reference to the Department current Employee is assigned in
+	 * 
+	 * @return Reference to the Department of Employee
+	 */
 	public Department getDpt() {
 		return dpt;
 	}
 
+	/**
+	 * Assign an Employee to a Department, calls appropriate functions to keep
+	 * structure coherent
+	 * 
+	 * @param dptParam
+	 *            New Department Employee will be assign to
+	 * 
+	 * @see Department#assign(Employee)
+	 */
 	public void assign(Department dptParam) {
 		if (dpt != null)
 			dpt.removeEmployee(this);
@@ -72,30 +162,67 @@ public class Employee extends AbstractPerson {
 		}
 	}
 
+	/**
+	 * Get the reference to the Company Employee is assigned to
+	 * 
+	 * @return Reference to the Company
+	 */
 	public Company getCompany() {
 		return company;
 	}
 
+	/**
+	 * Get the ArrayList of all Check
+	 * 
+	 * @return ArrayList of all Checks
+	 */
 	public ArrayList<CheckInOut> getCheckInOut() {
 		return checkInOut;
 	}
 
+	/**
+	 * Add a Check to Employee's list
+	 * 
+	 * @param param
+	 *            CheckInOut you want to add
+	 */
 	public void addCheckInOut(CheckInOut param) {
 		checkInOut.add(param);
 	}
 
+	/**
+	 * Modify a specified CheckInOut to another one, if old isn't found, do
+	 * nothing
+	 * 
+	 * @param oldCIO
+	 *            The former CheckInOut you want to replace
+	 * @param newCIO
+	 *            The new one
+	 */
 	public void modifyCheckInOut(CheckInOut oldCIO, CheckInOut newCIO) {
 		int index = checkInOut.indexOf(oldCIO);
 		if (index != -1)
 			checkInOut.set(index, newCIO);
 	}
 
+	/**
+	 * Delete a specified CheckInOut
+	 * 
+	 * @param toDelete
+	 *            CheckInOut you want to delete
+	 */
 	public void deleteCheckInOut(CheckInOut toDelete) {
 		int index = checkInOut.indexOf(toDelete);
 		if (index != -1)
 			checkInOut.remove(index);
 	}
 
+	/**
+	 * Totally erase an Employee from the database
+	 * 
+	 * @see Department#removeEmployee(Employee)
+	 * @see Company#removeEmployee(Employee)
+	 */
 	public void removeEmployee() {
 		if (company.contains(this))
 			company.removeEmployee(this);
@@ -105,10 +232,23 @@ public class Employee extends AbstractPerson {
 				dpt.removeEmployee(this);
 	}
 
+	/**
+	 * Get String with First and last name of an Employee
+	 * 
+	 * @return String containing those informations
+	 */
 	public String getPrinting() {
 		return "Employee : " + getfName() + " " + getlName();// + " " + id;
 	}
 
+	/**
+	 * Assign Employee to the specified company
+	 * 
+	 * @param company
+	 *            Reference to Company you want to assign Employee to
+	 * 
+	 * @see Company#add(Employee)
+	 */
 	public void assign(Company company) {
 		this.company = company;
 	}

@@ -1,18 +1,45 @@
 package centralapp.model;
 
+/**
+ * <b>Manager : Manage Manager Objects</b>
+ * <p>
+ * Attributes:
+ * <ul>
+ * <li>managementDpt : Reference to management Department</li>
+ * </ul>
+ * 
+ * <p>
+ * Extends Employee.
+ * </p>
+ * 
+ * @see Employee
+ * @see ManagementDpt
+ * 
+ * @author Julien
+ */
 public class Manager extends Employee {
 
-	// Attribut
+	// Attribute
+	/**
+	 * Reference to the managementDpt
+	 */
 	private ManagementDpt managementDpt;
 
-	// Constructeur
+	// Constructor
+	/**
+	 * Constructor of a Manager
+	 * 
+	 * @param lnParam Last name of the Manager
+	 * @param fnParam First name of the Manager
+	 * @param companyParam Company Manager is in
+	 */
 	public Manager(String lnParam, String fnParam, Company companyParam) {
 		super(lnParam, fnParam, companyParam);
 		managementDpt = super.getCompany().getManagementDpt();
 		managementDpt.addManager(this);
 	}
 
-	// Methode
+	// Method
 	public String getlName() {
 		return super.getlName();
 	}
@@ -21,6 +48,7 @@ public class Manager extends Employee {
 		return super.getfName();
 	}
 
+	
 	public int getId() {
 		return super.getId();
 	}
@@ -29,6 +57,13 @@ public class Manager extends Employee {
 		return super.getDpt();
 	}
 
+	/**
+	 * Modify Department of a Manager
+	 * 
+	 * @param dptParam New Department of the Manager, null to unassign
+	 * 
+	 * @see Department#setManager(Manager)
+	 */
 	public void setDpt(Department dptParam) {
 		if (super.dpt != null && super.getDpt() != dptParam && dptParam != null) // Retirer instance actuelle de l'ancien dpt
 			if (super.dpt.getManager() != null)
@@ -46,6 +81,12 @@ public class Manager extends Employee {
 				dptParam.setManager(this);
 	}
 	
+	/**
+	 * Remove totally manager from Database
+	 * 
+	 * @see Department#removeManager()
+	 * @see ManagementDpt#removeManager(Manager)
+	 */
 	public void removeManager() {
 		if(managementDpt.contains(this))
 			managementDpt.removeManager(this);
@@ -57,6 +98,11 @@ public class Manager extends Employee {
 		super.removeEmployee();
 	}
 
+	/**
+	 * Get information about manager
+	 * 
+	 * @return String containing first and last name
+	 */
 	public String getPrinting() {
 		return "Manager : " + getfName() + " " + getlName();
 	}

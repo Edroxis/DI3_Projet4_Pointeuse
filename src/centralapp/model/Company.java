@@ -202,7 +202,7 @@ public class Company {
 	/**
 	 * Remove an Employee from the company and the Department he's in
 	 * 
-	 * @param empParma
+	 * @param empParam
 	 *            reference to the Employee you want to delete
 	 * 
 	 * @see Employee#removeEmployee()

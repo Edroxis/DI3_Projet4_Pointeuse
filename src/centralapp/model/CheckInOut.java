@@ -2,16 +2,34 @@ package centralapp.model;
 
 import java.time.ZonedDateTime;
 
+/**
+ * <b>CheckInOut : Manage Check In and Check out</b>
+ * 
+ * @author Julien
+ */
 public class CheckInOut {
-	// Attribut
+	// Attribute
+	/**
+	 * Date and hour of the check
+	 */
 	private ZonedDateTime date;
 
-	// Constructeur
+	// Constructor
+	/**
+	 * Constructor of a check
+	 * 
+	 * @param dateParam Date of current check
+	 */
 	public CheckInOut(ZonedDateTime dateParam) {
 		date = dateParam;
 	}
 
-	// Methode
+	// Method
+	/**
+	 * Get the date and hour of current check
+	 * 
+	 * @return Date of current check
+	 */
 	public ZonedDateTime getDate() {
 		return date;
 	}
