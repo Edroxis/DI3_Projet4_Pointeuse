@@ -1,5 +1,7 @@
 package centralapp.model;
 
+import java.io.Serializable;
+
 /**
  * <b>AbstractPerson : Manage Person's name</b>
  * 
@@ -13,7 +15,7 @@ package centralapp.model;
  * 
  * @author Julien
  */
-public abstract class AbstractPerson {
+public abstract class AbstractPerson implements Serializable{
 	// Attribute
 	/**
 	 * Last Name

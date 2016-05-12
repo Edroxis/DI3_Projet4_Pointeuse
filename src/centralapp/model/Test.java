@@ -18,19 +18,19 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 		Boss flamby = new Boss("Hollande", "Francois");
-		Company france = new Company("R�publique Fran�aise", flamby);
+		Company france = new Company("Republique Francaise", flamby);
 
 		Manager man1 = new Manager("Cazeneuve", "Bernard", france);
 		Manager man2 = new Manager("Valls", "Manuel", france);
 		Manager man3 = new Manager("El Komhri", "Myriam", france);
 
-		Department interieur = new Department("Minist�re de l'Int�rieur",
+		Department interieur = new Department("Ministere de l'Interieur",
 				france);
 
-		Department travail = new Department("Minist�re du Travail");
+		Department travail = new Department("Ministere du Travail");
 		travail.assign(france);
 
-		Department defense = new Department("Minist�re de la D�fense");
+		Department defense = new Department("Ministere de la Defense");
 		defense.assign(france);
 
 		interieur.setManager(man2);
@@ -45,9 +45,9 @@ public class Test {
 		Employee emp4 = new Employee("Inspecteur1", "Marc", travail);
 		Employee emp5 = new Employee("Inspecteur2", "Joe", travail);
 		Employee emp6 = new Employee("Inspecteur3", "Luc", france);
-		Employee emp7 = new Employee("Sergeant", "R�mi", defense);
+		Employee emp7 = new Employee("Sergeant", "Remi", defense);
 		Employee emp8 = new Employee("Capitaine", "Martin", defense);
-		Employee emp9 = new Employee("G�n�ral", "Paul");
+		Employee emp9 = new Employee("General", "Paul");
 
 		// emp1.removeEmployee();
 
@@ -55,7 +55,12 @@ public class Test {
 
 		// travail.removeDpt();
 
-		System.out.println(france.print());
+		System.out.println(france.print() + "-----------------------------------");
+		
+		france.serialize("Company.ser");
+		
+		Company myCompany = Company.unserialize("Company.ser");
+		System.out.println(myCompany.print());
 
 		/*
 		 * ZonedDateTime date1 = null, date2 = null; //TEST pointages employ�s

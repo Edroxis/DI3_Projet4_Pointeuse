@@ -1,5 +1,7 @@
 package centralapp.model;
 
+import java.io.Serializable;
+
 /**
  * <b>AbstractDpt : Manage Department's name</b>
  * 
@@ -13,7 +15,7 @@ package centralapp.model;
  * 
  * @author Julien
  */
-public abstract class AbstractDpt {
+public abstract class AbstractDpt implements Serializable{
 
 	// Attribute
 	/**

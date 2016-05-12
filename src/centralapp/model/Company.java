@@ -1,5 +1,6 @@
 package centralapp.model;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -27,7 +28,7 @@ import java.util.Iterator;
  * 
  * @author Julien
  */
-public class Company {
+public class Company implements Serializable{
 
 	// Attribute
 	/**
@@ -300,6 +301,41 @@ public class Company {
 				res = res + temp3.getPrinting() + System.lineSeparator();
 		}
 
+		return res;
+	}
+
+	void serialize(String nomFichier){
+		ObjectOutputStream oos = null;
+		try {
+			final FileOutputStream fichierOut = new FileOutputStream(nomFichier);
+			oos = new ObjectOutputStream(fichierOut);
+			oos.writeObject(this);
+			oos.flush();if (oos != null)
+				oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	static Company unserialize(String nomFichier) {
+		ObjectInputStream ois = null;
+		Company res = null;
+
+		FileInputStream fichierIn;
+		try {
+			fichierIn = new FileInputStream(nomFichier);
+			ois = new ObjectInputStream(fichierIn);
+			res = (Company) ois.readObject();
+			if(ois != null)
+				ois.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		return res;
 	}
 }
