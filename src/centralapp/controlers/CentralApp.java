@@ -20,8 +20,7 @@ public class CentralApp {
 	private Company company;
 	
 	public CentralApp() {
-		boss = new Boss("Page", "Jimmy");
-		company = new Company("LedZep", boss);
+		company = Company.unserialize("Company.ser");
 		
 		companyControler = new CompanyControler(this);
 		departmentControler = new DepartmentControler(this);

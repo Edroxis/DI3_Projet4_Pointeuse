@@ -15,7 +15,7 @@ import java.io.Serializable;
  * 
  * @author Julien
  */
-public abstract class AbstractPerson implements Serializable{
+public abstract class AbstractPerson implements Serializable {
 	// Attribute
 	/**
 	 * Last Name

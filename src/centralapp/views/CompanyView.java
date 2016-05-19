@@ -23,7 +23,7 @@ public class CompanyView extends JPanel {
 	private CompanyControler controler;
 	
 	private JTextField companyNameField;
-	JComboBox<AbstractPerson> companyBossComboBox;
+	private JComboBox<AbstractPerson> companyBossComboBox;
 	
 	public CompanyView(CentralApp mainControler, CompanyControler companyControler) {
 		this.mainControler = mainControler;

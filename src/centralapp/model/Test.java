@@ -17,48 +17,6 @@ public class Test {
 	 * @see Company
 	 */
 	public static void main(String[] args) {
-		Boss flamby = new Boss("Hollande", "Francois");
-		Company france = new Company("Republique Francaise", flamby);
-
-		Manager man1 = new Manager("Cazeneuve", "Bernard", france);
-		Manager man2 = new Manager("Valls", "Manuel", france);
-		Manager man3 = new Manager("El Komhri", "Myriam", france);
-
-		Department interieur = new Department("Ministere de l'Interieur",
-				france);
-
-		Department travail = new Department("Ministere du Travail");
-		travail.assign(france);
-
-		Department defense = new Department("Ministere de la Defense");
-		defense.assign(france);
-
-		interieur.setManager(man2);
-		travail.setManager(man3);
-		defense.setManager(man1);
-
-		defense.removeManager();
-
-		Employee emp1 = new Employee("CRS1", "Jack", interieur);
-		Employee emp2 = new Employee("CRS2", "Alfred", interieur);
-		Employee emp3 = new Employee("CRS3", "Jean-Claude", interieur);
-		Employee emp4 = new Employee("Inspecteur1", "Marc", travail);
-		Employee emp5 = new Employee("Inspecteur2", "Joe", travail);
-		Employee emp6 = new Employee("Inspecteur3", "Luc", france);
-		Employee emp7 = new Employee("Sergeant", "Remi", defense);
-		Employee emp8 = new Employee("Capitaine", "Martin", defense);
-		Employee emp9 = new Employee("General", "Paul");
-
-		// emp1.removeEmployee();
-
-		// emp2.assign(travail);
-
-		// travail.removeDpt();
-
-		System.out.println(france.print() + "-----------------------------------");
-		
-		france.serialize("Company.ser");
-		
 		Company myCompany = Company.unserialize("Company.ser");
 		System.out.println(myCompany.print());
 

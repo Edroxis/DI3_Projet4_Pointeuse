@@ -28,7 +28,7 @@ import java.util.Iterator;
  * 
  * @author Julien
  */
-public class Company implements Serializable{
+public class Company implements Serializable {
 
 	// Attribute
 	/**
@@ -310,14 +310,15 @@ public class Company implements Serializable{
 			final FileOutputStream fichierOut = new FileOutputStream(nomFichier);
 			oos = new ObjectOutputStream(fichierOut);
 			oos.writeObject(this);
-			oos.flush();if (oos != null)
+			oos.flush();
+			if (oos != null)
 				oos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	static Company unserialize(String nomFichier) {
+	public static Company unserialize(String nomFichier) {
 		ObjectInputStream ois = null;
 		Company res = null;
 
