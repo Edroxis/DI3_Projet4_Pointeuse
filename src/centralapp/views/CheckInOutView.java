@@ -30,7 +30,7 @@ public class CheckInOutView extends JPanel {
 		
 		table = new JTable();
 		String[][] data = new String[emp.getCheckInOut().size()][2] ;
-		int i = 0;
+		int i = 1;
 		
 		for(CheckInOut ch : emp.getCheckInOut()){
 			data[i][0] = ch.getDate().format(dateFormatter);

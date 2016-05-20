@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import centralapp.model.Boss;
-import centralapp.model.Company;
-import centralapp.model.Department;
-import centralapp.model.Employee;
+import centralapp.model.*;
 import centralapp.views.MainView;
+
+//TODO delete once test finished
+import java.time.ZonedDateTime;
 
 public class CentralApp {
 	private CompanyControler companyControler;
 	private DepartmentControler departmentControler;
 	private PeopleControler peopleControler;
+	private CheckInOutControler checkControler;
 	private MainView mainWindow;
 	private Company company;
 	private JFileChooser companyChooser;
@@ -44,6 +45,12 @@ public class CentralApp {
 			Boss boss = new Boss("Last name", "First name");
 			company = new Company("Company's name", boss);
 		}
+		
+		//TODO This is a test, REMOVE
+		Employee emp3 = company.getEmployees().get(3);
+		emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
+		checkControler = new CheckInOutControler(this, emp3);
+		mainWindow.addTab("emp3", checkControler.getView());
 		
 		//Update the first infos
 		companyControler.getView().updateCompanyName(company.toString());
