@@ -46,10 +46,12 @@ public class CentralApp {
 		}
 		
 		//TODO This is a test, REMOVE
-		Employee emp3 = company.getEmployees().get(3);
+		Employee emp3 = new Employee("Jean", "Bon", company);
 		emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
+		emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-11-03T10:15:30+01:00[Europe/Paris]")));
+		emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-10-03T10:15:30+01:00[Europe/Paris]")));
 		checkControler = new CheckInOutControler(this, emp3);
-		mainWindow.addTab("emp3", checkControler.getView());
+		mainWindow.addTab(emp3.getfName()+" "+emp3.getlName(), checkControler.getView());
 		
 		//Update the first infos
 		companyControler.getView().updateCompanyName(company.toString());

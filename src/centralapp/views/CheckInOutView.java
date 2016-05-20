@@ -12,6 +12,10 @@ import centralapp.model.*;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class CheckInOutView extends JPanel {
 
@@ -30,12 +34,14 @@ public class CheckInOutView extends JPanel {
 		
 		table = new JTable();
 		String[][] data = new String[emp.getCheckInOut().size()][2] ;
-		int i = 1;
+		int i = 0;
 		
 		for(CheckInOut ch : emp.getCheckInOut()){
 			data[i][0] = ch.getDate().format(dateFormatter);
 			data[i][1] = ch.getDate().format(hourFormatter);
+			i++;
 		}
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		table.setModel(new DefaultTableModel(
 			data,
@@ -51,6 +57,14 @@ public class CheckInOutView extends JPanel {
 			}
 		});
 		add(table);
+		
+		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		add(panel);
+		
+		JButton btnClose = new JButton("Close");
+		panel.add(btnClose);
 	}
 
 }
