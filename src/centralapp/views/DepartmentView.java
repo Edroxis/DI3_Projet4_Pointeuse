@@ -70,7 +70,6 @@ public class DepartmentView extends JPanel {
 		departmentFormPanel.add(departmentManagerLabel, "2, 4");
 		
 		departmentManagerComboBox = new JComboBox<AbstractPerson>();
-		departmentManagerComboBox.addItemListener(controler.new SelectManagerEvent());
 		departmentFormPanel.add(departmentManagerComboBox, "4, 4");
 		
 		JPanel departmentButtonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -87,6 +86,7 @@ public class DepartmentView extends JPanel {
 		
 		//Set up events
 		departmentsComboBox.addItemListener(controler.new SelectEvent());
+		departmentManagerComboBox.addItemListener(controler.new SelectManagerEvent());
 		departmentAddButton.addMouseListener(controler.new AddEvent());
 		departmentApplyButton.addMouseListener(controler.new ApplyEvent());
 		departmentRemoveButton.addMouseListener(controler.new RemoveEvent());
@@ -115,8 +115,6 @@ public class DepartmentView extends JPanel {
 		for(Department dpt : dptsList) {
 			departmentsComboBox.addItem(dpt);
 		}
-		
-		departmentsComboBox.setSelectedIndex(-1);
 	}
 	
 	public void updatePeopleList(ArrayList<Employee> employeesList) {

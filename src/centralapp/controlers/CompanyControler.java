@@ -4,11 +4,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-import centralapp.model.Boss;
 import centralapp.model.Company;
+import centralapp.model.Employee;
 import centralapp.views.CompanyView;
 
 public class CompanyControler {
@@ -22,6 +21,10 @@ public class CompanyControler {
 	
 	public CompanyView getView() {
 		return view;
+	}
+	
+	public void updatePeopleList(ArrayList<Employee> list) {
+		view.updatePeopleList(list);
 	}
 
 	public class NameEvent extends FocusAdapter {

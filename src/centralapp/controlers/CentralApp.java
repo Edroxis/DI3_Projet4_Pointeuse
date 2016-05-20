@@ -1,5 +1,7 @@
 package centralapp.controlers;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,15 +21,22 @@ public class CentralApp {
 	private PeopleControler peopleControler;
 	private MainView mainWindow;
 	private Company company;
+	private JFileChooser companyChooser;
+	private String companyFileLocation;
 	
 	public CentralApp() {		
 		companyControler = new CompanyControler(this);
 		departmentControler = new DepartmentControler(this);
 		peopleControler = new PeopleControler(this);
-		mainWindow = new MainView();
+		
+		mainWindow = new MainView(this);
 		mainWindow.addTab("Company", companyControler.getView());
 		mainWindow.addTab("Department", departmentControler.getView());
 		mainWindow.addTab("People", peopleControler.getView());
+		
+		companyChooser = new JFileChooser();
+		companyChooser.setFileFilter(new FileNameExtensionFilter(
+				"Company file", "ser"));
 	}
 	
 	public void run() {
@@ -59,27 +68,22 @@ public class CentralApp {
 	
 	private boolean openFile() {
 		boolean openFileSucceed = false;
-		
-	    JFileChooser companyChooser = new JFileChooser();
-	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-	        "Company file", "ser");
-	    companyChooser.setFileFilter(filter);
 	    
 	    if(companyChooser.showOpenDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
-	    	String absolutePath = companyChooser.getSelectedFile().getAbsolutePath();
+	    	companyFileLocation = companyChooser.getSelectedFile().getAbsolutePath();
 	 
 	    	try {
-	    		company = Company.unserialize(absolutePath);
+	    		company = Company.unserialize(companyFileLocation);
 	    		openFileSucceed = true;
 	    	}
     		catch(ClassNotFoundException e) {
-    			System.err.println("Bad version file: " + absolutePath);
+    			System.err.println("Bad version file: " + companyFileLocation);
     		}
 	    	catch(FileNotFoundException e) {
-	    		System.err.println("Cannot find the following file: " + absolutePath);
+	    		System.err.println("Cannot find the following file: " + companyFileLocation);
 	    	}
 	    	catch(IOException e) {
-	    		System.err.println("File corrputed: " + absolutePath);
+	    		System.err.println("File corrputed: " + companyFileLocation);
 	    	}
 	    }
 	    
@@ -100,8 +104,33 @@ public class CentralApp {
 	public void notifyPeopleListModification() {
 		ArrayList<Employee> list = company.getEmployees();
 		
+		companyControler.updatePeopleList(list);
 		departmentControler.updatePeopleList(list);
 		peopleControler.updatePeopleList(list);
+	}
+	
+	public class ExitEvent extends WindowAdapter {
+		@Override
+		public void windowClosing(WindowEvent arg0) {
+			if(companyFileLocation == null) {			    
+			    if(companyChooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
+			    	companyFileLocation = companyChooser.getSelectedFile().getAbsolutePath();
+			    	
+			    	try {
+						company.serialize(companyFileLocation);
+						
+					} catch (FileNotFoundException e) {
+						System.err.println("Cannot save in " + companyFileLocation
+								+ ". File not found!");
+						
+					} catch (IOException e) {
+						System.err.println("Cannot save in " + companyFileLocation +
+								". Unknown error!");
+					}
+			    }
+			}
+			System.exit(0);
+		}
 	}
 
 	public static void main(String[] args) {

@@ -4,12 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import centralapp.controlers.CentralApp;
+
 @SuppressWarnings("serial")
 public class MainView extends JFrame {
 	
 	private JTabbedPane tabbedPane;
 	
-	public MainView() {
+	public MainView(CentralApp controler) {
 		//GTK theme
 		/*try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
@@ -25,6 +27,9 @@ public class MainView extends JFrame {
 		
 		//Just to test
 		//openCheckInOutTab();
+		
+		//Set up events
+		addWindowListener(controler.new ExitEvent());
 	}
 	
 	public void addTab(String name, JPanel tab){

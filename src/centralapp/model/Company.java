@@ -305,18 +305,15 @@ public class Company implements Serializable {
 		return res;
 	}
 
-	void serialize(String nomFichier){
-		ObjectOutputStream oos = null;
-		try {
-			final FileOutputStream fichierOut = new FileOutputStream(nomFichier);
-			oos = new ObjectOutputStream(fichierOut);
-			oos.writeObject(this);
-			oos.flush();
-			if (oos != null)
-				oos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void serialize(String nomFichier)
+	throws FileNotFoundException, IOException {
+		FileOutputStream fichierOut = new FileOutputStream(nomFichier);
+		ObjectOutputStream oos = new ObjectOutputStream(fichierOut);
+
+		oos.writeObject(this);
+		oos.flush();
+		if (oos != null)
+			oos.close();
 	}
 
 	public static Company unserialize(String nomFichier)

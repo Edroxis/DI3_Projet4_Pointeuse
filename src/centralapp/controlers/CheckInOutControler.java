@@ -13,7 +13,7 @@ public class CheckInOutControler {
 		view = new CheckInOutView(mainControler, this, emp);
 	}
 	
-	public CompanyView getView() {
+	public CheckInOutView getView() {
 		return view;
 	}
 }
