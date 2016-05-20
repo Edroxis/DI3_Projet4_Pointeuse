@@ -1,12 +1,15 @@
 package centralapp.views;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 @SuppressWarnings("serial")
 public class MainView extends JFrame {
 	
-	public MainView(CompanyView company, DepartmentView dpt, PeopleView people) {
+	private JTabbedPane tabbedPane;
+	
+	public MainView() {
 		//GTK theme
 		/*try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
@@ -17,15 +20,14 @@ public class MainView extends JFrame {
 		
 		setSize(800, 600);
 		
-		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane = new JTabbedPane();
 		getContentPane().add(tabbedPane);
-		
-		tabbedPane.addTab("Company", company);
-		tabbedPane.addTab("Department", dpt);
-		tabbedPane.addTab("People", people);
-		tabbedPane.setSelectedComponent(people);
 		
 		//Just to test
 		//openCheckInOutTab();
+	}
+	
+	public void addTab(String name, JPanel tab){
+		tabbedPane.addTab(name, tab);
 	}
 }

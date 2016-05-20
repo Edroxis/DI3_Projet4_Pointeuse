@@ -24,10 +24,10 @@ public class CentralApp {
 		companyControler = new CompanyControler(this);
 		departmentControler = new DepartmentControler(this);
 		peopleControler = new PeopleControler(this);
-		mainWindow = new MainView(
-				companyControler.getView(),
-				departmentControler.getView(),
-				peopleControler.getView());
+		mainWindow = new MainView();
+		mainWindow.addTab("Company", companyControler.getView());
+		mainWindow.addTab("Department", departmentControler.getView());
+		mainWindow.addTab("People", peopleControler.getView());
 	}
 	
 	public void run() {
@@ -47,7 +47,7 @@ public class CentralApp {
 		 */
 		while(true) {
 			try {
-				CheckInOutControler instance = new CheckInOutControler(company, "127.0.0.1", 1337);
+				ComControler instance = new ComControler(company, "127.0.0.1", 1337);
 				instance.run();
 			} catch (IOException e) {}
 			
