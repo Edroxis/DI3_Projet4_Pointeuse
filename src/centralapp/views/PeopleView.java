@@ -99,10 +99,6 @@ public class PeopleView extends JPanel {
 		
 		JButton personRemoveButton = new JButton("Remove");
 		personButtonsPanel.add(personRemoveButton);
-
-		//TODO: Update infos: Fill the combobox, disable the management dpt, add MrX and the boss
-		updateDepartmentsList(mainControler.getCompany().getDepartments());
-		updatePeopleList(mainControler.getCompany().getEmployees());
 		
 		//Set up events
 		personDepartmentComboBox.addItemListener(controler.new SelectDepartmentEvent());

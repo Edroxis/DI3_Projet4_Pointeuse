@@ -58,10 +58,6 @@ public class CompanyView extends JPanel {
 		companyBossComboBox = new JComboBox<AbstractPerson>();
 		add(companyBossComboBox, "4, 4");
 		
-		//Update infos
-		companyNameField.setText(mainControler.getCompany().toString());
-		updatePeopleList(mainControler.getCompany().getEmployees());
-		
 		//Set up events
 		companyNameField.addFocusListener(controler.new NameEvent());
 		companyBossComboBox.addItemListener(controler.new BossEvent());
@@ -69,6 +65,10 @@ public class CompanyView extends JPanel {
 	
 	public String getName() {
 		return companyNameField.getText();
+	}
+	
+	public void updateCompanyName(String name) {
+		companyNameField.setText(name);
 	}
 	
 	public void updatePeopleList(ArrayList<Employee> employeesList) {

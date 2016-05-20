@@ -85,9 +85,6 @@ public class DepartmentView extends JPanel {
 		JButton departmentRemoveButton = new JButton("Remove");
 		departmentButtonsPanel.add(departmentRemoveButton);
 		
-		//Update infos
-		updateDepartmentsList(mainControler.getCompany().getDepartments());
-		
 		//Set up events
 		departmentsComboBox.addItemListener(controler.new SelectEvent());
 		departmentAddButton.addMouseListener(controler.new AddEvent());
@@ -125,7 +122,7 @@ public class DepartmentView extends JPanel {
 	public void updatePeopleList(ArrayList<Employee> employeesList) {
 		departmentManagerComboBox.removeAll();
 		
-		departmentManagerComboBox.addItem(mainControler.getCompany().getBoss());
+		//departmentManagerComboBox.addItem(mainControler.getCompany().getBoss());
 		for(Employee employee : employeesList) {
 			departmentManagerComboBox.addItem(employee);
 		}

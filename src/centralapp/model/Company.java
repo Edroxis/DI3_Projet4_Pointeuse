@@ -28,6 +28,7 @@ import java.util.Iterator;
  * 
  * @author Julien
  */
+@SuppressWarnings("serial")
 public class Company implements Serializable {
 
 	// Attribute
@@ -318,24 +319,17 @@ public class Company implements Serializable {
 		}
 	}
 
-	public static Company unserialize(String nomFichier) {
+	public static Company unserialize(String nomFichier)
+	throws ClassNotFoundException, FileNotFoundException, IOException {
 		ObjectInputStream ois = null;
 		Company res = null;
 
 		FileInputStream fichierIn;
-		try {
-			fichierIn = new FileInputStream(nomFichier);
-			ois = new ObjectInputStream(fichierIn);
-			res = (Company) ois.readObject();
-			if(ois != null)
-				ois.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		fichierIn = new FileInputStream(nomFichier);
+		ois = new ObjectInputStream(fichierIn);
+		res = (Company) ois.readObject();
+		if(ois != null)
+			ois.close();
 		
 		return res;
 	}

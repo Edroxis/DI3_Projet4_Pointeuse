@@ -1,5 +1,8 @@
 package centralapp.model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * <b>Test : Test class of model</b>
  * 
@@ -17,8 +20,21 @@ public class Test {
 	 * @see Company
 	 */
 	public static void main(String[] args) {
-		Company myCompany = Company.unserialize("Company.ser");
-		System.out.println(myCompany.print());
+		Company myCompany;
+		try {
+			myCompany = Company.unserialize("Company.ser");
+			System.out.println(myCompany.print());
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		/*
 		 * ZonedDateTime date1 = null, date2 = null; //TEST pointages employ�s
