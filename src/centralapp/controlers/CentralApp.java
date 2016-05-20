@@ -23,7 +23,6 @@ public class CentralApp {
 	private MainView mainWindow;
 	private Company company;
 	private JFileChooser companyChooser;
-	private String companyFileLocation;
 	
 	public CentralApp() {		
 		companyControler = new CompanyControler(this);
@@ -77,7 +76,7 @@ public class CentralApp {
 		boolean openFileSucceed = false;
 	    
 	    if(companyChooser.showOpenDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
-	    	companyFileLocation = companyChooser.getSelectedFile().getAbsolutePath();
+	    	String companyFileLocation = companyChooser.getSelectedFile().getAbsolutePath();
 	 
 	    	try {
 	    		company = Company.unserialize(companyFileLocation);
@@ -118,24 +117,22 @@ public class CentralApp {
 	
 	public class ExitEvent extends WindowAdapter {
 		@Override
-		public void windowClosing(WindowEvent arg0) {
-			if(companyFileLocation == null) {			    
-			    if(companyChooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
-			    	companyFileLocation = companyChooser.getSelectedFile().getAbsolutePath();
-			    	
-			    	try {
-						company.serialize(companyFileLocation);
-						
-					} catch (FileNotFoundException e) {
-						System.err.println("Cannot save in " + companyFileLocation
-								+ ". File not found!");
-						
-					} catch (IOException e) {
-						System.err.println("Cannot save in " + companyFileLocation +
-								". Unknown error!");
-					}
-			    }
-			}
+		public void windowClosing(WindowEvent arg0) {		    
+		    if(companyChooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
+		    	String companyFileLocation = companyChooser.getSelectedFile().getAbsolutePath();
+		    	
+		    	try {
+					company.serialize(companyFileLocation);
+					
+				} catch (FileNotFoundException e) {
+					System.err.println("Cannot save in " + companyFileLocation
+							+ ". File not found!");
+					
+				} catch (IOException e) {
+					System.err.println("Cannot save in " + companyFileLocation +
+							". Unknown error!");
+				}
+		    }
 			System.exit(0);
 		}
 	}
