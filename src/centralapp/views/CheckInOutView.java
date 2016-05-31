@@ -1,5 +1,6 @@
 package centralapp.views;
 
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.JPanel;
@@ -29,33 +30,11 @@ public class CheckInOutView extends JPanel {
 	public CheckInOutView(CentralApp mainControler, CheckInOutControler localControler, Employee emp) {
 		this.mainControler = mainControler;
 		controler = localControler;
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		DateTimeFormatter hourFormatter = DateTimeFormatter.ofPattern("HH:mm");
 		
 		table = new JTable();
-		String[][] data = new String[emp.getCheckInOut().size()][2] ;
-		int i = 0;
 		
-		for(CheckInOut ch : emp.getCheckInOut()){
-			data[i][0] = ch.getDate().format(dateFormatter);
-			data[i][1] = ch.getDate().format(hourFormatter);
-			i++;
-		}
+		updateTable(emp);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		table.setModel(new DefaultTableModel(
-			data,
-			new String[] {
-				"Jour", "Heure"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
 		add(table);
 		
 		JPanel panel = new JPanel();
@@ -65,6 +44,34 @@ public class CheckInOutView extends JPanel {
 		
 		JButton btnClose = new JButton("Close");
 		panel.add(btnClose);
+	}
+	
+	public void updateTable(Employee emp){//update the model of the JTable
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		DateTimeFormatter hourFormatter = DateTimeFormatter.ofPattern("HH:mm");
+		
+		String[][] data = new String[emp.getCheckInOut().size()][2] ;
+		int i = 0;
+		
+		for(CheckInOut ch : emp.getCheckInOut()){
+			data[i][0] = ch.getDate().format(dateFormatter);
+			data[i][1] = ch.getDate().format(hourFormatter);
+			i++;
+		}
+		
+		table.setModel(new DefaultTableModel(
+				data,
+				new String[] {
+					"Jour", "Heure"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					String.class, String.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
 	}
 
 }
