@@ -70,7 +70,7 @@ public class DepartmentControler {
 			Department newDpt = new Department(newDptName, company);
 			newDpt.setManager(view.getManager());
 			
-			company.add(newDpt);
+			//company.add(newDpt);
 			mainControler.notifyDptListModification();
 		}
 	}
