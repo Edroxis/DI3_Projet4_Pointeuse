@@ -34,5 +34,10 @@ public class MainView extends JFrame {
 	
 	public void addTab(String name, JPanel tab){
 		tabbedPane.addTab(name, tab);
+		CentralApp.nbTab++;
+	}
+
+	public void closeTab(int tabNb) {
+		tabbedPane.remove(tabNb);
 	}
 }

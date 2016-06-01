@@ -19,10 +19,12 @@ public class CentralApp {
 	private CompanyControler companyControler;
 	private DepartmentControler departmentControler;
 	private PeopleControler peopleControler;
-	private CheckInOutControler checkControler;
+	private ArrayList<CheckInOutControler> checksControlers;
 	private MainView mainWindow;
 	private Company company;
 	private JFileChooser companyChooser;
+	
+	public static int nbTab;
 	
 	public CentralApp() {		
 		companyControler = new CompanyControler(this);
@@ -45,13 +47,26 @@ public class CentralApp {
 			company = new Company("Company's name", boss);
 		}
 		
+		checksControlers = new ArrayList<CheckInOutControler>();
+		
 		//TODO This is a test, REMOVE
 		Employee emp3 = new Employee("Jean", "Bon", company);
-		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
-		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-11-03T10:15:30+01:00[Europe/Paris]")));
+		Employee emp4 = new Employee("Jean2", "Bon2", company);
+		Employee emp5 = new Employee("Jean3", "Bon3", company);
+		emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
+		emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-11-03T10:15:30+01:00[Europe/Paris]")));
+		emp5.addCheckInOut(new CheckInOut(ZonedDateTime.parse("1995-11-03T10:15:30+01:00[Europe/Paris]")));
+		openCheckTab(emp3);
+		openCheckTab(emp4);
+		openCheckTab(emp5);
+		closeCheckTab(checksControlers.get(0));
+		closeCheckTab(checksControlers.get(0));
+		//closeCheckTab(checksControlers.get(0));
 		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-10-03T10:15:30+01:00[Europe/Paris]")));
-		checkControler = new CheckInOutControler(this, emp3);
-		mainWindow.addTab(emp3.getfName()+" "+emp3.getlName(), checkControler.getView());
+		//checkControler = new CheckInOutControler(this, emp3);
+		//mainWindow.addTab(emp3.getfName()+" "+emp3.getlName(), checkControler.getView());
+		
+		//////////////////////
 		
 		//Update the first infos
 		companyControler.getView().updateCompanyName(company.toString());
@@ -72,6 +87,25 @@ public class CentralApp {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {}
 		}
+	}
+	
+	public void openCheckTab(Employee emp){	//Fonction pour ouvrir un onglet de Checks In Out
+		CheckInOutControler newCIOC = new CheckInOutControler(this, emp, nbTab);
+		checksControlers.add(newCIOC);
+		mainWindow.addTab(emp.getfName()+" "+emp.getlName(), newCIOC.getView());
+	}
+	
+	public void closeCheckTab(CheckInOutControler controler){
+		int indexInAL = checksControlers.indexOf(controler);
+		
+		if(indexInAL != -1){	//if tab is contained on the window
+			for(int i = indexInAL+1; i < checksControlers.size(); i++)	//Reduce tabNb of following tabs (avoid NullPointerException)
+				checksControlers.get(i).tabNb--;
+			mainWindow.closeTab(controler.getTabNb());
+			checksControlers.remove(controler);
+		}
+		else
+			System.err.println("[CentralApp#closeCheckTab] this CheckInOutControler doesn't exist");
 	}
 	
 	private boolean openFile() {
