@@ -6,14 +6,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+
 import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
 import centralapp.views.PeopleView;
+import centralapp.views.PeopleView.MyDefaultMutableTreeNode;
 
 public class PeopleControler {
 	private CentralApp mainControler;
 	private PeopleView view;
+	
+	private int lastSelectedID;
 	
 	public PeopleControler(CentralApp controler) {
 		mainControler = controler;
@@ -32,17 +38,12 @@ public class PeopleControler {
 		view.updatePeopleList(list);
 	}
 	
-	public class SelectEvent extends MouseAdapter {
+	public class TreeSelectEvent implements TreeSelectionListener {
 		@Override
-		public void mouseClicked(MouseEvent event) {
-			int countClicks = event.getClickCount();
-			
-			if(countClicks == 1) {
-				System.err.println("[People] Select person");
-			}
-			else if(countClicks == 2) {
-				System.err.println("[People] Open check in/out person");
-			}
+		public void valueChanged(TreeSelectionEvent event) {
+			lastSelectedID = ((MyDefaultMutableTreeNode) event.getNewLeadSelectionPath().getLastPathComponent()).getId();
+			if(lastSelectedID!=-1)
+				mainControler.openCheckTab(mainControler.getCompany().findEmployee(lastSelectedID));
 		}
 	}
 	

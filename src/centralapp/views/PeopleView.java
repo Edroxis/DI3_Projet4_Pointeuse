@@ -46,12 +46,12 @@ public class PeopleView extends JPanel {
 		JLabel peopleTreeIndication = new JLabel("Double-click to open check in/out:");
 		add(peopleTreeIndication);
 		
-		DefaultMutableTreeNode racine = new DefaultMutableTreeNode("The Root");
+		MyDefaultMutableTreeNode racine = new MyDefaultMutableTreeNode("The Root",-1);
 		DefaultTreeModel arbreModele = new DefaultTreeModel(racine);
 		peopleTree = new JTree(arbreModele);
 		//updateTree();
 		peopleTree.setRootVisible(false);
-		peopleTree.addMouseListener(controler.new SelectEvent());
+		peopleTree.addTreeSelectionListener(controler.new TreeSelectEvent());
 		add(peopleTree);
 		
 		//Create the form: firstname, lastname, 
@@ -138,6 +138,7 @@ public class PeopleView extends JPanel {
 			personDepartmentComboBox.addItem(dpt);
 		}
 		personDepartmentComboBox.addItem(unassignedDpt);
+		updateTree();
 	}
 	
 	public void updatePeopleList(ArrayList<Employee> peopleList) {
@@ -147,17 +148,31 @@ public class PeopleView extends JPanel {
 	
 	public void updateTree(){
 		Company cmp = mainControler.getCompany();
-		DefaultMutableTreeNode racine = new DefaultMutableTreeNode("The Root");
+		DefaultMutableTreeNode racine = new MyDefaultMutableTreeNode("The Root",-1);
 		
 		for(Department dpt : cmp.getDepartments()){
-		    DefaultMutableTreeNode x = new DefaultMutableTreeNode(dpt.toString());
-		    for(Employee emp : dpt.getEmployees().values())
-		    	x.add( new DefaultMutableTreeNode(emp.getfName()+" "+emp.getlName()));
+			MyDefaultMutableTreeNode x = new MyDefaultMutableTreeNode(dpt.toString(),-1);
+		    
+		    for(Employee emp : dpt.getEmployees().values()){
+
+		    	x.add( new MyDefaultMutableTreeNode(emp.getfName()+" "+emp.getlName(), emp.getId()));
+		    }
 		    racine.add(x);
 		}
 		
 		DefaultTreeModel newModel = new DefaultTreeModel(racine);
 		
 		peopleTree.setModel(newModel);
+	}
+	
+	public class MyDefaultMutableTreeNode extends DefaultMutableTreeNode{
+		private int id;
+		MyDefaultMutableTreeNode(String nodeName, int id){
+			super(nodeName);
+			this.id = id;
+		}
+		public int getId(){
+			return id;
+		}
 	}
 }

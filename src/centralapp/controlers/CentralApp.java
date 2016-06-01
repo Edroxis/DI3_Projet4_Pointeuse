@@ -52,13 +52,12 @@ public class CentralApp {
 		//TODO This is a test, REMOVE
 		Department dpt1 = new Department("Dpt1", company);
 		Department dpt2 = new Department("Dpt2", company);
-		Employee emp3 = new Employee("Jean", "Bon", dpt1);
 		Employee emp4 = new Employee("Jean2", "Bon2", dpt1);
 		Employee emp5 = new Employee("Jean3", "Bon3", dpt2);
 		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
 		emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-11-03T10:15:30+01:00[Europe/Paris]")));
 		emp5.addCheckInOut(new CheckInOut(ZonedDateTime.parse("1995-11-03T10:15:30+01:00[Europe/Paris]")));
-		openCheckTab(emp3);
+		//openCheckTab(emp3);
 		openCheckTab(emp4);
 		openCheckTab(emp5);
 		//closeCheckTab(checksControlers.get(0));
@@ -67,7 +66,6 @@ public class CentralApp {
 		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-10-03T10:15:30+01:00[Europe/Paris]")));
 		//checkControler = new CheckInOutControler(this, emp3);
 		//mainWindow.addTab(emp3.getfName()+" "+emp3.getlName(), checkControler.getView());
-		
 		//////////////////////
 		
 		//Update the first infos
@@ -105,6 +103,7 @@ public class CentralApp {
 				checksControlers.get(i).tabNb--;
 			mainWindow.closeTab(controler.getTabNb());
 			checksControlers.remove(controler);
+			nbTab--;
 		}
 		else
 			System.err.println("[CentralApp#closeCheckTab] this CheckInOutControler doesn't exist");
