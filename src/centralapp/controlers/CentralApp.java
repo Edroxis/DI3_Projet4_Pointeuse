@@ -59,8 +59,8 @@ public class CentralApp {
 		openCheckTab(emp3);
 		openCheckTab(emp4);
 		openCheckTab(emp5);
-		closeCheckTab(checksControlers.get(0));
-		closeCheckTab(checksControlers.get(0));
+		//closeCheckTab(checksControlers.get(0));
+		//closeCheckTab(checksControlers.get(0));
 		//closeCheckTab(checksControlers.get(0));
 		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-10-03T10:15:30+01:00[Europe/Paris]")));
 		//checkControler = new CheckInOutControler(this, emp3);

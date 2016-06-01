@@ -46,6 +46,7 @@ public class CheckInOutView extends JPanel {
 		
 		JButton btnClose = new JButton("Close");
 		panel.add(btnClose);
+		btnClose.addMouseListener(controler.new CloseEvent());
 	}
 	
 	public void updateTable(Employee emp){//update the model of the JTable
