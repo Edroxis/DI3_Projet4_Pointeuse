@@ -52,7 +52,6 @@ public class PeopleView extends JPanel {
 		peopleTree = new JTree(arbreModele);
 		//updateTree();
 		peopleTree.setRootVisible(false);
-		peopleTree.addTreeSelectionListener(controler.new TreeSelectEvent());
 		add(peopleTree);
 		
 		//Create the form: firstname, lastname, 
@@ -110,6 +109,7 @@ public class PeopleView extends JPanel {
 		personButtonsPanel.add(personRemoveButton);
 		
 		//Set up events
+		peopleTree.addTreeSelectionListener(controler.new TreeSelectEvent());
 		personDepartmentComboBox.addItemListener(controler.new SelectDepartmentEvent());
 		personAddButton.addMouseListener(controler.new AddEvent());
 		personApplyButton.addMouseListener(controler.new ApplyEvent());
@@ -149,10 +149,11 @@ public class PeopleView extends JPanel {
 	
 	public void updateTree(){
 		Company cmp = mainControler.getCompany();
+		int i = 1;
 		DefaultMutableTreeNode racine = new MyDefaultMutableTreeNode("The Root",-1);
 		
 		for(Department dpt : cmp.getDepartments()){
-			MyDefaultMutableTreeNode x = new MyDefaultMutableTreeNode(dpt.toString(),-1);
+			MyDefaultMutableTreeNode x = new MyDefaultMutableTreeNode(dpt.toString(),-i);
 			Manager man = dpt.getManager();
 			if(man != null)
 				x.add( new MyDefaultMutableTreeNode("Manager: "+man.getfName()+" "+man.getlName(), man.getId()));
@@ -160,11 +161,16 @@ public class PeopleView extends JPanel {
 		    	x.add( new MyDefaultMutableTreeNode(emp.getfName()+" "+emp.getlName(), emp.getId()));
 		    }
 		    racine.add(x);
+		    i++;
 		}
 		
 		DefaultTreeModel newModel = new DefaultTreeModel(racine);
 		
 		peopleTree.setModel(newModel);
+	}
+	
+	public void selectDepartmentBoxId(int i){
+		personDepartmentComboBox.setSelectedIndex(i-1);
 	}
 	
 	public class MyDefaultMutableTreeNode extends DefaultMutableTreeNode{

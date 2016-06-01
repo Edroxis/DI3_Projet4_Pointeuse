@@ -41,9 +41,17 @@ public class PeopleControler {
 	public class TreeSelectEvent implements TreeSelectionListener {
 		@Override
 		public void valueChanged(TreeSelectionEvent event) {
-			lastSelectedID = ((MyDefaultMutableTreeNode) event.getNewLeadSelectionPath().getLastPathComponent()).getId();
-			if(lastSelectedID!=-1)
+			MyDefaultMutableTreeNode actualNode = ((MyDefaultMutableTreeNode) event.getNewLeadSelectionPath().getLastPathComponent());
+			lastSelectedID = actualNode.getId();
+			if(lastSelectedID>=0){
+				//Open tab of the employee
 				mainControler.openCheckTab(mainControler.getCompany().findEmployee(lastSelectedID));
+				
+				//Change selected item on comboBox to Dpt of selected Employee
+				view.selectDepartmentBoxId(-((MyDefaultMutableTreeNode)actualNode.getParent()).getId());	
+			}
+			else
+				view.selectDepartmentBoxId(-lastSelectedID);	//Change selected item on comboBox to selected Dpt
 		}
 	}
 	
