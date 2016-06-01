@@ -24,6 +24,7 @@ import centralapp.model.AbstractPerson;
 import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
+import centralapp.model.Manager;
 
 @SuppressWarnings("serial")
 public class PeopleView extends JPanel {
@@ -152,9 +153,10 @@ public class PeopleView extends JPanel {
 		
 		for(Department dpt : cmp.getDepartments()){
 			MyDefaultMutableTreeNode x = new MyDefaultMutableTreeNode(dpt.toString(),-1);
-		    
+			Manager man = dpt.getManager();
+			if(man != null)
+				x.add( new MyDefaultMutableTreeNode("Manager: "+man.getfName()+" "+man.getlName(), man.getId()));
 		    for(Employee emp : dpt.getEmployees().values()){
-
 		    	x.add( new MyDefaultMutableTreeNode(emp.getfName()+" "+emp.getlName(), emp.getId()));
 		    }
 		    racine.add(x);

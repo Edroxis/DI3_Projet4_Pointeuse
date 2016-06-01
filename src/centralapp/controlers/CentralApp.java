@@ -54,6 +54,8 @@ public class CentralApp {
 		Department dpt2 = new Department("Dpt2", company);
 		Employee emp4 = new Employee("Jean2", "Bon2", dpt1);
 		Employee emp5 = new Employee("Jean3", "Bon3", dpt2);
+		Manager man = new Manager("Machin", "Truc", company);
+		dpt1.setManager(man);
 		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
 		emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-11-03T10:15:30+01:00[Europe/Paris]")));
 		emp5.addCheckInOut(new CheckInOut(ZonedDateTime.parse("1995-11-03T10:15:30+01:00[Europe/Paris]")));
