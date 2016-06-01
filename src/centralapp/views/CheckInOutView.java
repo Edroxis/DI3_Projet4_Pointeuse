@@ -24,6 +24,8 @@ public class CheckInOutView extends JPanel {
 	private CheckInOutControler controler;
 	private JTable table;
 	
+	private JLabel noCheckLabel = new JLabel("No Check in or out for this Employee");
+	
 	/**
 	 * Create the panel.
 	 */
@@ -33,7 +35,7 @@ public class CheckInOutView extends JPanel {
 		
 		table = new JTable();
 		
-		updateTable(emp);
+		updateTable(emp);		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(table);
 		
@@ -49,6 +51,10 @@ public class CheckInOutView extends JPanel {
 	public void updateTable(Employee emp){//update the model of the JTable
 		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		DateTimeFormatter hourFormatter = DateTimeFormatter.ofPattern("HH:mm");
+		
+		remove(noCheckLabel);
+		if(emp.getCheckInOut().size() == 0)
+			add(noCheckLabel);
 		
 		String[][] data = new String[emp.getCheckInOut().size()][2] ;
 		int i = 0;
