@@ -90,9 +90,19 @@ public class CentralApp {
 	}
 	
 	public void openCheckTab(Employee emp){	//Fonction pour ouvrir un onglet de Checks In Out
-		CheckInOutControler newCIOC = new CheckInOutControler(this, emp, nbTab);
-		checksControlers.add(newCIOC);
-		mainWindow.addTab(emp.getfName()+" "+emp.getlName(), newCIOC.getView());
+		boolean alreadyOpened = false;
+		for(CheckInOutControler cioc : checksControlers)
+			if(emp == cioc.getEmployee())
+				alreadyOpened = true;
+		
+		if(alreadyOpened == false)
+		{
+			CheckInOutControler newCIOC = new CheckInOutControler(this, emp, nbTab);
+			checksControlers.add(newCIOC);
+			mainWindow.addTab(emp.getfName()+" "+emp.getlName(), newCIOC.getView());
+		}
+		else
+			System.err.println("[CentrallApp#openCheckTab] Tab already opened");
 	}
 	
 	public void closeCheckTab(CheckInOutControler controler){

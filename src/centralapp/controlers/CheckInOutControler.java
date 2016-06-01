@@ -10,12 +10,18 @@ import centralapp.views.CompanyView;
 public class CheckInOutControler {
 	private CentralApp mainControler;
 	private CheckInOutView view;
+	private Employee employee;
 	public int tabNb;	//Numero de l'onglet
 	
 	public CheckInOutControler(CentralApp mainControler, Employee emp, int tabNb) {
 		this.mainControler = mainControler;
-		view = new CheckInOutView(mainControler, this, emp);
+		employee = emp;
+		view = new CheckInOutView(mainControler, this, employee);
 		this.tabNb = tabNb;
+	}
+	
+	public Employee getEmployee(){
+		return employee;
 	}
 	
 	public int getTabNb() {
