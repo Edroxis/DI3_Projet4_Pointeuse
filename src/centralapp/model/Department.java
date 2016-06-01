@@ -1,5 +1,6 @@
 package centralapp.model;
 
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -227,5 +228,14 @@ public class Department extends AbstractDpt {
 		for (Employee e : employeeMap.values())
 			res += "\t" + e.toString() + System.lineSeparator();
 		return res;
+	}
+
+	/**
+	 * Get EployeeMap
+	 * 
+	 * @return ConcurrentHashMap of Employees, indexed by their ID
+	 */
+	public ConcurrentHashMap<Integer, Employee> getEmployees() {
+		return employeeMap;
 	}
 }

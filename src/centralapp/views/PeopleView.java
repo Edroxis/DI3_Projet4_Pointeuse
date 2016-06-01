@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -19,6 +21,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import centralapp.controlers.CentralApp;
 import centralapp.controlers.PeopleControler;
 import centralapp.model.AbstractPerson;
+import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
 
@@ -32,6 +35,8 @@ public class PeopleView extends JPanel {
 	private JComboBox<Department> personDepartmentComboBox;
 	private Department unassignedDpt;
 	
+	private JTree peopleTree;
+	
 	public PeopleView(CentralApp mainControler, PeopleControler peopleControler) {
 		this.mainControler = mainControler;
 		controler = peopleControler;
@@ -41,7 +46,10 @@ public class PeopleView extends JPanel {
 		JLabel peopleTreeIndication = new JLabel("Double-click to open check in/out:");
 		add(peopleTreeIndication);
 		
-		JTree peopleTree = new JTree();
+		DefaultMutableTreeNode racine = new DefaultMutableTreeNode("The Root");
+		DefaultTreeModel arbreModele = new DefaultTreeModel(racine);
+		peopleTree = new JTree(arbreModele);
+		//updateTree();
 		peopleTree.setRootVisible(false);
 		peopleTree.addMouseListener(controler.new SelectEvent());
 		add(peopleTree);
@@ -134,5 +142,22 @@ public class PeopleView extends JPanel {
 	
 	public void updatePeopleList(ArrayList<Employee> peopleList) {
 		System.err.println("[PeopleView] updatePeopleList() not implemented yet");
+		updateTree();
+	}
+	
+	public void updateTree(){
+		Company cmp = mainControler.getCompany();
+		DefaultMutableTreeNode racine = new DefaultMutableTreeNode("The Root");
+		
+		for(Department dpt : cmp.getDepartments()){
+		    DefaultMutableTreeNode x = new DefaultMutableTreeNode(dpt.toString());
+		    for(Employee emp : dpt.getEmployees().values())
+		    	x.add( new DefaultMutableTreeNode(emp.getfName()+" "+emp.getlName()));
+		    racine.add(x);
+		}
+		
+		DefaultTreeModel newModel = new DefaultTreeModel(racine);
+		
+		peopleTree.setModel(newModel);
 	}
 }
