@@ -110,6 +110,7 @@ public class DepartmentView extends JPanel {
 	
 	public void updateDepartmentsList(ArrayList<Department> dptsList) {
 		departmentsComboBox.removeAll();
+		System.out.println("updateDepartmentsList");
 		
 		departmentsComboBox.addItem(mainControler.getCompany().getManagementDpt());
 		for(Department dpt : dptsList) {
@@ -117,12 +118,15 @@ public class DepartmentView extends JPanel {
 		}
 	}
 	
-	public void updatePeopleList(ArrayList<Employee> employeesList) {
-		departmentManagerComboBox.removeAll();
+	public void updatePeopleList() {
+		ArrayList<Employee> employeesList = mainControler.getCompany().getEmployees();
+		departmentManagerComboBox.removeAllItems();
+		System.out.println("updatePeopleList");
 		
 		//departmentManagerComboBox.addItem(mainControler.getCompany().getBoss());
 		for(Employee employee : employeesList) {
-			departmentManagerComboBox.addItem(employee);
+			if(employee instanceof Manager)
+				departmentManagerComboBox.addItem(employee);
 		}
 	}
 }

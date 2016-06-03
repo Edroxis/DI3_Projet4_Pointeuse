@@ -30,8 +30,8 @@ public class DepartmentControler {
 		view.updateDepartmentsList(list);
 	}
 	
-	public void updatePeopleList(ArrayList<Employee> list) {
-		view.updatePeopleList(list);
+	public void updatePeopleList() {
+		view.updatePeopleList();
 	}
 	
 	public class SelectEvent implements ItemListener {
@@ -46,7 +46,7 @@ public class DepartmentControler {
 				else
 					view.setManager(((Department)dpt).getManager());
 				
-				updatePeopleList(mainControler.getCompany().getEmployees());
+				updatePeopleList();
 			}
 		}
 	}

@@ -160,7 +160,7 @@ public class CentralApp {
 		ArrayList<Employee> list = company.getEmployees();
 		
 		companyControler.updatePeopleList(list);
-		departmentControler.updatePeopleList(list);
+		departmentControler.updatePeopleList();
 		peopleControler.updatePeopleList(list);
 	}
 	
