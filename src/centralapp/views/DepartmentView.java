@@ -21,6 +21,7 @@ import centralapp.model.AbstractDpt;
 import centralapp.model.AbstractPerson;
 import centralapp.model.Department;
 import centralapp.model.Employee;
+import centralapp.model.ManagementDpt;
 import centralapp.model.Manager;
 
 @SuppressWarnings("serial")
@@ -109,7 +110,7 @@ public class DepartmentView extends JPanel {
 	}
 	
 	public void updateDepartmentsList(ArrayList<Department> dptsList) {
-		departmentsComboBox.removeAll();
+		departmentsComboBox.removeAllItems();
 		System.out.println("updateDepartmentsList");
 		
 		departmentsComboBox.addItem(mainControler.getCompany().getManagementDpt());
@@ -118,15 +119,31 @@ public class DepartmentView extends JPanel {
 		}
 	}
 	
-	public void updatePeopleList() {
+	public void updatePeopleList() {//TODO créer fonction updateView, fusion des 2 fonctions update
+		ManagementDpt manDpt;
+		Department dpt;
 		ArrayList<Employee> employeesList = mainControler.getCompany().getEmployees();
 		departmentManagerComboBox.removeAllItems();
 		System.out.println("updatePeopleList");
 		
 		//departmentManagerComboBox.addItem(mainControler.getCompany().getBoss());
+		AbstractPerson nullPerson = new AbstractPerson("none", "");
+		departmentManagerComboBox.addItem(nullPerson);
 		for(Employee employee : employeesList) {
 			if(employee instanceof Manager)
 				departmentManagerComboBox.addItem(employee);
 		}
+		AbstractDpt absDpt = (AbstractDpt) departmentsComboBox.getSelectedItem();
+		if(absDpt instanceof ManagementDpt){
+			manDpt = (ManagementDpt) absDpt;
+		}
+		if(absDpt instanceof Department){
+			dpt = (Department) absDpt;
+			if(dpt.getManager() == null)
+				departmentManagerComboBox.setSelectedItem(nullPerson);
+			else
+				departmentManagerComboBox.setSelectedItem(dpt.getManager());
+		}
+			
 	}
 }

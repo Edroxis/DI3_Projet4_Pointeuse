@@ -6,7 +6,7 @@ import java.io.Serializable;
  * <b>AbstractPerson : Manage Person's name</b>
  * 
  * <p>
- * Contains and manage the name of Person. Virtual class inherited by Employee
+ * Contains and manage the name of Person. Class inherited by Employee
  * and Boss
  * </p>
  * 
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * 
  * @author Julien
  */
-public abstract class AbstractPerson implements Serializable {
+public class AbstractPerson implements Serializable {
 	// Attribute
 	/**
 	 * Last Name
@@ -35,7 +35,7 @@ public abstract class AbstractPerson implements Serializable {
 	 * @param fnParam
 	 *            the first name
 	 */
-	AbstractPerson(String lnParam, String fnParam) {
+	public AbstractPerson(String lnParam, String fnParam) {
 		lName = lnParam;
 		fName = fnParam;
 	}
