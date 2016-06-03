@@ -7,10 +7,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import centralapp.model.AbstractDpt;
+import centralapp.model.AbstractPerson;
 import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
 import centralapp.model.ManagementDpt;
+import centralapp.model.Manager;
 import centralapp.views.DepartmentView;
 
 public class DepartmentControler {
@@ -68,7 +70,11 @@ public class DepartmentControler {
 			Company company = mainControler.getCompany();
 			
 			Department newDpt = new Department(newDptName, company);
-			newDpt.setManager(view.getManager());
+			AbstractPerson absPrs = view.getManager();
+			if(absPrs instanceof Manager)
+				newDpt.setManager((Manager)absPrs);
+			else
+				newDpt.setManager(null);
 			
 			//company.add(newDpt);
 			mainControler.notifyDptListModification();
@@ -79,6 +85,15 @@ public class DepartmentControler {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			//TODO: Promote if it's an employee
+			/*AbstractDpt absDpt = view.getDpt();
+			AbstractPerson absPrs = view.getManager();
+			if(absPrs instanceof Manager){
+				
+				newDpt.setManager((Manager)absPrs);
+			}
+			else
+				newDpt.setManager(null);
+			mainControler.notifyDptListModification();*/
 			System.err.println("[Dpt] Apply event");
 			mainControler.notifyDptListModification();
 		}
