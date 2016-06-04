@@ -2,6 +2,7 @@ package centralapp.controlers;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class CentralApp {
 		companyControler = new CompanyControler(this);
 		departmentControler = new DepartmentControler(this);
 		peopleControler = new PeopleControler(this);
+		checksControlers = new ArrayList<CheckInOutControler>();
 		
 		mainWindow = new MainView(this);
 		mainWindow.addTab("Company", companyControler.getView());
@@ -39,36 +41,35 @@ public class CentralApp {
 		companyChooser = new JFileChooser();
 		companyChooser.setFileFilter(new FileNameExtensionFilter(
 				"Company file", "ser"));
+		
 	}
 	
 	public void run() {
 		if(!openFile()) {
 			Boss boss = new Boss("Last name", "First name");
 			company = new Company("Company's name", boss);
+			
+			//TODO This is a test, REMOVE
+			Department dpt1 = new Department("Dpt1", company);
+			Department dpt2 = new Department("Dpt2", company);
+			Employee emp4 = new Employee("Jean2", "Bon2", dpt1);
+			Employee emp5 = new Employee("Jean3", "Bon3", dpt2);
+			Manager man = new Manager("Machin", "Truc", company);
+			dpt1.setManager(man);
+			//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
+			emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-11-03T10:15:30+01:00[Europe/Paris]")));
+			emp5.addCheckInOut(new CheckInOut(ZonedDateTime.parse("1995-11-03T10:15:30+01:00[Europe/Paris]")));
+			//openCheckTab(emp3);
+			openCheckTab(emp4);
+			openCheckTab(emp5);
+			//closeCheckTab(checksControlers.get(0));
+			//closeCheckTab(checksControlers.get(0));
+			//closeCheckTab(checksControlers.get(0));
+			//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-10-03T10:15:30+01:00[Europe/Paris]")));
+			//checkControler = new CheckInOutControler(this, emp3);
+			//mainWindow.addTab(emp3.getfName()+" "+emp3.getlName(), checkControler.getView());
+			//////////////////////
 		}
-		
-		checksControlers = new ArrayList<CheckInOutControler>();
-		
-		//TODO This is a test, REMOVE
-		Department dpt1 = new Department("Dpt1", company);
-		Department dpt2 = new Department("Dpt2", company);
-		Employee emp4 = new Employee("Jean2", "Bon2", dpt1);
-		Employee emp5 = new Employee("Jean3", "Bon3", dpt2);
-		Manager man = new Manager("Machin", "Truc", company);
-		dpt1.setManager(man);
-		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
-		emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-11-03T10:15:30+01:00[Europe/Paris]")));
-		emp5.addCheckInOut(new CheckInOut(ZonedDateTime.parse("1995-11-03T10:15:30+01:00[Europe/Paris]")));
-		//openCheckTab(emp3);
-		openCheckTab(emp4);
-		openCheckTab(emp5);
-		//closeCheckTab(checksControlers.get(0));
-		//closeCheckTab(checksControlers.get(0));
-		//closeCheckTab(checksControlers.get(0));
-		//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-10-03T10:15:30+01:00[Europe/Paris]")));
-		//checkControler = new CheckInOutControler(this, emp3);
-		//mainWindow.addTab(emp3.getfName()+" "+emp3.getlName(), checkControler.getView());
-		//////////////////////
 		
 		//Update the first infos
 		companyControler.getView().updateCompanyName(company.toString());
@@ -138,7 +139,7 @@ public class CentralApp {
 	    		System.err.println("Cannot find the following file: " + companyFileLocation);
 	    	}
 	    	catch(IOException e) {
-	    		System.err.println("File corrputed: " + companyFileLocation);
+	    		System.err.println("File corrupted: " + companyFileLocation);
 	    	}
 	    }
 	    
@@ -179,7 +180,7 @@ public class CentralApp {
 					
 				} catch (IOException e) {
 					System.err.println("Cannot save in " + companyFileLocation +
-							". Unknown error!");
+							". Unknown exception " + e);
 				}
 		    }
 			System.exit(0);

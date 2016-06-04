@@ -28,7 +28,7 @@ import java.util.Iterator;
  * 
  * @author Julien
  */
-@SuppressWarnings("serial")
+
 public class Company implements Serializable {
 
 	// Attribute
@@ -92,6 +92,19 @@ public class Company implements Serializable {
 	 */
 	public Boss getBoss() {
 		return boss;
+	}
+
+	public void setBoss(AbstractPerson luckyGuy) {
+		//If the lucky guy is already the boss, no need to promote him
+		if(luckyGuy != boss) {
+			//Here, we create new instances to prevent lost attributes (mem leaks)
+			
+			//The current boss become an unassigned employee
+			add(new Employee(boss));
+			
+			//Set the new boss
+			boss = new Boss(luckyGuy);
+		}
 	}
 
 	/**

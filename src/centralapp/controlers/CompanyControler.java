@@ -6,6 +6,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
+import centralapp.model.AbstractDpt;
+import centralapp.model.AbstractPerson;
 import centralapp.model.Company;
 import centralapp.model.Employee;
 import centralapp.views.CompanyView;
@@ -44,7 +46,8 @@ public class CompanyControler {
 		@Override
 		public void itemStateChanged(ItemEvent event) {
 			if(event.getStateChange() == ItemEvent.SELECTED) {
-				System.err.println("[Company] Select event");
+				AbstractPerson luckyGuy = (AbstractPerson)event.getItem();
+				mainControler.getCompany().setBoss(luckyGuy);
 			}
 		}
 	}

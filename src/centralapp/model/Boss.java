@@ -25,6 +25,10 @@ public class Boss extends AbstractPerson {
 	public Boss(String lnParam, String fnParam) {
 		super(lnParam, fnParam);
 	}
+	
+	public Boss(AbstractPerson man) {
+		super(man);
+	}
 
 	// Method
 	public String getlName() {

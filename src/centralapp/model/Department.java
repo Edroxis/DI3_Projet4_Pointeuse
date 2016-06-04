@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 
  * @author Julien
  */
-@SuppressWarnings("serial")
+
 public class Department extends AbstractDpt {
 
 	// Attribute

@@ -1,5 +1,6 @@
 package centralapp.model;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 /**
@@ -7,7 +8,8 @@ import java.time.ZonedDateTime;
  * 
  * @author Julien
  */
-public class CheckInOut {
+
+public class CheckInOut implements Serializable {
 	// Attribute
 	/**
 	 * Date and hour of the check

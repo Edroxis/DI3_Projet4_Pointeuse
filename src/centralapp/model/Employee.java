@@ -111,6 +111,15 @@ public class Employee extends AbstractPerson {
 		company = null;
 		dpt = null;
 	}
+	
+	/**
+	 * Constructor of Employee
+	 * 
+	 * @param person
+	 */
+	public Employee(AbstractPerson man) {
+		super(man);
+	}
 
 	// Method
 	public String getlName() {
