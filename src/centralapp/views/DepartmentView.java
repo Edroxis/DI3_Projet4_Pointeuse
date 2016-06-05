@@ -33,6 +33,7 @@ public class DepartmentView extends JPanel {
 	private JComboBox<AbstractDpt> departmentsComboBox;
 	private JTextField departmentNameField;
 	private JComboBox<AbstractPerson> departmentManagerComboBox;
+	private JButton departmentRemoveButton;
 	
 	public DepartmentView(CentralApp mainControler, DepartmentControler dptControler) {
 		this.mainControler = mainControler;
@@ -83,7 +84,7 @@ public class DepartmentView extends JPanel {
 		JButton departmentApplyButton = new JButton("Apply");
 		departmentButtonsPanel.add(departmentApplyButton);
 		
-		JButton departmentRemoveButton = new JButton("Remove");
+		departmentRemoveButton = new JButton("Remove");
 		departmentButtonsPanel.add(departmentRemoveButton);
 		
 		//Set up events
@@ -110,11 +111,11 @@ public class DepartmentView extends JPanel {
 		departmentManagerComboBox.setSelectedItem(manager);
 	}
 	
-	public AbstractDpt getDpt(){
+	public AbstractDpt getDpt() {
 		return (AbstractDpt) departmentsComboBox.getSelectedItem();
 	}
 	
-	public void updateDepartmentsList(ArrayList<Department> dptsList) {//TODO créer fonction updateView, fusion des 2 fonctions update
+	public void updateDepartmentsList(ArrayList<Department> dptsList) {//TODO crï¿½er fonction updateView, fusion des 2 fonctions update
 		departmentsComboBox.removeAllItems();
 		System.out.println("updateDepartmentsList");
 		
@@ -142,6 +143,7 @@ public class DepartmentView extends JPanel {
 			manDpt = (ManagementDpt) absDpt;
 			departmentManagerComboBox.addItem(boss);
 			departmentManagerComboBox.setEnabled(false);
+			departmentRemoveButton.setEnabled(false);
 		}
 		
 		if(absDpt instanceof Department){
@@ -150,6 +152,7 @@ public class DepartmentView extends JPanel {
 					departmentManagerComboBox.addItem(employee);
 			}
 			departmentManagerComboBox.setEnabled(true);
+			departmentRemoveButton.setEnabled(true);
 			departmentManagerComboBox.addItem(nullPerson);
 			dpt = (Department) absDpt;
 			if(dpt.getManager() == null)
