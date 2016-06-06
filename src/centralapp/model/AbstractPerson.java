@@ -58,6 +58,14 @@ public class AbstractPerson implements Serializable {
 	public String getfName() {
 		return fName;
 	}
+	
+	public void setlName(String name) {
+		lName = name;
+	}
+	
+	public void setfName(String name) {
+		fName = name;
+	}
 
 	/**
 	 * Get the name of a Person

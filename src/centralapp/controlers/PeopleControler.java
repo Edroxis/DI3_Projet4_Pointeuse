@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
+import centralapp.model.AbstractPerson;
 import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
@@ -43,33 +44,24 @@ public class PeopleControler {
 		public void valueChanged(TreeSelectionEvent event) {
 			MyDefaultMutableTreeNode actualNode = ((MyDefaultMutableTreeNode) event.getNewLeadSelectionPath().getLastPathComponent());
 			lastSelectedID = actualNode.getId();
-			if(lastSelectedID>=0){
-				//Open tab of the employee
-				mainControler.openCheckTab(mainControler.getCompany().findEmployee(lastSelectedID));
+			
+			if(lastSelectedID >= 0) {
+				Employee employee = mainControler.getCompany().findEmployee(lastSelectedID);
+				
+				view.setFirstName(employee.getfName());
+				view.setLastName(employee.getlName());
 				
 				//Change selected item on comboBox to Dpt of selected Employee
-				view.selectDepartmentBoxId(-((MyDefaultMutableTreeNode)actualNode.getParent()).getId());	
+				view.selectDepartmentId(-((MyDefaultMutableTreeNode)actualNode.getParent()).getId());	
 			}
 			else
-				view.selectDepartmentBoxId(-lastSelectedID);	//Change selected item on comboBox to selected Dpt
-		}
-	}
-	
-	public class SelectDepartmentEvent implements ItemListener {
-		@Override
-		public void itemStateChanged(ItemEvent event) {
-			if(event.getStateChange() == ItemEvent.SELECTED) {
-				System.err.println("[People] Select department event");
-			}
+				view.selectDepartmentId(-lastSelectedID);	//Change selected item on comboBox to selected Dpt
 		}
 	}
 	
 	public class AddEvent extends MouseAdapter {
 		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			//TODO: Assign dpt too
-			System.err.println("[People] Add event");
-			
+		public void mouseClicked(MouseEvent arg0) {			
 			String firstName = view.getFirstName();
 			String lastName = view.getLastName();
 			Department dpt = view.getDepartment();
@@ -85,15 +77,32 @@ public class PeopleControler {
 	
 	public class ApplyEvent extends MouseAdapter {
 		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			System.err.println("[People] Apply event");
+		public void mouseClicked(MouseEvent arg0) {			
+			String firstName = view.getFirstName();
+			String lastName = view.getLastName();
+			Department dpt = view.getDepartment();
+			
+			AbstractPerson person = mainControler.getCompany().findEmployee(lastSelectedID);
+			if(person != null) {
+				person.setfName(firstName);
+				person.setlName(lastName);
+				
+				if(person instanceof Employee)
+					((Employee)person).assign(dpt);
+
+				mainControler.notifyPeopleListModification();
+			}
 		}
 	}
 	
 	public class RemoveEvent extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			System.err.println("[People] Remove event");
+			AbstractPerson emp = mainControler.getCompany().findEmployee(lastSelectedID);
+			if(emp != null && emp instanceof Employee) {
+				mainControler.getCompany().removeEmployee((Employee)emp);
+				mainControler.notifyPeopleListModification();
+			}
 		}
 	}
 }
