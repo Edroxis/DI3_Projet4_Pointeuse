@@ -78,7 +78,7 @@ public class CentralApp {
 		 */
 		while(true) {
 			try {
-				ComControler instance = new ComControler(company, "127.0.0.1", 1337);
+				ComControler instance = new ComControler(this, company, "127.0.0.1", 1337);
 				instance.run();
 			} catch (IOException e) {}
 			
