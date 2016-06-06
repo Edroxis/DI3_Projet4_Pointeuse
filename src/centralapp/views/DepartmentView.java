@@ -147,6 +147,13 @@ public class DepartmentView extends JPanel {
 	public Department getDpt() {
 		return (Department) departmentsComboBox.getSelectedItem();
 	}
+	
+	/**
+	 * @param dpt the department to select on ComboBox
+	 */
+	public void setDptOnCB(Department dpt){
+		departmentsComboBox.setSelectedItem(dpt);
+	}
 
 	/**
 	 * Update Dpt selectable list

@@ -92,6 +92,7 @@ public class DepartmentControler {
 				futureManager.removeEmployee();
 			}
 			mainControler.notifyDptListModification();
+			view.setDptOnCB(newDpt);
 		}
 	}
 

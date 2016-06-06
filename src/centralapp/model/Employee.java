@@ -88,10 +88,10 @@ public class Employee extends AbstractPerson {
 		id = nbEmployee;
 		nbEmployee++;
 		checkInOut = new ArrayList<CheckInOut>(0);
+		assign(dptParam);
 		company = dptParam.getCompany();
 		if (dptParam.getCompany() != null)
 			dptParam.getCompany().add(this);
-		assign(dptParam);
 	}
 
 	/**

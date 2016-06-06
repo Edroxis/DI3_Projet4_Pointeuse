@@ -47,6 +47,9 @@ public class Manager extends Employee {
 		super(emp);
 		managementDpt = super.getCompany().getManagementDpt();
 		managementDpt.addManager(this);
+		for(CheckInOut cio : emp.getCheckInOut())
+			this.addCheckInOut(cio);
+		emp.removeEmployee();
 	}
 
 	/**
