@@ -1,9 +1,11 @@
 package slaves;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,9 @@ public class TimeClockModel {
 	private static String buffer = "";
 	private static ServerSocket srvSocket = null;
 	private static OutputStream outStream = null;
+	private static InputStream inStream = null;
+	private static StringBuffer inBuffer = new StringBuffer();
+	private static byte[] bytesBuffer = new byte[4096];
 	private static ArrayList<TimeClockModel> listOfCheckInOut = 
 			new ArrayList<TimeClockModel>();
 	
@@ -47,6 +52,7 @@ public class TimeClockModel {
 				//Block until a connection
 				Socket socket = srvSocket.accept();
 				outStream = socket.getOutputStream();
+				inStream = socket.getInputStream();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -76,6 +82,28 @@ public class TimeClockModel {
 				waitClient = true;
 			}
 		}
+	}
+	
+	public static String receive(int port) {
+		String str2Return = null;
+		
+		waitForClient(port);
+		
+		try {
+			while(inStream.available() > 0) {
+				inStream.read(bytesBuffer);
+				inBuffer.append(new String(bytesBuffer)); //TODO: Possible bug here
+			}
+			
+			str2Return = inBuffer.toString();
+			inBuffer.setLength(0);
+
+		} catch (IOException e) {
+			System.out.println("Client disconnected");
+			waitClient = true;
+		}
+		
+		return str2Return;
 	}
 	
 	

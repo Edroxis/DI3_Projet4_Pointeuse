@@ -151,7 +151,6 @@ public class PeopleView extends JPanel {
 	}
 	
 	public void updatePeopleList(ArrayList<Employee> peopleList) {
-		System.err.println("[PeopleView] updatePeopleList() not implemented yet");
 		updateTree();
 	}
 	

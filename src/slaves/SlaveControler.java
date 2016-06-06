@@ -1,12 +1,18 @@
 package slaves;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SlaveControler {
 	private View view;
 	private int port;
+	private Pattern pattern;
 	
 	public SlaveControler(int port) {		
 		view = new View();
 		this.port = port;
+		pattern = Pattern.compile("(\\d+) ([^\\n]+)");
 	}
 	
 	public void run() {
@@ -20,7 +26,29 @@ public class SlaveControler {
 			}
 
 			TimeClockModel.sendAll(port);
+			receivePeople();
 		}
+	}
+	
+	public void receivePeople() {
+		ArrayList<EmployeeModel> list = new ArrayList<EmployeeModel>();
+		String people = TimeClockModel.receive(port);
+		
+		boolean doContinue = true;
+		while(doContinue) {
+			Matcher matcher = pattern.matcher(people); 
+			if(matcher.find()) {
+				int id = Integer.parseInt(matcher.group(0));
+				String name = matcher.group(1);
+				
+				EmployeeModel newEmp = new EmployeeModel(id, name);
+				list.add(newEmp);
+			}
+			else
+				doContinue = false;
+		}
+	
+		view.updatePeopleList(list);
 	}
 	
 	public static void main(String[] args) {

@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +24,7 @@ import javax.swing.UIManager;
 public class View extends JFrame {
 	private JLabel dateTimeInfo;
 	private JButton checkButton;
-	private JFormattedTextField numberField;
+	private JComboBox<EmployeeModel> employeeComboBox;
 	
 	public View() {
 		//GTK theme 
@@ -44,14 +46,14 @@ public class View extends JFrame {
 		updater.actionPerformed(null);
 		new Timer(30000, updater).start(); //Update every 30 secs
 		
-		numberField = new JFormattedTextField(NumberFormat.getNumberInstance());
+		employeeComboBox = new JComboBox<EmployeeModel>();
 		
 		checkButton = new JButton("Check in/out");
 		checkButton.addActionListener(new CheckInOutListener());
 		
 		JPanel horizontalPanel = new JPanel();
 		horizontalPanel.setLayout(new BoxLayout(horizontalPanel, BoxLayout.X_AXIS));
-		horizontalPanel.add(numberField);
+		horizontalPanel.add(employeeComboBox);
 		horizontalPanel.add(checkButton);
 
 		JPanel mainPanel = new JPanel();
@@ -60,16 +62,23 @@ public class View extends JFrame {
 		mainPanel.add(horizontalPanel, BorderLayout.PAGE_END);
 		
 		this.add(mainPanel);
-	}	
+	}
+	
+	public void updatePeopleList(ArrayList<EmployeeModel> list) {
+		employeeComboBox.removeAllItems();
+		for(EmployeeModel emp : list) {
+			employeeComboBox.addItem(emp);
+		}
+	}
 
 
 	private class CheckInOutListener implements ActionListener {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-			Object obj = numberField.getValue();
+			EmployeeModel emp = (EmployeeModel)employeeComboBox.getSelectedItem();
 			
-			if(obj != null) {
-				int id = ((Number)obj).intValue();
+			if(emp != null) {
+				int id = emp.getId();
 				TimeClockModel.add(id);
 				System.out.println("Pointage de " + id);
 			}

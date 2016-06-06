@@ -21,6 +21,7 @@ public class CentralApp {
 	private DepartmentControler departmentControler;
 	private PeopleControler peopleControler;
 	private GeneralCIOControler generalCheckControler;
+	private ComControler comControler;
 	private ArrayList<CheckInOutControler> checksControlers;
 	private MainView mainWindow;
 	private Company company;
@@ -31,7 +32,8 @@ public class CentralApp {
 	
 	public static int nbTab;
 	
-	public CentralApp() {		
+	public CentralApp() {
+		comControler = new ComControler(company, "127.0.0.1", 1337);
 		companyControler = new CompanyControler(this);
 		departmentControler = new DepartmentControler(this);
 		peopleControler = new PeopleControler(this);
@@ -87,10 +89,7 @@ public class CentralApp {
 		/*  This loop allows to retry the socket client connection if it fails
 		 */
 		while(true) {
-			try {
-				ComControler instance = new ComControler(company, "127.0.0.1", 1337);
-				instance.run();
-			} catch (IOException e) {}
+			comControler.run();
 			
 			try {
 				Thread.sleep(5000);
@@ -172,6 +171,7 @@ public class CentralApp {
 	public void notifyPeopleListModification() {
 		ArrayList<Employee> list = company.getEmployees();
 		
+		comControler.updatePeopleList(list);
 		companyControler.updatePeopleList(list, company.getBoss());
 		departmentControler.updatePeopleList(list);
 		peopleControler.updatePeopleList(list);
