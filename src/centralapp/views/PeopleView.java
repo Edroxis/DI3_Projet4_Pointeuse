@@ -48,19 +48,15 @@ public class PeopleView extends JPanel {
 		controler = peopleControler;
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel leftPanel = new JPanel();
-		add(leftPanel, BorderLayout.WEST);
-		leftPanel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel peopleTreeIndication = new JLabel("Double-click to open check in/out:");
-		leftPanel.add(peopleTreeIndication, BorderLayout.NORTH);
-		
 		MyDefaultMutableTreeNode racine = new MyDefaultMutableTreeNode("The Root",-1);
 		DefaultTreeModel arbreModele = new DefaultTreeModel(racine);
 		peopleTree = new JTree(arbreModele);
+		add(peopleTree, BorderLayout.WEST);
 		//updateTree();
 		peopleTree.setRootVisible(false);
-		leftPanel.add(peopleTree, BorderLayout.CENTER);
+		
+		//Set up events
+		peopleTree.addTreeSelectionListener(controler.new TreeSelectEvent());
 		
 		//Create the form: firstname, lastname, 
 		JPanel personFormPanel = new JPanel();
@@ -115,9 +111,6 @@ public class PeopleView extends JPanel {
 		
 		JButton personRemoveButton = new JButton("Remove");
 		personButtonsPanel.add(personRemoveButton);
-		
-		//Set up events
-		peopleTree.addTreeSelectionListener(controler.new TreeSelectEvent());
 		personAddButton.addMouseListener(controler.new AddEvent());
 		personApplyButton.addMouseListener(controler.new ApplyEvent());
 		personRemoveButton.addMouseListener(controler.new RemoveEvent());
