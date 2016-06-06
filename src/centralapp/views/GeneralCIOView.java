@@ -115,7 +115,10 @@ public class GeneralCIOView extends JPanel {
 						data[i][0] = Integer.toString(emp.getId());
 						data[i][1] = emp.getfName();
 						data[i][2] = emp.getlName();
-						data[i][3] = emp.getDpt().toString();
+						if(emp.getDpt() != null)
+							data[i][3] = emp.getDpt().toString();
+						else
+							data[i][3] = "unassigned";
 						data[i][4] = cio.getDate().format(dateFormatter);
 						i++;
 					}
