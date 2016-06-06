@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
 
 import centralapp.model.AbstractPerson;
 import centralapp.model.Company;
@@ -42,20 +43,24 @@ public class PeopleControler {
 	public class TreeSelectEvent implements TreeSelectionListener {
 		@Override
 		public void valueChanged(TreeSelectionEvent event) {
-			MyDefaultMutableTreeNode actualNode = ((MyDefaultMutableTreeNode) event.getNewLeadSelectionPath().getLastPathComponent());
-			lastSelectedID = actualNode.getId();
+			TreePath path = event.getNewLeadSelectionPath();
 			
-			if(lastSelectedID >= 0) {
-				Employee employee = mainControler.getCompany().findEmployee(lastSelectedID);
+			if(path != null) {
+				MyDefaultMutableTreeNode actualNode = ((MyDefaultMutableTreeNode) path.getLastPathComponent());
+				lastSelectedID = actualNode.getId();
 				
-				view.setFirstName(employee.getfName());
-				view.setLastName(employee.getlName());
-				
-				//Change selected item on comboBox to Dpt of selected Employee
-				view.selectDepartmentId(-((MyDefaultMutableTreeNode)actualNode.getParent()).getId());	
+				if(lastSelectedID >= 0) {
+					Employee employee = mainControler.getCompany().findEmployee(lastSelectedID);
+					
+					view.setFirstName(employee.getfName());
+					view.setLastName(employee.getlName());
+					
+					//Change selected item on comboBox to Dpt of selected Employee
+					view.selectDepartmentId(-((MyDefaultMutableTreeNode)actualNode.getParent()).getId());	
+				}
+				else
+					view.selectDepartmentId(-lastSelectedID);	//Change selected item on comboBox to selected Dpt
 			}
-			else
-				view.selectDepartmentId(-lastSelectedID);	//Change selected item on comboBox to selected Dpt
 		}
 	}
 	
