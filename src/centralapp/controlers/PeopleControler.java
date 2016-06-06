@@ -20,7 +20,6 @@ import centralapp.views.PeopleView.MyDefaultMutableTreeNode;
 /**
  * <b>PeopleControler : Controler of the view with peoples<\b>
  * 
- * @author Julien
  */
 public class PeopleControler {
 	/**

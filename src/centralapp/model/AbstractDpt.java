@@ -13,17 +13,14 @@ import java.io.Serializable;
  * @see Department
  * @see ManagementDpt
  * 
- * @author Julien
  */
 public abstract class AbstractDpt implements Serializable {
 
-	// Attribute
 	/**
 	 * Name of the Department
 	 */
 	private String name;
 
-	// Constructor
 	/**
 	 * Constructor
 	 * 
@@ -34,7 +31,6 @@ public abstract class AbstractDpt implements Serializable {
 		name = nameParam;
 	}
 
-	// Method
 	/**
 	 * Get the name of the Department
 	 * 
@@ -44,6 +40,11 @@ public abstract class AbstractDpt implements Serializable {
 		return name;
 	}
 	
+	/**
+	 * Set the name of the Department
+	 * 
+	 * @param name of the Department
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}

@@ -18,7 +18,6 @@ import java.util.Iterator;
  * 
  * @see AbstractDpt
  * 
- * @author Julien
  */
 public class ManagementDpt extends AbstractDpt {
 

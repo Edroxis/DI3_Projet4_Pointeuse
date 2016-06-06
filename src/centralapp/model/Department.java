@@ -25,7 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @see Boss
  * @see Company
  * 
- * @author Julien
  */
 
 public class Department extends AbstractDpt {

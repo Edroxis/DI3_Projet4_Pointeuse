@@ -7,7 +7,6 @@ package centralapp.model;
  * Get first and last name, and boss's String.
  * </p>
  * 
- * @author Julien
  */
 public class Boss extends AbstractPerson {
 
@@ -26,17 +25,13 @@ public class Boss extends AbstractPerson {
 		super(lnParam, fnParam);
 	}
 	
+	/**
+	 * Build a boss from another person implementing AbstractPerson
+	 * 
+	 * @param man
+	 */
 	public Boss(AbstractPerson man) {
 		super(man.getlName(), man.getfName());
-	}
-
-	// Method
-	public String getlName() {
-		return super.getlName();
-	}
-
-	public String getfName() {
-		return super.getfName();
 	}
 
 	/**

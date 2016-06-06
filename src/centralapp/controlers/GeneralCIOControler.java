@@ -18,7 +18,6 @@ import centralapp.views.GeneralCIOView;
 /**
  * <b>GeneralCIOC : Controler of the view with all checks</b>
  * 
- * @author Julien
  */
 public class GeneralCIOControler {
 	/**

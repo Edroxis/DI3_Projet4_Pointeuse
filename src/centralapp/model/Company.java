@@ -26,7 +26,6 @@ import java.util.Iterator;
  * @see ManagementDpt
  * @see Boss
  * 
- * @author Julien
  */
 
 public class Company implements Serializable {
@@ -94,6 +93,11 @@ public class Company implements Serializable {
 		return boss;
 	}
 
+	/**
+	 * Set the new boss of the company
+	 * 
+	 * @param luckyGuy
+	 */
 	public void setBoss(AbstractPerson luckyGuy) {
 		//If the lucky guy is already the boss, no need to promote him
 		if(luckyGuy != boss) {
@@ -318,10 +322,17 @@ public class Company implements Serializable {
 		return res;
 	}
 
-	public void serialize(String nomFichier)
+	/**
+	 * Serialize the company in a file (save the departments, employees, ...)
+	 * 
+	 * @param fileName The absolute path to the file
+	 * @throws FileNotFoundException When the directory is not accessible
+	 * @throws IOException Thrown for example when there are permissions issues
+	 */
+	public void serialize(String fileName)
 	throws FileNotFoundException, IOException {
-		FileOutputStream fichierOut = new FileOutputStream(nomFichier);
-		ObjectOutputStream oos = new ObjectOutputStream(fichierOut);
+		FileOutputStream outFile = new FileOutputStream(fileName);
+		ObjectOutputStream oos = new ObjectOutputStream(outFile);
 
 		oos.writeObject(this);
 		oos.flush();
@@ -329,13 +340,23 @@ public class Company implements Serializable {
 			oos.close();
 	}
 
-	public static Company unserialize(String nomFichier)
+	/**
+	 * Load a company from a file
+	 * 
+	 * @param fileName The absolute path of the file to load
+	 * @return The new loaded company
+	 * throws ClassNotFoundException When the file comes from another
+	 * version of the application
+	 * @throws FileNotFoundException When the file does not exist
+	 * @throws IOException When the file is corrupted
+	 */
+	public static Company unserialize(String fileName)
 	throws ClassNotFoundException, FileNotFoundException, IOException {
 		ObjectInputStream ois = null;
 		Company res = null;
 
 		FileInputStream fichierIn;
-		fichierIn = new FileInputStream(nomFichier);
+		fichierIn = new FileInputStream(fileName);
 		ois = new ObjectInputStream(fichierIn);
 		res = (Company) ois.readObject();
 		if(ois != null)

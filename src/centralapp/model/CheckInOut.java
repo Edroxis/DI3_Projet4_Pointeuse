@@ -6,7 +6,6 @@ import java.time.ZonedDateTime;
 /**
  * <b>CheckInOut : Manage Check In and Check out</b>
  * 
- * @author Julien
  */
 
 public class CheckInOut implements Serializable {

@@ -18,7 +18,6 @@ import centralapp.views.DepartmentView;
 /**
  * <b>DepartmentControler : Controler of the view with the Departments</b>
  * 
- * @author Julien
  */
 public class DepartmentControler {
 	/**

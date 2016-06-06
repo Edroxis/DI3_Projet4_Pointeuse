@@ -22,7 +22,6 @@ import javax.swing.JButton;
 /**
  * <b>GeneralCIOView : View of all checks</b>
  * 
- * @author Julien
  */
 @SuppressWarnings("serial")
 public class GeneralCIOView extends JPanel {

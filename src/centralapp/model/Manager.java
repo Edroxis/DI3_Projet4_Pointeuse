@@ -15,7 +15,6 @@ package centralapp.model;
  * @see Employee
  * @see ManagementDpt
  * 
- * @author Julien
  */
 public class Manager extends Employee {
 
@@ -39,28 +38,15 @@ public class Manager extends Employee {
 		managementDpt.addManager(this);
 	}
 	
+	/** 
+	 * Build a manager from an employee
+	 * 
+	 * @param emp The employee to promote
+	 */
 	public Manager(Employee emp) {
 		super(emp);
 		managementDpt = super.getCompany().getManagementDpt();
 		managementDpt.addManager(this);
-	}
-
-	// Method
-	public String getlName() {
-		return super.getlName();
-	}
-
-	public String getfName() {
-		return super.getfName();
-	}
-
-	
-	public int getId() {
-		return super.getId();
-	}
-
-	public Department getDpt() {
-		return super.getDpt();
 	}
 
 	/**

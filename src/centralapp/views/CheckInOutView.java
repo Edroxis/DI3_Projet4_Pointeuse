@@ -19,7 +19,6 @@ import javax.swing.BoxLayout;
 /**
  * <b>CheckInOutView : Manage the view which contains check of a particular employee</b>
  * 
- * @author Julien
  */
 @SuppressWarnings("serial")
 public class CheckInOutView extends JPanel {

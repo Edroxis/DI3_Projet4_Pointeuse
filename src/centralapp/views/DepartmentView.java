@@ -26,8 +26,7 @@ import centralapp.model.ManagementDpt;
 import centralapp.model.Manager;
 
 /**
- * 
- * @author Julien
+ * <b>DepartmentView : Manage the view of the departments</b>
  */
 @SuppressWarnings("serial")
 public class DepartmentView extends JPanel {

@@ -8,7 +8,6 @@ import java.io.IOException;
  * 
  * @see Company
  * 
- * @author Julien
  */
 public class Test {
 

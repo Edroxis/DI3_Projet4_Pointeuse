@@ -24,7 +24,6 @@ import java.util.ArrayList;
  * @see CheckInOut
  * @see AbstractPerson
  * 
- * @author Julien
  */
 public class Employee extends AbstractPerson {
 
@@ -112,6 +111,11 @@ public class Employee extends AbstractPerson {
 		dpt = null;
 	}
 	
+	/**
+	 * Copy constructor of Employee
+	 * 
+	 * @param man the employee to copy
+	 */
 	public Employee(Employee man) {
 		this(man.getlName(), man.getfName(), man.getDpt());
 	}
@@ -123,15 +127,6 @@ public class Employee extends AbstractPerson {
 	 */
 	public Employee(AbstractPerson man) {
 		this(man.getlName(), man.getfName());
-	}
-
-	// Method
-	public String getlName() {
-		return super.getlName();
-	}
-
-	public String getfName() {
-		return super.getfName();
 	}
 
 	/**

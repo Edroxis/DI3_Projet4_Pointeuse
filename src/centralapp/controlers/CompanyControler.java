@@ -16,7 +16,6 @@ import centralapp.views.CompanyView;
 /**
  * <b>CompanyControler : Manage Controler of the Company</b>
  * 
- * @author Julien
  */
 public class CompanyControler {
 	/**

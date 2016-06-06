@@ -13,10 +13,8 @@ import java.io.Serializable;
  * @see Employee
  * @see Boss
  * 
- * @author Julien
  */
 public class AbstractPerson implements Serializable {
-	// Attribute
 	/**
 	 * Last Name
 	 */
@@ -26,7 +24,6 @@ public class AbstractPerson implements Serializable {
 	 */
 	private String fName;
 
-	// Constructor
 	/**
 	 * Constructor
 	 * 
@@ -59,12 +56,21 @@ public class AbstractPerson implements Serializable {
 		return fName;
 	}
 	
-	public void setlName(String name) {
-		lName = name;
+	/** Set the last name of the person
+	 * 
+	 * @param lastName 
+	 */
+	public void setlName(String lastName) {
+		lName = lastName;
 	}
 	
-	public void setfName(String name) {
-		fName = name;
+	/**
+	 * Set the first name of the person
+	 * 
+	 * @param firstName
+	 */
+	public void setfName(String firstName) {
+		fName = firstName;
 	}
 
 	/**

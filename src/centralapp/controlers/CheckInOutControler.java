@@ -9,7 +9,6 @@ import centralapp.views.CheckInOutView;
 /**
  * <b>CheckInOutControler : Manage the view of each person's checks</b>
  * 
- * @author Julien
  */
 public class CheckInOutControler {
 	/**

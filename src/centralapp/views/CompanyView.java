@@ -21,7 +21,6 @@ import centralapp.model.Employee;
 /**
  * <b>CompanyControler : Manage the view of the Company</b>
  * 
- * @author Julien
  */
 @SuppressWarnings("serial")
 public class CompanyView extends JPanel {
