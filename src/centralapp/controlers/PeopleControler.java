@@ -59,6 +59,16 @@ public class PeopleControler {
 		}
 	}
 	
+	public class TreeClickEvent extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			if(arg0.getClickCount() == 2) {
+				if(lastSelectedID >= 0)
+					mainControler.openCheckTab(mainControler.getCompany().findEmployee(lastSelectedID));
+			}
+		}
+	}
+	
 	public class AddEvent extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {			

@@ -118,6 +118,7 @@ public class PeopleView extends JPanel {
 		
 		//Set up events
 		peopleTree.addTreeSelectionListener(controler.new TreeSelectEvent());
+		peopleTree.addMouseListener(controler.new TreeClickEvent());
 		personAddButton.addMouseListener(controler.new AddEvent());
 		personApplyButton.addMouseListener(controler.new ApplyEvent());
 		personRemoveButton.addMouseListener(controler.new RemoveEvent());
