@@ -261,4 +261,13 @@ public class Employee extends AbstractPerson {
 	public void assign(Company company) {
 		this.company = company;
 	}
+
+	/**
+	 * Get nb of checks for this Employee
+	 * 
+	 * @return Number of checks
+	 */
+	public int getTotalCIO() {
+		return checkInOut.size();
+	}
 }

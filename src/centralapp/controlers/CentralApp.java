@@ -20,6 +20,7 @@ public class CentralApp {
 	private CompanyControler companyControler;
 	private DepartmentControler departmentControler;
 	private PeopleControler peopleControler;
+	private GeneralCIOControler generalCheckControler;
 	private ArrayList<CheckInOutControler> checksControlers;
 	private MainView mainWindow;
 	private Company company;
@@ -32,11 +33,13 @@ public class CentralApp {
 		departmentControler = new DepartmentControler(this);
 		peopleControler = new PeopleControler(this);
 		checksControlers = new ArrayList<CheckInOutControler>();
+		generalCheckControler = new GeneralCIOControler(this);
 		
 		mainWindow = new MainView(this);
 		mainWindow.addTab("Company", companyControler.getView());
 		mainWindow.addTab("Department", departmentControler.getView());
 		mainWindow.addTab("People", peopleControler.getView());
+		mainWindow.addTab("Checks", generalCheckControler.getView());
 		
 		companyChooser = new JFileChooser();
 		companyChooser.setFileFilter(new FileNameExtensionFilter(
@@ -163,6 +166,7 @@ public class CentralApp {
 		companyControler.updatePeopleList(list);
 		departmentControler.updatePeopleList();
 		peopleControler.updatePeopleList(list);
+		generalCheckControler.updateTable();
 	}
 	
 	public class ExitEvent extends WindowAdapter {

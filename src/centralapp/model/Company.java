@@ -343,4 +343,16 @@ public class Company implements Serializable {
 		
 		return res;
 	}
+
+	/**
+	 * Get total nb of checks of all employees
+	 * 
+	 * @return Number of checks
+	 */
+	public int getTotalCIO() {
+		int total = 0;
+		for(Employee emp : employeeList)
+			total += emp.getTotalCIO();
+		return total;
+	}
 }
