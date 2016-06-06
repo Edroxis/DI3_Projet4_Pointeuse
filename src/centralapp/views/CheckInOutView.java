@@ -1,14 +1,12 @@
 package centralapp.views;
 
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import centralapp.controlers.CentralApp;
 import centralapp.controlers.CheckInOutControler;
-import centralapp.controlers.ComControler;
-import centralapp.controlers.CompanyControler;
 import centralapp.model.*;
 
 import javax.swing.JTable;
@@ -18,18 +16,44 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 
+/**
+ * <b>CheckInOutView : Manage the view which contains check of a particular employee</b>
+ * 
+ * @author Julien
+ */
+@SuppressWarnings("serial")
 public class CheckInOutView extends JPanel {
-
+	/**
+	 * Reference to the main controler
+	 */
 	private CentralApp mainControler;
+	
+	/**
+	 * Reference to the Controler
+	 */
 	private CheckInOutControler controler;
+	
+	/**
+	 * Table containing Checks
+	 */
 	private JTable table;
-	
+
+	/**
+	 * Reference to corresponding Employee
+	 */
 	private Employee employee;
-	
+
+	/**
+	 * Message if there's no check on this employee checkList
+	 */
 	private JLabel noCheckLabel = new JLabel("No Check in or out for this Employee");
 	
 	/**
-	 * Create the panel.
+	 * Constructor of this class
+	 * 
+	 * @param mainControler Reference to the CentralApp
+	 * @param localControler Reference to the Controler
+	 * @param emp Reference to the Employee
 	 */
 	public CheckInOutView(CentralApp mainControler, CheckInOutControler localControler, Employee emp) {
 		this.mainControler = mainControler;
@@ -40,22 +64,32 @@ public class CheckInOutView extends JPanel {
 		
 		updateTable();		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		add(table);
 		
+		// Initialize Pane for Scrolling
+		JScrollPane scrollPane = new JScrollPane();
+		add(scrollPane);
+		scrollPane.setViewportView(table);
+		
+		//Initialize panel containing the close button
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel);
 		
+		//Initialize Close Button
 		JButton btnClose = new JButton("Close");
 		panel.add(btnClose);
 		btnClose.addMouseListener(controler.new CloseEvent());
 	}
 	
-	public void updateTable(){//update the model of the JTable
+	/**
+	 * Update Table Content
+	 */
+	public void updateTable(){
 		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		DateTimeFormatter hourFormatter = DateTimeFormatter.ofPattern("HH:mm");
 		
+		//Put the emptyMessage (or not) depending on checkList Emptiness
 		remove(noCheckLabel);
 		if(employee.getCheckInOut().size() == 0)
 			add(noCheckLabel);
@@ -63,12 +97,14 @@ public class CheckInOutView extends JPanel {
 		String[][] data = new String[employee.getCheckInOut().size()][2] ;
 		int i = 0;
 		
+		//Fill the Table
 		for(CheckInOut ch : employee.getCheckInOut()){
 			data[i][0] = ch.getDate().format(dateFormatter);
 			data[i][1] = ch.getDate().format(hourFormatter);
 			i++;
 		}
 		
+		//Print Table
 		table.setModel(new DefaultTableModel(
 				data,
 				new String[] {

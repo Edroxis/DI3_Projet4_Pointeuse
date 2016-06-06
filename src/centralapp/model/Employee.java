@@ -119,7 +119,7 @@ public class Employee extends AbstractPerson {
 	/**
 	 * Constructor of Employee
 	 * 
-	 * @param person
+	 * @param man person
 	 */
 	public Employee(AbstractPerson man) {
 		this(man.getlName(), man.getfName());
