@@ -18,14 +18,39 @@ import centralapp.model.AbstractPerson;
 import centralapp.model.Boss;
 import centralapp.model.Employee;
 
+/**
+ * <b>CompanyControler : Manage the view of the Company</b>
+ * 
+ * @author Julien
+ */
 @SuppressWarnings("serial")
 public class CompanyView extends JPanel {
+	/**
+	 * Reference to the CentralApp
+	 */
 	private CentralApp mainControler;
+	
+	/**
+	 * Reference to the Controler
+	 */
 	private CompanyControler controler;
 	
+	/**
+	 * TextField containing Company's name
+	 */
 	private JTextField companyNameField;
+	
+	/**
+	 * Box containing boss
+	 */
 	private JComboBox<AbstractPerson> companyBossComboBox;
 	
+	/**
+	 * Constructor of the class
+	 * 
+	 * @param mainControler Reference to the CentralApp
+	 * @param companyControler Reference to the Controler
+	 */
 	public CompanyView(CentralApp mainControler, CompanyControler companyControler) {
 		this.mainControler = mainControler;
 		controler = companyControler;
@@ -63,15 +88,31 @@ public class CompanyView extends JPanel {
 		companyNameField.addFocusListener(controler.new NameEvent());
 		companyBossComboBox.addItemListener(controler.new BossEvent());
 	}
-	
+
+	/**
+	 * Get TextField content
+	 * 
+	 * @return The String in the TextField
+	 */
 	public String getName() {
 		return companyNameField.getText();
 	}
-	
+
+	/**
+	 * Change the Content of the TextField
+	 * 
+	 * @param name The String to print on the TextField
+	 */
 	public void updateCompanyName(String name) {
 		companyNameField.setText(name);
 	}
-	
+
+	/**
+	 * Method to update the comboBox
+	 * 
+	 * @param employeesList List of the Employees
+	 * @param boss Reference to the Boss
+	 */
 	public void updatePeopleList(ArrayList<Employee> employeesList, Boss boss) {
 		companyBossComboBox.removeAllItems();
 		
