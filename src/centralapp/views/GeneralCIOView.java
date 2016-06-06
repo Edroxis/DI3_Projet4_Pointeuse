@@ -2,6 +2,7 @@ package centralapp.views;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -72,11 +73,17 @@ public class GeneralCIOView extends JPanel {
         
         JButton btnFilter = new JButton("Filter");
         panel.add(btnFilter);
-        btnFilter.addMouseListener(controler.new FilterEvent());
         
         JButton btnReset = new JButton("Reset");
         panel.add(btnReset);
+        
+        JButton btnWorking = new JButton("Currently Working");
+        panel.add(btnWorking);
+        
+        //Set up events
+        btnFilter.addMouseListener(controler.new FilterEvent());
         btnReset.addMouseListener(controler.new ResetEvent());
+        btnWorking.addMouseListener(controler.new WorkingEvent());
 	}
 	
 	public void setMinTextField(String str){
@@ -131,6 +138,40 @@ public class GeneralCIOView extends JPanel {
 		);
 
 		table.setModel(model);
+	}
+	
+	public void printCurrentlyWorking(ArrayList<Employee> currentlyWorking){
+		String[][] data = new String[currentlyWorking.size()][5];
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm");
+		CheckInOut cio;
+		int i = 0;
+		
+		if(currentlyWorking.isEmpty()){
+			data = new String[1][5];
+			data[0][0] = "No";
+			data[0][1] = "Employee";
+			data[0][2] = "Currently";
+			data[0][3] = "Working";
+			data[0][4] = "!";
+		}
+		else{
+			for (Employee emp : currentlyWorking) {
+				cio = emp.getCheckInOut().get(currentlyWorking.size()-1);
+				data[i][0] = Integer.toString(emp.getId());
+				data[i][1] = emp.getfName();
+				data[i][2] = emp.getlName();
+				if(emp.getDpt() != null)
+					data[i][3] = emp.getDpt().toString();
+				else
+					data[i][3] = "unassigned";
+				data[i][4] = cio.getDate().format(dateFormatter);
+				i++;
+			}
+		}
+		table.setModel(new DefaultTableModel(data,
+				new String[] { "Id", "First Name", "Last Name", "Department", "Hour of check" }
+		));
+		
 	}
 
 }

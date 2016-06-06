@@ -5,7 +5,10 @@ import java.awt.event.MouseEvent;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
+import centralapp.model.CheckInOut;
+import centralapp.model.Company;
 import centralapp.model.Employee;
 import centralapp.views.GeneralCIOView;
 
@@ -71,6 +74,38 @@ public class GeneralCIOControler {
 			view.setMaxTextField(formatStr);
 			
 			updateTable();
+		}
+	}
+	
+	public class WorkingEvent extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			String format = "dd/MM/yyyy";
+			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format );
+			java.util.Date date = new java.util.Date();
+			String today = formater.format(date);
+			
+			Company cmp = mainControler.getCompany();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			
+			ArrayList<Employee> currentlyWorking = new ArrayList<Employee>();
+			
+			for(Employee emp : cmp.getEmployees()){
+				ArrayList<CheckInOut> list = emp.getCheckInOut();
+				if(!list.isEmpty()){
+					if(list.get(list.size()-1).getDate().format(formatter) == today){
+						if(list.size() == 1)
+						{
+							currentlyWorking.add(emp);
+						}
+						else{
+							if(list.get(list.size()-2).getDate().format(formatter) != today)
+								currentlyWorking.add(emp);
+						}
+					}
+				}
+			}
+			view.printCurrentlyWorking(currentlyWorking);
 		}
 	}
 }
