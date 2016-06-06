@@ -52,9 +52,10 @@ public class DepartmentControler {
 			Company company = mainControler.getCompany();
 			Department newDpt = new Department(newDptName, company);
 			Employee futureManager = view.getManager();
-			if(futureManager != null)
+			if(futureManager != null) {
 				newDpt.setManager(new Manager(futureManager));
-			futureManager.removeEmployee();
+				futureManager.removeEmployee();
+			}
 			mainControler.notifyDptListModification();
 		}
 	}
@@ -65,9 +66,10 @@ public class DepartmentControler {
 			Department dpt = view.getDpt();
 			dpt.setName(view.getName());
 			Employee futureManager = view.getManager();
-			if(futureManager != null)
+			if(futureManager != null) {
 				dpt.setManager(new Manager(futureManager));
-			futureManager.removeEmployee();
+				futureManager.removeEmployee();
+			}
 			mainControler.notifyDptListModification();
 		}
 	}
