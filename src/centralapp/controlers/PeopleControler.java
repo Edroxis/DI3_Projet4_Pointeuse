@@ -1,7 +1,5 @@
 package centralapp.controlers;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 
 import centralapp.model.AbstractPerson;
-import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
 import centralapp.views.PeopleView;

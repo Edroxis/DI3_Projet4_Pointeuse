@@ -6,12 +6,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import centralapp.model.AbstractDpt;
-import centralapp.model.AbstractPerson;
 import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
-import centralapp.model.ManagementDpt;
 import centralapp.model.Manager;
 import centralapp.views.DepartmentView;
 

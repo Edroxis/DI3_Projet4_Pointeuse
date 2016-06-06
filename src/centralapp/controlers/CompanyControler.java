@@ -6,7 +6,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-import centralapp.model.AbstractDpt;
 import centralapp.model.AbstractPerson;
 import centralapp.model.Boss;
 import centralapp.model.Company;

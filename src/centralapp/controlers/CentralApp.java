@@ -10,7 +10,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import centralapp.model.*;
+import centralapp.model.Boss;
+import centralapp.model.Company;
+import centralapp.model.Department;
+import centralapp.model.Employee;
 import centralapp.views.MainView;
 
 /**

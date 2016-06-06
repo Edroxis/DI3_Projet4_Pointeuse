@@ -17,13 +17,8 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import centralapp.controlers.CentralApp;
 import centralapp.controlers.DepartmentControler;
-import centralapp.model.AbstractDpt;
-import centralapp.model.AbstractPerson;
-import centralapp.model.Boss;
 import centralapp.model.Department;
 import centralapp.model.Employee;
-import centralapp.model.ManagementDpt;
-import centralapp.model.Manager;
 
 /**
  * <b>DepartmentView : Manage the view of the departments</b>

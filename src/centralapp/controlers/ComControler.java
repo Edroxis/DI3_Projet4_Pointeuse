@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.time.ZonedDateTime;
-import centralapp.model.Boss;
+
 import centralapp.model.CheckInOut;
 import centralapp.model.Company;
 import centralapp.model.Employee;

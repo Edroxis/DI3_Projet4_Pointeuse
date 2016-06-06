@@ -1,9 +1,9 @@
 package centralapp.views;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,16 +20,10 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import centralapp.controlers.CentralApp;
 import centralapp.controlers.PeopleControler;
-import centralapp.model.AbstractPerson;
 import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
 import centralapp.model.Manager;
-import java.awt.Component;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.CardLayout;
-import javax.swing.SwingConstants;
 
 /**
  * PeopleView : Manage View of peoples

@@ -7,12 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import centralapp.model.Boss;
 import centralapp.model.CheckInOut;
 import centralapp.model.Company;
-import centralapp.model.Department;
 import centralapp.model.Employee;
-import centralapp.model.ManagementDpt;
 import centralapp.views.GeneralCIOView;
 
 /**
