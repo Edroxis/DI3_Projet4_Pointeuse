@@ -3,7 +3,15 @@ package slaves;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Class providing utilities functions
+ */
 public class Utils {
+	/** Round the date time in argument to the nearest quarter 
+	 *  (e.g. 23:57 -> 0:00 (the next day))
+	 * @param dateTime the date time to round
+	 * @return The rounded date time
+	 */
 	static public ZonedDateTime roundTimeMinQuarter(ZonedDateTime dateTime) {
 		//Round the sec
 		int unroundedSec = dateTime.getSecond();
