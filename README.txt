@@ -1,7 +1,7 @@
 Projet issu d'une collaboration entre Julien Amoros et Kevin Seroux.
 
-Pour lancer le projet, il faut lancer "CentralApp" qui se trouve dans centralapp.controlers, c'est l'application principale.
-Il faut aussi lancer "SlaveControler" disponible dans slaves, c'est la partie pointeuse.
+Pour lancer le projet, il faut lancer "CentralApp" qui se trouve dans centralapp.controlers, c'est l'application principale (avec tout ce qui est dans centralapp).
+Il faut aussi lancer "SlaveControler" disponible dans slaves, c'est la partie pointeuse (avec tout ce qui est dans slaves).
 
 Lors du lancement de l'application principale, il est possible de récupérer une sauvegarde .ser issu d'une utilisation précédente, faire annuler créera une entrprise par défaut.
 Dans l'onglet Company, il est possible de changer le nom, mais aussi de choisir le boss.
