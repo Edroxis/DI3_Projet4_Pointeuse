@@ -25,6 +25,11 @@ import centralapp.model.Company;
 import centralapp.model.Department;
 import centralapp.model.Employee;
 import centralapp.model.Manager;
+import java.awt.Component;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.CardLayout;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class PeopleView extends JPanel {
@@ -41,18 +46,21 @@ public class PeopleView extends JPanel {
 	public PeopleView(CentralApp mainControler, PeopleControler peopleControler) {
 		this.mainControler = mainControler;
 		controler = peopleControler;
+		setLayout(new BorderLayout(0, 0));
 		
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		JPanel leftPanel = new JPanel();
+		add(leftPanel, BorderLayout.WEST);
+		leftPanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel peopleTreeIndication = new JLabel("Double-click to open check in/out:");
-		add(peopleTreeIndication);
+		leftPanel.add(peopleTreeIndication, BorderLayout.NORTH);
 		
 		MyDefaultMutableTreeNode racine = new MyDefaultMutableTreeNode("The Root",-1);
 		DefaultTreeModel arbreModele = new DefaultTreeModel(racine);
 		peopleTree = new JTree(arbreModele);
 		//updateTree();
 		peopleTree.setRootVisible(false);
-		add(peopleTree);
+		leftPanel.add(peopleTree, BorderLayout.CENTER);
 		
 		//Create the form: firstname, lastname, 
 		JPanel personFormPanel = new JPanel();
