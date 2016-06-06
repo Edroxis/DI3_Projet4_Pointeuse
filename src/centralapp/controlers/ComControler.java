@@ -24,16 +24,19 @@ public class ComControler implements Runnable {
 	private String buffer;
 	private int remainingRetries;
 	private Company company;
+	private CentralApp centralApp;
 	
 	/**
 	 * The constructor
 	 * 
+	 * @param centralApp The main controlers to notify views from check in/out update
 	 * @param company The company that will be fed up with the check in/out
 	 * @param ip The time clocking ip
 	 * @param port The time clocking port
 	 * @throws IOException Whether the connection fails
 	 */
-	public ComControler(Company company, String ip, int port) throws IOException {
+	public ComControler(CentralApp centralApp, Company company, String ip, int port) throws IOException {
+		this.centralApp = centralApp;
 		this.company = company;
 		this.remainingRetries = COUNT_OF_MAX_RETRIES;
 		this.ip = ip;
@@ -134,6 +137,7 @@ public class ComControler implements Runnable {
 				employee = company.getMrX();
 				
 			employee.addCheckInOut(new CheckInOut(dateTime));
+			centralApp.notifyPeopleListModification();
 		}
 	}
 }
