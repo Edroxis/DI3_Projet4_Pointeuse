@@ -13,9 +13,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import centralapp.model.*;
 import centralapp.views.MainView;
 
-//TODO delete once test finished
-import java.time.ZonedDateTime;
-
 public class CentralApp {
 	private CompanyControler companyControler;
 	private DepartmentControler departmentControler;
@@ -54,30 +51,6 @@ public class CentralApp {
 		if(!openFile()) {
 			Boss boss = new Boss("Last name", "First name");
 			company = new Company("Company's name", boss);
-			
-			//TODO This is a test, REMOVE
-			Department dpt1 = new Department("Dpt1", company);
-			Department dpt2 = new Department("Dpt2", company);
-			Employee emp4 = new Employee("Jean2", "Bon2", dpt1);
-			Employee emp5 = new Employee("Jean3", "Bon3", dpt2);
-			Manager man = new Manager("Machin", "Truc", company);
-			dpt1.setManager(man);
-			//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
-			emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2016-06-06T10:15:30+01:00[Europe/Paris]")));
-			company.getMrX().addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-06-06T10:15:30+01:00[Europe/Paris]")));
-			company.getMrX().addCheckInOut(new CheckInOut(ZonedDateTime.parse("2011-06-06T10:15:30+01:00[Europe/Paris]")));
-			emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-06-06T10:15:30+01:00[Europe/Paris]")));
-			emp5.addCheckInOut(new CheckInOut(ZonedDateTime.parse("1995-11-03T10:15:30+01:00[Europe/Paris]")));
-			//openCheckTab(emp3);
-			openCheckTab(emp4);
-			openCheckTab(emp5);
-			//closeCheckTab(checksControlers.get(0));
-			//closeCheckTab(checksControlers.get(0));
-			//closeCheckTab(checksControlers.get(0));
-			//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-10-03T10:15:30+01:00[Europe/Paris]")));
-			//checkControler = new CheckInOutControler(this, emp3);
-			//mainWindow.addTab(emp3.getfName()+" "+emp3.getlName(), checkControler.getView());
-			//////////////////////
 		}
 		
 		//Update the first infos
