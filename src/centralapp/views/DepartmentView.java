@@ -26,11 +26,6 @@ import centralapp.model.Employee;
 @SuppressWarnings("serial")
 public class DepartmentView extends JPanel {
 	/**
-	 * Reference to CentralApp
-	 */
-	private CentralApp mainControler;
-
-	/**
 	 * Reference to the Controler
 	 */
 	private DepartmentControler controler;
@@ -65,7 +60,6 @@ public class DepartmentView extends JPanel {
 	 * @param dptControler
 	 */
 	public DepartmentView(CentralApp mainControler, DepartmentControler dptControler) {
-		this.mainControler = mainControler;
 		controler = dptControler;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

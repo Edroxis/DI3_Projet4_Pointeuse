@@ -14,6 +14,7 @@ import java.io.Serializable;
  * @see Boss
  * 
  */
+@SuppressWarnings("serial")
 public class AbstractPerson implements Serializable {
 	/**
 	 * Last Name

@@ -34,6 +34,7 @@ import java.util.Iterator;
  * 
  */
 
+@SuppressWarnings("serial")
 public class Company implements Serializable {
 
 	// Attribute

@@ -23,12 +23,7 @@ import centralapp.model.Employee;
  * 
  */
 @SuppressWarnings("serial")
-public class CompanyView extends JPanel {
-	/**
-	 * Reference to the CentralApp
-	 */
-	private CentralApp mainControler;
-	
+public class CompanyView extends JPanel {	
 	/**
 	 * Reference to the Controler
 	 */
@@ -51,7 +46,6 @@ public class CompanyView extends JPanel {
 	 * @param companyControler Reference to the Controler
 	 */
 	public CompanyView(CentralApp mainControler, CompanyControler companyControler) {
-		this.mainControler = mainControler;
 		controler = companyControler;
 		
 		setLayout(new FormLayout(new ColumnSpec[] {

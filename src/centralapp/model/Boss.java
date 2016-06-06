@@ -8,6 +8,7 @@ package centralapp.model;
  * </p>
  * 
  */
+@SuppressWarnings("serial")
 public class Boss extends AbstractPerson {
 
 	// Attribute

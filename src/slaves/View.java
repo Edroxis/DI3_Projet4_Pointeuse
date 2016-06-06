@@ -21,6 +21,7 @@ import javax.swing.UIManager;
 /**
  * The MHI of the time clocking 
  */
+@SuppressWarnings("serial")
 public class View extends JFrame {
 	private JLabel dateTimeInfo;
 	private JButton checkButton;

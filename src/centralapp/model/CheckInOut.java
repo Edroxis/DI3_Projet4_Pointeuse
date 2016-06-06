@@ -8,6 +8,7 @@ import java.time.ZonedDateTime;
  * 
  */
 
+@SuppressWarnings("serial")
 public class CheckInOut implements Serializable {
 	// Attribute
 	/**

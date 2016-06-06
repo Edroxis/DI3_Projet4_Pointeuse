@@ -21,12 +21,7 @@ import centralapp.model.Employee;
  * 
  */
 @SuppressWarnings("serial")
-public class CheckInOutView extends JPanel {
-	/**
-	 * Reference to the main controler
-	 */
-	private CentralApp mainControler;
-	
+public class CheckInOutView extends JPanel {	
 	/**
 	 * Reference to the Controler
 	 */
@@ -55,7 +50,6 @@ public class CheckInOutView extends JPanel {
 	 * @param emp Reference to the Employee
 	 */
 	public CheckInOutView(CentralApp mainControler, CheckInOutControler localControler, Employee emp) {
-		this.mainControler = mainControler;
 		controler = localControler;
 		employee = emp;
 		

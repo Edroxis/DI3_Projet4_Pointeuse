@@ -25,6 +25,7 @@ import java.util.ArrayList;
  * @see AbstractPerson
  * 
  */
+@SuppressWarnings("serial")
 public class Employee extends AbstractPerson {
 
 	// Attribute

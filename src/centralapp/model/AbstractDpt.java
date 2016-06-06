@@ -14,6 +14,7 @@ import java.io.Serializable;
  * @see ManagementDpt
  * 
  */
+@SuppressWarnings("serial")
 public abstract class AbstractDpt implements Serializable {
 
 	/**

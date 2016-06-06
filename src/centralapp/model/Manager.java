@@ -16,6 +16,7 @@ package centralapp.model;
  * @see ManagementDpt
  * 
  */
+@SuppressWarnings("serial")
 public class Manager extends Employee {
 
 	// Attribute

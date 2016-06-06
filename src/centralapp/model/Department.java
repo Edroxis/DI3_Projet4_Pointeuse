@@ -26,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 
  */
 
+@SuppressWarnings("serial")
 public class Department extends AbstractDpt {
 
 	// Attribute
@@ -38,11 +39,6 @@ public class Department extends AbstractDpt {
 	 * HashMap containing Employees indexed by id
 	 */
 	private ConcurrentHashMap<Integer, Employee> employeeMap;
-
-	/**
-	 * Contains number of Employee in this Department
-	 */
-	private int nbEmployee;
 
 	/**
 	 * Reference to the manager
@@ -60,7 +56,6 @@ public class Department extends AbstractDpt {
 		super(nameParam);
 		employeeMap = new ConcurrentHashMap<Integer, Employee>(0);
 		manager = null;
-		nbEmployee = 0;
 	}
 
 	/**
@@ -104,7 +99,6 @@ public class Department extends AbstractDpt {
 
 		if (!employeeMap.containsKey(eParam.getId())) {
 			employeeMap.put(eParam.getId(), eParam);
-			nbEmployee++;
 		}
 	}
 
@@ -177,7 +171,6 @@ public class Department extends AbstractDpt {
 	public void removeEmployee(Employee empParam) {
 		if (employeeMap.containsValue(empParam)) {
 			employeeMap.remove(empParam.getId());
-			nbEmployee--;
 		}
 	}
 

@@ -19,6 +19,7 @@ import java.util.Iterator;
  * @see AbstractDpt
  * 
  */
+@SuppressWarnings("serial")
 public class ManagementDpt extends AbstractDpt {
 
 	// Attribute
