@@ -10,4 +10,6 @@ Dans l'onglet People il est possible d'ajouter des employés (bouton add), attent
 Il est possible de voir les employés des différents départements dans le volet de gauche, un double clic sur un employé va ouvrir une page personnelle contenant tous ses pointages, il est possible de fermer cette page avec le bouton close.
 Dans l'onglet Checks, on peut voir tous les pointages de la société, triables par date, nom, départment, il y a aussi des filtres en bas, attentio à bien respecter la synthaxe fournie. Currently working permet de voir les gens qui n'ont pointé qu'une fois aujourd'hui.
 
+Pour la pointeuse, il faut entrer l'ID de l'employé, qui est stocké sur sa carte, ou qui est consultable dans l'onglet Checks de l'application principale.
+
 Lors de la fermeture du programme, vous pourrez sauvegarder votre session au format .ser pour pouvoir le reprendre pour les prochaines utilisations.
