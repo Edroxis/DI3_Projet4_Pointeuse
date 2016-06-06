@@ -207,11 +207,19 @@ public class Employee extends AbstractPerson {
 	 */
 	public void addCheckInOut(CheckInOut param) {
 		int i;
-		for(i = 0; i<checkInOut.size(); i++){
+		boolean contained = false;
+		
+		for(i = 0; i<checkInOut.size(); i++){	//Find where to insert check to keep increasing order
 			if(param.getDate().compareTo(checkInOut.get(i).getDate())<0)
 				break;
 		}
-		checkInOut.add(i, param);
+		
+		for(CheckInOut ch : checkInOut){	//Verify if Check is not already in database
+			if(ch.getDate().compareTo(param.getDate())==0)
+				contained = true;
+		}
+		if(!contained)
+			checkInOut.add(i, param);
 	}
 
 	/**

@@ -112,9 +112,10 @@ public class GeneralCIOView extends JPanel {
 
 	public void updateTable() {// update the model of the JTable
 		int i = 0;
-		String[][] data = new String[mainControler.getCompany().getTotalCIO()][5];
+		Employee MrX = mainControler.getCompany().getMrX();
+		String[][] data = new String[mainControler.getCompany().getTotalCIO()+MrX.getTotalCIO()][5];
 		DateTimeFormatter dateFormatter = controler.getDateFormatter();
-
+		
 		for (Employee emp : mainControler.getCompany().getEmployees()) {
 			for (CheckInOut cio : emp.getCheckInOut()) {
 				if((filterMin != null && cio.getDate().compareTo(filterMin)>=0) || filterMin == null){
@@ -131,6 +132,15 @@ public class GeneralCIOView extends JPanel {
 					}
 				}
 			}
+		}
+		
+		for(CheckInOut cio : MrX.getCheckInOut()){
+			data[i][0] = "X";
+			data[i][1] = "Unknown Employee";
+			data[i][2] = "Unknown Employee";
+			data[i][3] = "Unknown Employee";
+			data[i][4] = cio.getDate().format(dateFormatter);
+			i++;
 		}
 		
 		model = new DefaultTableModel(data,
