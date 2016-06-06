@@ -18,12 +18,17 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
-@SuppressWarnings("serial")
+/**
+ * The MHI of the time clocking 
+ */
 public class View extends JFrame {
 	private JLabel dateTimeInfo;
 	private JButton checkButton;
 	private JFormattedTextField numberField;
 	
+	/**
+	 * The constructor
+	 */
 	public View() {
 		//GTK theme 
 		try {
@@ -63,6 +68,9 @@ public class View extends JFrame {
 	}	
 
 
+	/**
+	 * Listener for check in/out events
+	 */
 	private class CheckInOutListener implements ActionListener {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
@@ -76,6 +84,9 @@ public class View extends JFrame {
 	    }
 	}
 	
+	/**
+	 * Listener for the rounded date time displayed on the MHI
+	 */
 	private class DateTimeInfoUpdater implements ActionListener {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {

@@ -1,14 +1,25 @@
 package slaves;
 
+/**
+ * Represents a time clocking instance
+ */
 public class SlaveControler {
 	private View view;
 	private int port;
 	
+	/** Constructor of the class
+	 * 
+	 * @param port The port on which the server will
+	 * listen incoming connections
+	 */
 	public SlaveControler(int port) {		
 		view = new View();
 		this.port = port;
 	}
 	
+	/**
+	 * Execute an instance of a time clocking
+	 */
 	public void run() {
 		view.setVisible(true);
 		
