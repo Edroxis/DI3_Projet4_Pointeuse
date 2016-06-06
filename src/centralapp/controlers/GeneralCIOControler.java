@@ -93,13 +93,13 @@ public class GeneralCIOControler {
 			for(Employee emp : cmp.getEmployees()){
 				ArrayList<CheckInOut> list = emp.getCheckInOut();
 				if(!list.isEmpty()){
-					if(list.get(list.size()-1).getDate().format(formatter) == today){
+					if(list.get(list.size()-1).getDate().format(formatter).equals(today)){
 						if(list.size() == 1)
 						{
 							currentlyWorking.add(emp);
 						}
 						else{
-							if(list.get(list.size()-2).getDate().format(formatter) != today)
+							if(!list.get(list.size()-2).getDate().format(formatter).equals(today))
 								currentlyWorking.add(emp);
 						}
 					}

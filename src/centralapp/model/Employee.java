@@ -200,13 +200,18 @@ public class Employee extends AbstractPerson {
 	}
 
 	/**
-	 * Add a Check to Employee's list
+	 * Add a Check to Employee's list, add it properly, in order to keep increasing orders
 	 * 
 	 * @param param
 	 *            CheckInOut you want to add
 	 */
 	public void addCheckInOut(CheckInOut param) {
-		checkInOut.add(param);
+		int i;
+		for(i = 0; i<checkInOut.size(); i++){
+			if(param.getDate().compareTo(checkInOut.get(i).getDate())<0)
+				break;
+		}
+		checkInOut.add(i, param);
 	}
 
 	/**

@@ -63,7 +63,8 @@ public class CentralApp {
 			Manager man = new Manager("Machin", "Truc", company);
 			dpt1.setManager(man);
 			//emp3.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2007-12-03T10:15:30+01:00[Europe/Paris]")));
-			emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-11-03T10:15:30+01:00[Europe/Paris]")));
+			emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2016-06-06T10:15:30+01:00[Europe/Paris]")));
+			emp4.addCheckInOut(new CheckInOut(ZonedDateTime.parse("2010-06-06T10:15:30+01:00[Europe/Paris]")));
 			emp5.addCheckInOut(new CheckInOut(ZonedDateTime.parse("1995-11-03T10:15:30+01:00[Europe/Paris]")));
 			//openCheckTab(emp3);
 			openCheckTab(emp4);
