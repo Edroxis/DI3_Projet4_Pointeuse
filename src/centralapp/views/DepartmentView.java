@@ -30,9 +30,10 @@ public class DepartmentView extends JPanel {
 	private CentralApp mainControler;
 	private DepartmentControler controler;
 	
-	private JComboBox<AbstractDpt> departmentsComboBox;
+	private JComboBox<Department> departmentsComboBox;
 	private JTextField departmentNameField;
-	private JComboBox<AbstractPerson> departmentManagerComboBox;
+	private JComboBox<Employee> departmentManagerComboBox;
+	private Employee nullPerson;
 	private JButton departmentRemoveButton;
 	
 	public DepartmentView(CentralApp mainControler, DepartmentControler dptControler) {
@@ -41,7 +42,7 @@ public class DepartmentView extends JPanel {
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		departmentsComboBox = new JComboBox<AbstractDpt>();
+		departmentsComboBox = new JComboBox<Department>();
 		add(departmentsComboBox);
 		
 		//Create the form: name, button choose manager, button add, apply, button remove
@@ -72,7 +73,8 @@ public class DepartmentView extends JPanel {
 		JLabel departmentManagerLabel = new JLabel("Manager");
 		departmentFormPanel.add(departmentManagerLabel, "2, 4");
 		
-		departmentManagerComboBox = new JComboBox<AbstractPerson>();
+		nullPerson = new Employee("none", "");
+		departmentManagerComboBox = new JComboBox<Employee>();
 		departmentFormPanel.add(departmentManagerComboBox, "4, 4");
 		
 		JPanel departmentButtonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -89,7 +91,6 @@ public class DepartmentView extends JPanel {
 		
 		//Set up events
 		departmentsComboBox.addItemListener(controler.new SelectEvent());
-		departmentManagerComboBox.addItemListener(controler.new SelectManagerEvent());
 		departmentAddButton.addMouseListener(controler.new AddEvent());
 		departmentApplyButton.addMouseListener(controler.new ApplyEvent());
 		departmentRemoveButton.addMouseListener(controler.new RemoveEvent());
@@ -99,66 +100,44 @@ public class DepartmentView extends JPanel {
 		return departmentNameField.getText();
 	}
 	
-	public void setName(String name) {
-		departmentNameField.setText(name);
+	public Employee getManager() {
+		Employee manager = (Employee)departmentManagerComboBox.getSelectedItem();
+		if(manager == nullPerson)
+			manager = null;
+			
+		return manager;
 	}
 	
-	public AbstractPerson getManager() {
-		return (AbstractPerson) departmentManagerComboBox.getSelectedItem();
+	public Department getDpt() {
+		return (Department)departmentsComboBox.getSelectedItem();
 	}
 	
-	public void setManager(AbstractPerson manager) {
-		departmentManagerComboBox.setSelectedItem(manager);
-	}
-	
-	public AbstractDpt getDpt() {
-		return (AbstractDpt) departmentsComboBox.getSelectedItem();
-	}
-	
-	public void updateDepartmentsList(ArrayList<Department> dptsList) {//TODO cr�er fonction updateView, fusion des 2 fonctions update
-		departmentsComboBox.removeAllItems();
-		System.out.println("updateDepartmentsList");
+	public void updateDepartmentsList(ArrayList<Department> dptsList) {
+		Department selectedDpt = getDpt();
 		
-		departmentsComboBox.addItem(mainControler.getCompany().getManagementDpt());
-		for(Department dpt : dptsList) {
+		departmentsComboBox.removeAllItems();
+		for(Department dpt : dptsList)
 			departmentsComboBox.addItem(dpt);
-		}
+		
+		departmentsComboBox.setSelectedItem(selectedDpt);
 	}
 	
-	public void updatePeopleList() {
-		AbstractDpt absDpt = (AbstractDpt) departmentsComboBox.getSelectedItem();
-		updateFromChoosenDpt(absDpt);
-	}
-	
-	public void updateFromChoosenDpt(AbstractDpt absDpt){
-		ManagementDpt manDpt;
-		Department dpt;
-		ArrayList<Employee> employeesList = mainControler.getCompany().getEmployees();
-		AbstractPerson nullPerson = new AbstractPerson("none", "");
-		Boss boss = mainControler.getCompany().getBoss();
+	public void updatePeopleList(ArrayList<Employee> list) {
+		Employee selectedManager = getManager();
 		
 		departmentManagerComboBox.removeAllItems();
+		departmentManagerComboBox.addItem(nullPerson);
+		for(Employee emp : list)
+			departmentManagerComboBox.addItem(emp);
 		
-		if(absDpt instanceof ManagementDpt){
-			manDpt = (ManagementDpt) absDpt;
-			departmentManagerComboBox.addItem(boss);
-			departmentManagerComboBox.setEnabled(false);
-			departmentRemoveButton.setEnabled(false);
-		}
-		
-		if(absDpt instanceof Department){
-			for(Employee employee : employeesList) {
-				if(employee instanceof Manager)
-					departmentManagerComboBox.addItem(employee);
-			}
-			departmentManagerComboBox.setEnabled(true);
-			departmentRemoveButton.setEnabled(true);
-			departmentManagerComboBox.addItem(nullPerson);
-			dpt = (Department) absDpt;
-			if(dpt.getManager() == null)
-				departmentManagerComboBox.setSelectedItem(nullPerson);
-			else
-				departmentManagerComboBox.setSelectedItem(dpt.getManager());
-		}
+		departmentManagerComboBox.setSelectedItem(selectedManager);
+	}
+	
+	public void updateFromChoosenDpt(Department dpt) {		
+		departmentNameField.setText(dpt.toString());
+		if(dpt.getManager() == null)
+			departmentManagerComboBox.setSelectedItem(nullPerson);
+		else
+			departmentManagerComboBox.setSelectedItem(dpt.getManager());
 	}
 }

@@ -40,11 +40,6 @@ public class AbstractPerson implements Serializable {
 		fName = fnParam;
 	}
 	
-	public AbstractPerson(AbstractPerson personToCopy) {
-		lName = personToCopy.lName;
-		fName = personToCopy.fName;
-	}
-
 	// Method
 	/**
 	 * Get the last name of a Person

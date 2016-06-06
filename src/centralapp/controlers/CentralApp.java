@@ -2,12 +2,12 @@ package centralapp.controlers;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import centralapp.model.*;
@@ -26,6 +26,9 @@ public class CentralApp {
 	private Company company;
 	private JFileChooser companyChooser;
 	
+	private final String fileExtension = "ser";
+	private final String fileSuffix = '.' + fileExtension;
+	
 	public static int nbTab;
 	
 	public CentralApp() {		
@@ -43,7 +46,7 @@ public class CentralApp {
 		
 		companyChooser = new JFileChooser();
 		companyChooser.setFileFilter(new FileNameExtensionFilter(
-				"Company file", "ser"));
+				"Company file", fileExtension));
 		
 	}
 	
@@ -76,8 +79,8 @@ public class CentralApp {
 		
 		//Update the first infos
 		companyControler.getView().updateCompanyName(company.toString());
-		notifyDptListModification();
 		notifyPeopleListModification();
+		notifyDptListModification();
 		
 		mainWindow.setVisible(true);
 
@@ -136,13 +139,19 @@ public class CentralApp {
 	    		openFileSucceed = true;
 	    	}
     		catch(ClassNotFoundException e) {
-    			System.err.println("Bad version file: " + companyFileLocation);
+    			JOptionPane.showMessageDialog(mainWindow,
+    					"Bad version file: " + companyFileLocation,
+	    				"Error", JOptionPane.ERROR_MESSAGE);
     		}
 	    	catch(FileNotFoundException e) {
-	    		System.err.println("Cannot find the following file: " + companyFileLocation);
+	    		JOptionPane.showMessageDialog(mainWindow,
+	    				"Cannot find the following file: " + companyFileLocation,
+	    				"Error", JOptionPane.ERROR_MESSAGE);
 	    	}
 	    	catch(IOException e) {
-	    		System.err.println("File corrupted: " + companyFileLocation);
+	    		JOptionPane.showMessageDialog(mainWindow,
+	    				"File corrupted: " + companyFileLocation,
+	    				"Error", JOptionPane.ERROR_MESSAGE);
 	    	}
 	    }
 	    
@@ -163,8 +172,8 @@ public class CentralApp {
 	public void notifyPeopleListModification() {
 		ArrayList<Employee> list = company.getEmployees();
 		
-		companyControler.updatePeopleList(list);
-		departmentControler.updatePeopleList();
+		companyControler.updatePeopleList(list, company.getBoss());
+		departmentControler.updatePeopleList(list);
 		peopleControler.updatePeopleList(list);
 		generalCheckControler.updateTable();
 	}
@@ -173,17 +182,19 @@ public class CentralApp {
 		@Override
 		public void windowClosing(WindowEvent arg0) {		    
 		    if(companyChooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
-		    	String companyFileLocation = companyChooser.getSelectedFile().getAbsolutePath();
+		    	String fileLocation = companyChooser.getSelectedFile().getAbsolutePath();
+		    	if(!fileLocation.endsWith(fileSuffix))
+		    		fileLocation = fileLocation + fileSuffix;
 		    	
 		    	try {
-					company.serialize(companyFileLocation);
+					company.serialize(fileLocation);
 					
 				} catch (FileNotFoundException e) {
-					System.err.println("Cannot save in " + companyFileLocation
+					System.err.println("Cannot save in " + fileLocation
 							+ ". File not found!");
 					
 				} catch (IOException e) {
-					System.err.println("Cannot save in " + companyFileLocation +
+					System.err.println("Cannot save in " + fileLocation +
 							". Unknown exception " + e);
 				}
 		    }

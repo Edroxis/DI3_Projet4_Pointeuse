@@ -32,32 +32,15 @@ public class DepartmentControler {
 		view.updateDepartmentsList(list);
 	}
 	
-	public void updatePeopleList() {
-		view.updatePeopleList();
+	public void updatePeopleList(ArrayList<Employee> list) {
+		view.updatePeopleList(list);
 	}
 	
 	public class SelectEvent implements ItemListener {
 		@Override
 		public void itemStateChanged(ItemEvent event) {
 			if(event.getStateChange() == ItemEvent.SELECTED) {
-				AbstractDpt dpt = (AbstractDpt)event.getItem();
-				
-				view.setName(dpt.toString());
-				if(dpt instanceof ManagementDpt)
-					view.setManager(mainControler.getCompany().getBoss());
-				else
-					view.setManager(((Department)dpt).getManager());
-				
-				updatePeopleList();
-			}
-		}
-	}
-	
-	public class SelectManagerEvent implements ItemListener {
-		@Override
-		public void itemStateChanged(ItemEvent event) {
-			if(event.getStateChange() == ItemEvent.SELECTED) {
-				System.err.println("[Dpt] Select manager event");
+				view.updateFromChoosenDpt(view.getDpt());
 			}
 		}
 	}
@@ -65,18 +48,13 @@ public class DepartmentControler {
 	public class AddEvent extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			//TODO: Promote if it's an employee
 			String newDptName = view.getName();
 			Company company = mainControler.getCompany();
-			
 			Department newDpt = new Department(newDptName, company);
-			AbstractPerson absPrs = view.getManager();
-			if(absPrs instanceof Manager)
-				newDpt.setManager((Manager)absPrs);
-			else
-				newDpt.setManager(null);
-			
-			//company.add(newDpt);
+			Employee futureManager = view.getManager();
+			if(futureManager != null)
+				newDpt.setManager(new Manager(futureManager));
+			futureManager.removeEmployee();
 			mainControler.notifyDptListModification();
 		}
 	}
@@ -84,17 +62,12 @@ public class DepartmentControler {
 	public class ApplyEvent extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			//TODO: Promote if it's an employee
-			/*AbstractDpt absDpt = view.getDpt();
-			AbstractPerson absPrs = view.getManager();
-			if(absPrs instanceof Manager){
-				
-				newDpt.setManager((Manager)absPrs);
-			}
-			else
-				newDpt.setManager(null);
-			mainControler.notifyDptListModification();*/
-			System.err.println("[Dpt] Apply event");
+			Department dpt = view.getDpt();
+			dpt.setName(view.getName());
+			Employee futureManager = view.getManager();
+			if(futureManager != null)
+				dpt.setManager(new Manager(futureManager));
+			futureManager.removeEmployee();
 			mainControler.notifyDptListModification();
 		}
 	}
@@ -102,7 +75,7 @@ public class DepartmentControler {
 	public class RemoveEvent extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			System.err.println("[Dpt] Remove event");
+			mainControler.getCompany().removeDepartment(view.getDpt());
 			mainControler.notifyDptListModification();
 		}
 	}

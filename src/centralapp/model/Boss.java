@@ -27,7 +27,7 @@ public class Boss extends AbstractPerson {
 	}
 	
 	public Boss(AbstractPerson man) {
-		super(man);
+		super(man.getlName(), man.getfName());
 	}
 
 	// Method

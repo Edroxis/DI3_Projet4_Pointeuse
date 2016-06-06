@@ -112,13 +112,17 @@ public class Employee extends AbstractPerson {
 		dpt = null;
 	}
 	
+	public Employee(Employee man) {
+		this(man.getlName(), man.getfName(), man.getDpt());
+	}
+	
 	/**
 	 * Constructor of Employee
 	 * 
 	 * @param person
 	 */
 	public Employee(AbstractPerson man) {
-		super(man);
+		this(man.getlName(), man.getfName());
 	}
 
 	// Method
@@ -160,14 +164,20 @@ public class Employee extends AbstractPerson {
 	public void assign(Department dptParam) {
 		if (dpt != null)
 			dpt.removeEmployee(this);
+		
 		dpt = dptParam;
-		if (dptParam != null && !dptParam.contains(this))
-			dptParam.assign(this);
-		if (company != dpt.getCompany()) {
-			if (company != null)
-				company.removeEmployee(this);
-			company = dpt.getCompany();
-			dpt.getCompany().add(this);
+		
+		if(dptParam != null) {
+			if(!dptParam.contains(this))
+				dptParam.assign(this);
+
+			if(company != dpt.getCompany()) {
+				if(company != null)
+					company.removeEmployee(this);
+				
+				company = dpt.getCompany();
+				dpt.getCompany().add(this);
+			}
 		}
 	}
 

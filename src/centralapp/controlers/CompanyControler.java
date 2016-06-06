@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import centralapp.model.AbstractDpt;
 import centralapp.model.AbstractPerson;
+import centralapp.model.Boss;
 import centralapp.model.Company;
 import centralapp.model.Employee;
 import centralapp.views.CompanyView;
@@ -25,8 +26,8 @@ public class CompanyControler {
 		return view;
 	}
 	
-	public void updatePeopleList(ArrayList<Employee> list) {
-		view.updatePeopleList(list);
+	public void updatePeopleList(ArrayList<Employee> list, Boss boss) {
+		view.updatePeopleList(list, boss);
 	}
 
 	public class NameEvent extends FocusAdapter {

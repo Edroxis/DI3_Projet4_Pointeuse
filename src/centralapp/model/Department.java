@@ -128,7 +128,7 @@ public class Department extends AbstractDpt {
 	 * 
 	 * @see Manager#setDpt(Department)
 	 */
-	public void setManager(Manager manParam) {
+	public void setManager(Manager manParam) {		
 		if (manager != null && manager != manParam)
 			manager.setDpt(null);
 
@@ -200,7 +200,7 @@ public class Department extends AbstractDpt {
 	 * 
 	 * @see Company#removeDepartment(Department)
 	 */
-	public void removeDpt() {
+	void removeDpt() { //Visibility package normal
 		Department nullDpt = null;
 		for (Employee e : employeeMap.values())
 			e.assign(nullDpt);
@@ -210,7 +210,7 @@ public class Department extends AbstractDpt {
 		if (company.containsDpt(this))
 			company.removeDepartment(this);
 
-		if (manager.getDpt() == this)
+		if (manager != null && manager.getDpt() == this)
 			manager.setDpt(null);
 	}
 

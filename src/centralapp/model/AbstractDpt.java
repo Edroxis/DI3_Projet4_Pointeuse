@@ -15,7 +15,7 @@ import java.io.Serializable;
  * 
  * @author Julien
  */
-public abstract class AbstractDpt implements Serializable{
+public abstract class AbstractDpt implements Serializable {
 
 	// Attribute
 	/**
@@ -42,5 +42,9 @@ public abstract class AbstractDpt implements Serializable{
 	 */
 	public String toString() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 }

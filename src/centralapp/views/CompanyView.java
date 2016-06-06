@@ -15,6 +15,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import centralapp.controlers.CentralApp;
 import centralapp.controlers.CompanyControler;
 import centralapp.model.AbstractPerson;
+import centralapp.model.Boss;
 import centralapp.model.Employee;
 
 @SuppressWarnings("serial")
@@ -71,10 +72,10 @@ public class CompanyView extends JPanel {
 		companyNameField.setText(name);
 	}
 	
-	public void updatePeopleList(ArrayList<Employee> employeesList) {
-		companyBossComboBox.removeAll();
+	public void updatePeopleList(ArrayList<Employee> employeesList, Boss boss) {
+		companyBossComboBox.removeAllItems();
 		
-		companyBossComboBox.addItem(mainControler.getCompany().getBoss());
+		companyBossComboBox.addItem(boss);
 		for(Employee employee : employeesList) {
 			companyBossComboBox.addItem(employee);
 		}

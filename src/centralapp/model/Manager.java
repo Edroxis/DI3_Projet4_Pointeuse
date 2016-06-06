@@ -38,6 +38,12 @@ public class Manager extends Employee {
 		managementDpt = super.getCompany().getManagementDpt();
 		managementDpt.addManager(this);
 	}
+	
+	public Manager(Employee emp) {
+		super(emp);
+		managementDpt = super.getCompany().getManagementDpt();
+		managementDpt.addManager(this);
+	}
 
 	// Method
 	public String getlName() {
