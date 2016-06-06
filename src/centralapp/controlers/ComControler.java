@@ -9,7 +9,9 @@ import centralapp.model.CheckInOut;
 import centralapp.model.Company;
 import centralapp.model.Employee;
 
-//One instance per client
+/**
+ * Handle the timeclocking slaves
+ */
 public class ComControler implements Runnable {
 	final private int COUNT_OF_MAX_RETRIES = 3;
 	final private int MILLISEC_BEFORE_RETRY = 10000;
@@ -23,6 +25,14 @@ public class ComControler implements Runnable {
 	private int remainingRetries;
 	private Company company;
 	
+	/**
+	 * The constructor
+	 * 
+	 * @param company The company that will be fed up with the check in/out
+	 * @param ip The time clocking ip
+	 * @param port The time clocking port
+	 * @throws IOException Whether the connection fails
+	 */
 	public ComControler(Company company, String ip, int port) throws IOException {
 		this.company = company;
 		this.remainingRetries = COUNT_OF_MAX_RETRIES;
@@ -32,6 +42,9 @@ public class ComControler implements Runnable {
 		setUpConnection();
 	}
 
+	/**
+	 * The main method to perform the operations
+	 */
 	@Override
 	public void run() {		
 		while(true) {
@@ -48,6 +61,11 @@ public class ComControler implements Runnable {
 	}
 	
 	
+	/**
+	 * Initiate the socket
+	 * 
+	 * @throws IOException
+	 */
 	private void setUpConnection() throws IOException {
 		try {
 			clientSocket = new Socket(ip, port);
@@ -60,6 +78,9 @@ public class ComControler implements Runnable {
 		}
 	}
 	
+	/**
+	 * Handle connection issues (client disconnection, ...)
+	 */
 	private void readingIssue() {
 		boolean isConnectionSetUp = false;
 		
@@ -83,6 +104,12 @@ public class ComControler implements Runnable {
 		}
 	}
 	
+	/**
+	 * Read incoming data from the time clocking and add the check
+	 * in/out entries into the employees of the company
+	 * 
+	 * @throws IOException
+	 */
 	private void read() throws IOException {
 		byte[] bytesBuffer = new byte[SIZE_BYTES_BUFFER];
 		

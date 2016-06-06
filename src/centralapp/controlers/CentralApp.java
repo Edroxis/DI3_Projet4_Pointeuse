@@ -13,6 +13,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import centralapp.model.*;
 import centralapp.views.MainView;
 
+/**
+ * The main class representing the central application
+ */
 public class CentralApp {
 	private CompanyControler companyControler;
 	private DepartmentControler departmentControler;
@@ -26,8 +29,14 @@ public class CentralApp {
 	private final String fileExtension = "ser";
 	private final String fileSuffix = '.' + fileExtension;
 	
+	/**
+	 * The count of tabs opened in the main view
+	 */
 	public static int nbTab;
 	
+	/**
+	 * The constructor
+	 */
 	public CentralApp() {		
 		companyControler = new CompanyControler(this);
 		departmentControler = new DepartmentControler(this);
@@ -44,9 +53,11 @@ public class CentralApp {
 		companyChooser = new JFileChooser();
 		companyChooser.setFileFilter(new FileNameExtensionFilter(
 				"Company file", fileExtension));
-		
 	}
 	
+	/**
+	 * Execute the central app
+	 */
 	public void run() {
 		if(!openFile()) {
 			Boss boss = new Boss("Last name", "First name");
@@ -74,6 +85,11 @@ public class CentralApp {
 		}
 	}
 	
+	/** 
+	 * Open a check in/out tab for the employee in argument
+	 * 
+	 * @param emp The employee
+	 */
 	public void openCheckTab(Employee emp){	//Fonction pour ouvrir un onglet de Checks In Out
 		boolean alreadyOpened = false;
 		for(CheckInOutControler cioc : checksControlers)
@@ -90,6 +106,11 @@ public class CentralApp {
 			System.err.println("[CentrallApp#openCheckTab] Tab already opened");
 	}
 	
+	/**
+	 * Close a check in/out tab associated to the controler
+	 * 
+	 * @param controler The controler associated to the sub-view (tab) to close
+	 */
 	public void closeCheckTab(CheckInOutControler controler){
 		int indexInAL = checksControlers.indexOf(controler);
 		
@@ -104,6 +125,11 @@ public class CentralApp {
 			System.err.println("[CentralApp#closeCheckTab] this CheckInOutControler doesn't exist");
 	}
 	
+	/**
+	 * Load a company file
+	 * 
+	 * @return true if the loading has succeed, false otherwise
+	 */
 	private boolean openFile() {
 		boolean openFileSucceed = false;
 	    
@@ -134,10 +160,16 @@ public class CentralApp {
 	    return openFileSucceed;
 	}
 	
+	/**
+	 * @return The company associated to the central application
+	 */
 	public Company getCompany() {
 		return company;
 	}
 	
+	/**
+	 * Notify all the sub-controlers that the list of departments has changed
+	 */
 	public void notifyDptListModification() {
 		ArrayList<Department> list = company.getDepartments();
 		
@@ -145,6 +177,9 @@ public class CentralApp {
 		peopleControler.updateDepartmentsList(list);
 	}
 	
+	/**
+	 *  Notify all the sub-controlers that the list of people has changed
+	 */
 	public void notifyPeopleListModification() {
 		ArrayList<Employee> list = company.getEmployees();
 		
@@ -154,6 +189,9 @@ public class CentralApp {
 		generalCheckControler.updateTable();
 	}
 	
+	/**
+	 * On exit, open a save dialog
+	 */
 	public class ExitEvent extends WindowAdapter {
 		@Override
 		public void windowClosing(WindowEvent arg0) {		    
